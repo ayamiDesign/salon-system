@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaqController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/faqs', [FaqController::class, 'index']);
