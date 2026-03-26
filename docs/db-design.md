@@ -1,0 +1,55 @@
+# DB設計
+
+## categories
+| カラム | 型 | 説明 |
+|--------|----|------|
+| id | bigint | 主キー |
+| name | string | カテゴリ名 |
+| created_at | timestamp | 作成日時 |
+| updated_at | timestamp | 更新日時 |
+
+## faqs
+| カラム | 型 | 説明 |
+|--------|----|------|
+| id | bigint | 主キー |
+| category_id | bigint | カテゴリID |
+| question | text | 質問 |
+| answer | text | 回答 |
+| note | text | 補足 |
+| pdf_url | string | PDFのURL |
+| sort_order | integer | 表示順 |
+| is_visible | boolean | 表示フラグ |
+| created_at | timestamp | 作成日時 |
+| updated_at | timestamp | 更新日時 |
+
+## treatment_time_guides（施術時間配分）
+| カラム | 型 | 説明 |
+|--------|----|------|
+| id | bigint | 主キー |
+| menu_name | string | メニュー名 |
+| total_minutes | integer | 合計時間 |
+| note | text | 配分内容 |
+| sort_order | integer | 表示順 |
+| created_at | timestamp | 作成日時 |
+| updated_at | timestamp | 更新日時 |
+
+## users（後で追加）
+| カラム | 型 | 説明 |
+|--------|----|------|
+| id | bigint | 主キー |
+| name | string | 名前 |
+| email | string | メール |
+| password | string | パスワード |
+| role | string | 権限 |
+| created_at | timestamp | 作成日時 |
+| updated_at | timestamp | 更新日時 |
+
+## リレーション
+- categories 1 : 多 faqs
+- users 1 : 多 faqs（将来的に）
+
+## 運用方針
+- FAQの表示順は sort_order で管理する
+- 表示順はカテゴリ単位で管理する
+- FAQの削除は物理削除ではなく is_visible で管理する
+- 並び順はドラッグ操作により変更する
