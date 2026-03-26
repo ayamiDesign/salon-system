@@ -5,8 +5,10 @@
 |--------|----|------|
 | id | bigint | 主キー |
 | name | string | カテゴリ名 |
+| sort_order | integer | 表示順 |
 | created_at | timestamp | 作成日時 |
 | updated_at | timestamp | 更新日時 |
+| deleted_at | timestamp | 削除日時 |
 
 ## faqs
 | カラム | 型 | 説明 |
@@ -16,11 +18,13 @@
 | question | text | 質問 |
 | answer | text | 回答 |
 | note | text | 補足 |
-| pdf_url | string | PDFのURL |
+| pdf | string | PDF |
+| url | string | URL |
 | sort_order | integer | 表示順 |
 | is_visible | boolean | 表示フラグ |
 | created_at | timestamp | 作成日時 |
 | updated_at | timestamp | 更新日時 |
+| deleted_at | timestamp | 削除日時 |
 
 ## treatment_time_guides（施術時間配分）
 | カラム | 型 | 説明 |
