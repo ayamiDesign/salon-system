@@ -77,11 +77,11 @@
                     </div>
 
                     <div class="flex flex-wrap gap-2">
-                        <a href="#"
+                        {{-- <a href="#"
                            class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
                             一括登録
-                        </a>
-                        <a href="#"
+                        </a> --}}
+                        <a href="{{ route('categories.create') }}">
                            class="inline-flex items-center justify-center rounded-lg bg-accent-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-accent-700">
                             新規登録
                         </a>
