@@ -63,8 +63,6 @@
 
             <!-- フォーム -->
             <section class="mt-6 rounded-2xl border border-slate-200 bg-white shadow-soft">
-
-                <!-- 上部 -->
                 <div class="border-b border-slate-200 px-5 py-4">
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
@@ -84,7 +82,7 @@
                     $categoryNames = old('name', $sessionInput['name'] ?? ['']);
                 @endphp
 
-                <!-- エラー -->
+                <!-- バリデーションアラート -->
                 @if ($errors->any())
                     <script>
                         window.addEventListener('DOMContentLoaded', function () {
@@ -99,51 +97,33 @@
                     <div class="rounded-xl border border-slate-200 bg-slate-50/70">
 
                         <!-- ヘッダー -->
-                        <div class="hidden md:grid grid-cols-12 gap-3 border-b border-slate-200 px-4 py-3 text-xs font-semibold tracking-wide text-slate-500">
-                            <div class="col-span-2">No.</div>
+                        <div class="hidden md:grid grid-cols-12 gap-3 border-b border-slate-200 px-4 py-3 text-xs font-semibold text-slate-500">
                             <div class="col-span-7">カテゴリ名</div>
-                            <div class="col-span-3 text-right">操作</div>
+                            <div class="col-span-5 text-right">操作</div>
                         </div>
 
-                        <!-- 入力行 -->
+                        <!-- 入力欄 -->
                         <div id="category-list" class="divide-y divide-slate-200">
                             @foreach($categoryNames as $index => $categoryName)
                                 <div class="category-row px-4 py-4">
                                     <div class="grid grid-cols-1 gap-3 md:grid-cols-12 md:items-center">
 
-                                        <!-- No -->
-                                        <div class="md:col-span-2">
-                                            <label class="mb-2 block text-sm font-medium text-slate-700 md:hidden">
-                                                No.
-                                            </label>
-                                            <div class="inline-flex min-w-[44px] items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-semibold text-slate-700 border border-slate-200">
-                                                {{ $index + 1 }}
-                                            </div>
-                                        </div>
-
                                         <!-- カテゴリ名 -->
                                         <div class="md:col-span-7">
-                                            <label class="mb-2 block text-sm font-medium text-slate-700 md:hidden">
-                                                カテゴリ名 <span class="text-rose-500">必須</span>
-                                            </label>
                                             <input
                                                 type="text"
                                                 name="name[]"
                                                 value="{{ $categoryName }}"
-                                                placeholder="例：予約・受付"
-                                                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-accent-500 focus:ring-2 focus:ring-accent-100"
+                                                class="w-full rounded-lg border px-3 py-2"
                                                 required
                                             >
                                         </div>
 
-                                        <!-- 削除 -->
-                                        <div class="md:col-span-3 flex md:justify-end">
-                                            <label class="mb-2 block text-sm font-medium text-slate-700 md:hidden">
-                                                操作
-                                            </label>
+                                        <!-- 削除ボタン -->
+                                        <div class="md:col-span-5 flex md:justify-end">
                                             <button type="button"
                                                     onclick="removeInput(this)"
-                                                    class="inline-flex items-center justify-center rounded-lg border border-rose-200 bg-rose-50 px-3 py-2.5 text-sm font-medium text-rose-700 transition hover:bg-rose-100">
+                                                    class="rounded-lg border px-4 py-2 text-red-600">
                                                 削除
                                             </button>
                                         </div>
@@ -154,31 +134,15 @@
                         </div>
                     </div>
 
-                    <!-- ルール -->
-                    <div class="mt-4 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3">
-                        <p class="text-sm font-medium text-blue-900">入力ルール</p>
-                        <ul class="mt-1 space-y-1 text-sm leading-6 text-blue-800">
-                            <li>・カテゴリ名は、内容が分かりやすい名称でご入力ください</li>
-                            <li>・表示順は登録後に変更することができます</li>
-                            <li>・不要な行は「削除」ボタンから削除してください</li>
-                            <li>・複数のカテゴリをまとめて登録することも可能です</li>
-                        </ul>
-                    </div>
-
                     <!-- ボタン -->
-                    <div class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
-                        <a href="{{ route('categories.index') }}"
-                           class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
-                            キャンセル
-                        </a>
-
-                        <button type="submit"
-                                class="inline-flex items-center justify-center rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-accent-700">
+                    <div class="mt-6 flex justify-end">
+                        <button class="bg-accent-600 text-white px-6 py-2 rounded-lg">
                             確認する
                         </button>
                     </div>
                 </form>
             </section>
+
         </main>
     </div>
 
@@ -187,43 +151,25 @@
         function addCategoryInput() {
             const container = document.getElementById('category-list');
 
-            const index = document.querySelectorAll('.category-row').length + 1;
-
             const div = document.createElement('div');
             div.className = 'category-row px-4 py-4';
 
             div.innerHTML = `
                 <div class="grid grid-cols-1 gap-3 md:grid-cols-12 md:items-center">
 
-                    <div class="md:col-span-2">
-                        <label class="mb-2 block text-sm font-medium text-slate-700 md:hidden">
-                            No.
-                        </label>
-                        <div class="inline-flex min-w-[44px] items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-semibold text-slate-700 border border-slate-200">
-                            ${index}
-                        </div>
-                    </div>
-
                     <div class="md:col-span-7">
-                        <label class="mb-2 block text-sm font-medium text-slate-700 md:hidden">
-                            カテゴリ名 <span class="text-rose-500">必須</span>
-                        </label>
                         <input
                             type="text"
                             name="name[]"
-                            placeholder="例：新しいカテゴリ"
-                            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-accent-500 focus:ring-2 focus:ring-accent-100"
+                            class="w-full rounded-lg border px-3 py-2"
                             required
                         >
                     </div>
 
-                    <div class="md:col-span-3 flex md:justify-end">
-                        <label class="mb-2 block text-sm font-medium text-slate-700 md:hidden">
-                            操作
-                        </label>
+                    <div class="md:col-span-5 flex md:justify-end">
                         <button type="button"
                                 onclick="removeInput(this)"
-                                class="inline-flex items-center justify-center rounded-lg border border-rose-200 bg-rose-50 px-3 py-2.5 text-sm font-medium text-rose-700 transition hover:bg-rose-100">
+                                class="rounded-lg border px-4 py-2 text-red-600">
                             削除
                         </button>
                     </div>

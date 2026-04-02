@@ -14,6 +14,9 @@ class CategoryController extends Controller
 
     public function create()
     {
+        // セッションを削除
+        session()->forget('category_input');
+
         // セッションを保存
         $sessionInput = session('category_input');
 
@@ -27,11 +30,6 @@ class CategoryController extends Controller
         $requestData = $request->validate([
             'name' => 'required|array',
             'name.*' => 'required|string|max:255|distinct|unique:categories,name',
-        ],
-        [
-            'name.*.required' => 'カテゴリ名を入力してください',
-            'name.*.distinct' => '同じカテゴリ名が入力されています',
-            'name.*.unique'   => 'すでに登録されているカテゴリ名です',
         ]);
 
         // データを形成
@@ -49,11 +47,6 @@ class CategoryController extends Controller
         $requestData = $request->validate([
             'name' => 'required|array',
             'name.*' => 'required|string|max:255|distinct|unique:categories,name',
-        ],
-        [
-            'name.*.required' => 'カテゴリ名を入力してください',
-            'name.*.distinct' => '同じカテゴリ名が入力されています',
-            'name.*.unique'   => 'すでに登録されているカテゴリ名です',
         ]);
 
         foreach ($requestData['name'] as $name) {
