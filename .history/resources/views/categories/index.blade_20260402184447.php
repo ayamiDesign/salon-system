@@ -99,11 +99,11 @@
                                             </div>
                                         </td>
 
-                                        {{-- <td class="px-5 py-4">
+                                        <td class="px-5 py-4">
                                             <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
                                                 {{ $category->faqs_count }}件
                                             </span>
-                                        </td> --}}
+                                        </td>
 
                                         <td class="px-5 py-4">
                                             <div class="flex flex-wrap gap-2">

@@ -47,6 +47,10 @@
                     </div>
 
                     <div class="flex flex-wrap gap-2">
+                        {{-- <a href="#"
+                           class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
+                            一括登録
+                        </a> --}}
                         <a
                             href="{{ route('categories.create') }}"
                             class="inline-flex items-center justify-center rounded-lg bg-accent-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-accent-700"
@@ -59,6 +63,35 @@
         </header>
 
         <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            {{-- 概要カード --}}
+            <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
+                <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h2 class="text-lg font-semibold text-slate-900">FAQカテゴリを一覧で管理</h2>
+                        <p class="mt-1 text-sm leading-6 text-slate-500">
+                            FAQに紐づくカテゴリを見やすく整理した、管理画面デザインの仮レイアウトです。
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                        <div class="rounded-xl bg-slate-50 px-4 py-3">
+                            <p class="text-xs text-slate-500">カテゴリ数</p>
+                            <p class="mt-1 text-lg font-semibold text-slate-900">{{ $categories->count() }}件</p>
+                        </div>
+
+                        <div class="rounded-xl bg-slate-50 px-4 py-3">
+                            <p class="text-xs text-slate-500">表示中</p>
+                            <p class="mt-1 text-lg font-semibold text-slate-900">{{ $visibleCount }}件</p>
+                        </div>
+
+                        <div class="col-span-2 rounded-xl bg-slate-50 px-4 py-3 sm:col-span-1">
+                            <p class="text-xs text-slate-500">非表示</p>
+                            <p class="mt-1 text-lg font-semibold text-slate-900">{{ $hiddenCount }}件</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {{-- 一覧テーブル --}}
             <section class="mt-6 rounded-2xl border border-slate-200 bg-white shadow-soft">
                 <div class="flex items-center justify-between border-b border-slate-200 px-5 py-4">
@@ -80,7 +113,6 @@
                                 <tr class="text-left text-slate-500">
                                     <th class="px-5 py-3 font-medium">表示順</th>
                                     <th class="px-5 py-3 font-medium">カテゴリ名</th>
-                                    {{-- <th class="px-5 py-3 font-medium">FAQ登録数</th> --}}
                                     <th class="px-5 py-3 font-medium">操作</th>
                                 </tr>
                             </thead>
@@ -93,17 +125,14 @@
 
                                         <td class="px-5 py-4">
                                             <div class="flex items-center gap-3">
+                                                <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-accent-50 text-sm font-semibold text-accent-700">
+                                                    {{ $category->sort_order }}
+                                                </span>
                                                 <span class="font-medium text-slate-800">
                                                     {{ $category->name }}
                                                 </span>
                                             </div>
                                         </td>
-
-                                        {{-- <td class="px-5 py-4">
-                                            <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
-                                                {{ $category->faqs_count }}件
-                                            </span>
-                                        </td> --}}
 
                                         <td class="px-5 py-4">
                                             <div class="flex flex-wrap gap-2">
@@ -142,11 +171,9 @@
                                         <p class="mt-3 text-base font-semibold leading-6 text-slate-900">
                                             {{ $category->name }}
                                         </p>
-                                        {{-- <p class="mt-2 text-sm text-slate-500">
-                                            FAQ：{{ $category->faqs_count }}件
-                                        </p> --}}
                                     </div>
                                 </div>
+
                                 <div class="mt-4 flex gap-2">
                                     <a
                                         href="#"

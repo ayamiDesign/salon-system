@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Faq;
 
 class CategoryController extends Controller
 {
     public function index()
     {
         $categories = Category::all();
+        
+        foreach($categories as $index => $data){
+            $count = Faq::where('id', $data['id'])->count();
+            $categories[$index]['count'] = $count;
+        }
         return view('categories.index',compact('categories'));
     }
 
