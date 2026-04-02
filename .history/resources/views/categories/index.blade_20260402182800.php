@@ -80,7 +80,6 @@
                                 <tr class="text-left text-slate-500">
                                     <th class="px-5 py-3 font-medium">表示順</th>
                                     <th class="px-5 py-3 font-medium">カテゴリ名</th>
-                                    {{-- <th class="px-5 py-3 font-medium">FAQ登録数</th> --}}
                                     <th class="px-5 py-3 font-medium">操作</th>
                                 </tr>
                             </thead>
@@ -98,12 +97,6 @@
                                                 </span>
                                             </div>
                                         </td>
-
-                                        {{-- <td class="px-5 py-4">
-                                            <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
-                                                {{ $category->faqs_count }}件
-                                            </span>
-                                        </td> --}}
 
                                         <td class="px-5 py-4">
                                             <div class="flex flex-wrap gap-2">
@@ -142,11 +135,9 @@
                                         <p class="mt-3 text-base font-semibold leading-6 text-slate-900">
                                             {{ $category->name }}
                                         </p>
-                                        {{-- <p class="mt-2 text-sm text-slate-500">
-                                            FAQ：{{ $category->faqs_count }}件
-                                        </p> --}}
                                     </div>
                                 </div>
+
                                 <div class="mt-4 flex gap-2">
                                     <a
                                         href="#"
