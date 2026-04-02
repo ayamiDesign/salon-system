@@ -14,33 +14,35 @@ class CategoryController extends Controller
 
     public function create()
     {
+        // セッションを削除
+        session()->forget('category_input');
+
         // セッションを保存
         $sessionInput = session('category_input');
 
-        return view('categories.create',compact('sessionInput'));
+        // 表示順の取得
+        $lastId = Category::max('id');
+        $displayOrder = $lastId + 1;
+
+        return view('categories.create',compact('displayOrder', 'sessionInput'));
     }
 
     public function confirm(Request $request)
     {
-
         // バリデーション
         $requestData = $request->validate([
             'name' => 'required|array',
             'name.*' => 'required|string|max:255|distinct|unique:categories,name',
-        ],
-        [
-            'name.*.required' => 'カテゴリ名を入力してください',
-            'name.*.distinct' => '同じカテゴリ名が入力されています',
-            'name.*.unique'   => 'すでに登録されているカテゴリ名です',
         ]);
 
         // データを形成
         $categoryNames = $requestData['name'];
+        $sortOrders = $requestData['sort_order'];
 
         // セッションに保存
         session(['category_input' => $requestData]);
 
-        return view('categories.confirm', compact('categoryNames'));
+        return view('categories.confirm', compact('displayOrder','categoryNames','sortOrders'));
     }
 
     public function store(Request $request)
@@ -49,11 +51,6 @@ class CategoryController extends Controller
         $requestData = $request->validate([
             'name' => 'required|array',
             'name.*' => 'required|string|max:255|distinct|unique:categories,name',
-        ],
-        [
-            'name.*.required' => 'カテゴリ名を入力してください',
-            'name.*.distinct' => '同じカテゴリ名が入力されています',
-            'name.*.unique'   => 'すでに登録されているカテゴリ名です',
         ]);
 
         foreach ($requestData['name'] as $name) {

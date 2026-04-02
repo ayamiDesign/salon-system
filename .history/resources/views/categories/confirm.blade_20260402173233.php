@@ -29,8 +29,6 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
     <div class="min-h-screen">
-
-        <!-- ヘッダー -->
         <header class="border-b border-slate-200 bg-white">
             <div class="mx-auto max-w-5xl px-4 py-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -49,10 +47,7 @@
             </div>
         </header>
 
-        <!-- メイン -->
         <main class="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
-
-            <!-- 説明 -->
             <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
                 <h2 class="text-lg font-semibold text-slate-900">入力内容をご確認ください</h2>
                 <p class="mt-1 text-sm leading-6 text-slate-500">
@@ -60,9 +55,7 @@
                 </p>
             </section>
 
-            <!-- 確認一覧 -->
             <section class="mt-6 rounded-2xl border border-slate-200 bg-white shadow-soft">
-
                 <div class="border-b border-slate-200 px-5 py-4">
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
@@ -88,20 +81,16 @@
                     @csrf
 
                     <div class="rounded-xl border border-slate-200 bg-slate-50/70">
-
-                        <!-- ヘッダー -->
                         <div class="hidden md:grid grid-cols-12 gap-3 border-b border-slate-200 px-4 py-3 text-xs font-semibold tracking-wide text-slate-500">
                             <div class="col-span-2">No.</div>
-                            <div class="col-span-10">カテゴリ名</div>
+                            <div class="col-span-7">カテゴリ名</div>
+                            <div class="col-span-3 text-right">状態</div>
                         </div>
 
-                        <!-- 一覧 -->
                         <div class="divide-y divide-slate-200">
                             @foreach ($categoryNames as $index => $categoryName)
                                 <div class="px-4 py-4">
                                     <div class="grid grid-cols-1 gap-3 md:grid-cols-12 md:items-center">
-
-                                        <!-- No -->
                                         <div class="md:col-span-2">
                                             <div class="mb-1 text-xs font-semibold tracking-wide text-slate-500 md:hidden">
                                                 No.
@@ -111,25 +100,30 @@
                                             </div>
                                         </div>
 
-                                        <!-- カテゴリ名 -->
-                                        <div class="md:col-span-10">
+                                        <div class="md:col-span-7">
                                             <div class="mb-1 text-xs font-semibold tracking-wide text-slate-500 md:hidden">
                                                 カテゴリ名
                                             </div>
                                             <div class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800">
                                                 {{ $categoryName }}
                                             </div>
-
                                             <input type="hidden" name="name[]" value="{{ $categoryName }}">
                                         </div>
 
+                                        <div class="md:col-span-3 flex md:justify-end">
+                                            <div class="mb-1 text-xs font-semibold tracking-wide text-slate-500 md:hidden">
+                                                状態
+                                            </div>
+                                            <div class="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700">
+                                                登録予定
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
 
-                    <!-- 注意 -->
                     <div class="mt-4 rounded-xl border border-amber-100 bg-amber-50 px-4 py-3">
                         <p class="text-sm font-medium text-amber-900">ご確認ください</p>
                         <ul class="mt-1 space-y-1 text-sm leading-6 text-amber-800">
@@ -139,7 +133,6 @@
                         </ul>
                     </div>
 
-                    <!-- ボタン -->
                     <div class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
                         <a href="{{ route('categories.create') }}"
                            class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
@@ -150,7 +143,6 @@
                                value="登録する"
                                class="inline-flex cursor-pointer items-center justify-center rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-accent-700">
                     </div>
-
                 </form>
             </section>
         </main>
