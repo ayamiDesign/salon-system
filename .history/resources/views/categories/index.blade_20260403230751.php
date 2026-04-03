@@ -265,7 +265,7 @@
                 });
             });
 
-            // 初期表示で番号を整える
+            // 表示順更新
             updateSortOrderLabels();
         });
     </script>

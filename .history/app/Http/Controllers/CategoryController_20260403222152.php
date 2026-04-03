@@ -13,7 +13,7 @@ class CategoryController extends Controller
          // セッションを削除
         $request->session()->forget('category_input');
 
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Category::all();
         return view('categories.index',compact('categories'));
     }
 
@@ -169,22 +169,17 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index');
     }
-
+    
     public function updateOrder(Request $request)
     {
-        $request->validate([
-            'ids' => ['required', 'array'],
-            'ids.*' => ['required', 'integer', 'exists:categories,id'],
-        ]);
+        $ids = $request->input('ids');
 
-        foreach ($request->ids as $index => $id) {
+        foreach ($ids as $index => $id) {
             Category::where('id', $id)->update([
                 'sort_order' => $index + 1
             ]);
         }
 
-        return response()->json([
-            'message' => '表示順を保存しました'
-        ]);
+        return response()->json(['status' => 'ok']);
     }
 }

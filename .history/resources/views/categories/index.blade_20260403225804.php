@@ -112,42 +112,34 @@
             function leaveSortMode(reset = false) {
                 isSortMode = false;
 
-                // ボタン表示戻す
                 sortModeButton.classList.remove('hidden');
                 saveSortButton.classList.add('hidden');
                 cancelSortButton.classList.add('hidden');
                 sortGuide.classList.add('hidden');
 
-                // ハンドル非表示、通常ボタン表示
                 sortHandles.forEach(el => el.classList.add('hidden'));
                 normalActions.forEach(el => el.classList.remove('hidden'));
 
-                // ドラッグ無効化
                 sortableRows.forEach(row => {
                     row.removeAttribute('draggable');
                     row.classList.remove('cursor-move', 'opacity-60', 'ring-2', 'ring-accent-100');
                 });
 
-                // キャンセル時はリロード
                 if (reset) {
                     window.location.reload();
                 }
 
-                // 表示順を更新
                 updateSortOrderLabels();
             }
 
-            // 表示順の数字を更新
             function updateSortOrderLabels() {
                 const pcRows = document.querySelectorAll('#pc-sortable-body .js-sort-row');
                 pcRows.forEach((row, index) => {
                     const order = index + 1;
-                    // data-order更新
                     row.dataset.order = order;
 
                     const id = row.dataset.id;
 
-                    // 表示番号更新
                     const pcLabel = row.querySelector('.js-sort-order-label');
                     if (pcLabel) pcLabel.textContent = order;
 
@@ -159,24 +151,18 @@
                 });
             }
 
-            // 並び替えボタン
             sortModeButton?.addEventListener('click', enterSortMode);
 
-            // キャンセルボタン
             cancelSortButton?.addEventListener('click', function () {
                 leaveSortMode(true);
             });
 
-            // 保存ボタン
             saveSortButton?.addEventListener('click', async function () {
-                // 現在の順番でID配列を作る
                 const orderedIds = Array.from(document.querySelectorAll('#pc-sortable-body .js-sort-row'))
                     .map(row => row.dataset.id);
 
-                // CSRFトークン取得
                 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                // ボタン無効化
                 saveSortButton.disabled = true;
                 saveSortButton.textContent = '保存中...';
 
@@ -211,26 +197,18 @@
                 }
             });
 
-            // =============================
-            // ドラッグ処理
-            // =============================
             sortableRows.forEach(row => {
-
-                // ドラッグ開始
                 row.addEventListener('dragstart', function () {
                     if (!isSortMode) return;
-                    // 今の行を保持
                     draggedItem = this;
                     this.classList.add('opacity-60');
                 });
 
-                // ドロップ許可
                 row.addEventListener('dragend', function () {
                     this.classList.remove('opacity-60');
                     sortableRows.forEach(r => r.classList.remove('ring-2', 'ring-accent-100'));
                 });
 
-                 // ドロップ時
                 row.addEventListener('dragover', function (e) {
                     if (!isSortMode) return;
                     e.preventDefault();
@@ -253,19 +231,16 @@
                     const draggedIndex = rows.indexOf(draggedItem);
                     const targetIndex = rows.indexOf(this);
 
-                    // 行の順番を入れ替える
                     if (draggedIndex < targetIndex) {
                         tbody.insertBefore(draggedItem, this.nextSibling);
                     } else {
                         tbody.insertBefore(draggedItem, this);
                     }
 
-                    // 表示順更新
                     updateSortOrderLabels();
                 });
             });
 
-            // 初期表示で番号を整える
             updateSortOrderLabels();
         });
     </script>

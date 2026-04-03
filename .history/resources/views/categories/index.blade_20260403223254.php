@@ -38,36 +38,31 @@
             const deleteCategoryName = document.getElementById('deleteCategoryName');
             const openButtons = document.querySelectorAll('.js-delete-open');
 
-            // 各削除ボタンにクリックイベントをつける
             openButtons.forEach(button => {
                 button.addEventListener('click', function () {
-
-                    // カテゴリID・カテゴリ名を取得
                     const categoryId = this.dataset.id;
                     const categoryName = this.dataset.name;
 
                     deleteCategoryName.textContent = categoryName;
-
-                     // 削除フォームの送信先URLをセット
                     deleteForm.action = `/categories/${categoryId}`;
 
-                    // モーダルを表示
                     modal.classList.remove('hidden');
                     modal.classList.add('flex');
+                    modal.setAttribute('aria-hidden', 'false');
                 });
             });
 
-            // キャンセルボタンを押したらモーダルを閉じる
             closeButton?.addEventListener('click', function () {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
+                modal.setAttribute('aria-hidden', 'true');
             });
 
-            // モーダルの背景クリックでも閉じる
             modal?.addEventListener('click', function (e) {
                 if (e.target === modal) {
                     modal.classList.add('hidden');
                     modal.classList.remove('flex');
+                    modal.setAttribute('aria-hidden', 'true');
                 }
             });
 
@@ -78,76 +73,62 @@
             const saveSortButton = document.getElementById('saveSortButton');
             const cancelSortButton = document.getElementById('cancelSortButton');
             const sortGuide = document.getElementById('sortGuide');
+
             const normalActions = document.querySelectorAll('.js-normal-actions');
             const sortHandles = document.querySelectorAll('.js-sort-handle');
             const sortableRows = document.querySelectorAll('.js-sort-row');
 
-            // 並び替え中かどうか
             let isSortMode = false;
-            // 今ドラッグしている行
             let draggedItem = null;
 
-            // 並び替えモードON
             function enterSortMode() {
                 isSortMode = true;
 
-                // ボタン表示切り替え
                 sortModeButton.classList.add('hidden');
                 saveSortButton.classList.remove('hidden');
                 cancelSortButton.classList.remove('hidden');
                 sortGuide.classList.remove('hidden');
 
-                // ハンドル表示、通常ボタン非表示
                 sortHandles.forEach(el => el.classList.remove('hidden'));
                 normalActions.forEach(el => el.classList.add('hidden'));
 
-                // ドラッグ可能にする
                 sortableRows.forEach(row => {
                     row.setAttribute('draggable', 'true');
                     row.classList.add('cursor-move');
                 });
             }
 
-            // 並び替えモードOFF
             function leaveSortMode(reset = false) {
                 isSortMode = false;
 
-                // ボタン表示戻す
                 sortModeButton.classList.remove('hidden');
                 saveSortButton.classList.add('hidden');
                 cancelSortButton.classList.add('hidden');
                 sortGuide.classList.add('hidden');
 
-                // ハンドル非表示、通常ボタン表示
                 sortHandles.forEach(el => el.classList.add('hidden'));
                 normalActions.forEach(el => el.classList.remove('hidden'));
 
-                // ドラッグ無効化
                 sortableRows.forEach(row => {
                     row.removeAttribute('draggable');
                     row.classList.remove('cursor-move', 'opacity-60', 'ring-2', 'ring-accent-100');
                 });
 
-                // キャンセル時はリロード
                 if (reset) {
                     window.location.reload();
                 }
 
-                // 表示順を更新
                 updateSortOrderLabels();
             }
 
-            // 表示順の数字を更新
             function updateSortOrderLabels() {
                 const pcRows = document.querySelectorAll('#pc-sortable-body .js-sort-row');
                 pcRows.forEach((row, index) => {
                     const order = index + 1;
-                    // data-order更新
                     row.dataset.order = order;
 
                     const id = row.dataset.id;
 
-                    // 表示番号更新
                     const pcLabel = row.querySelector('.js-sort-order-label');
                     if (pcLabel) pcLabel.textContent = order;
 
@@ -159,24 +140,18 @@
                 });
             }
 
-            // 並び替えボタン
             sortModeButton?.addEventListener('click', enterSortMode);
 
-            // キャンセルボタン
             cancelSortButton?.addEventListener('click', function () {
                 leaveSortMode(true);
             });
 
-            // 保存ボタン
             saveSortButton?.addEventListener('click', async function () {
-                // 現在の順番でID配列を作る
                 const orderedIds = Array.from(document.querySelectorAll('#pc-sortable-body .js-sort-row'))
                     .map(row => row.dataset.id);
 
-                // CSRFトークン取得
                 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                // ボタン無効化
                 saveSortButton.disabled = true;
                 saveSortButton.textContent = '保存中...';
 
@@ -211,26 +186,18 @@
                 }
             });
 
-            // =============================
-            // ドラッグ処理
-            // =============================
             sortableRows.forEach(row => {
-
-                // ドラッグ開始
                 row.addEventListener('dragstart', function () {
                     if (!isSortMode) return;
-                    // 今の行を保持
                     draggedItem = this;
                     this.classList.add('opacity-60');
                 });
 
-                // ドロップ許可
                 row.addEventListener('dragend', function () {
                     this.classList.remove('opacity-60');
                     sortableRows.forEach(r => r.classList.remove('ring-2', 'ring-accent-100'));
                 });
 
-                 // ドロップ時
                 row.addEventListener('dragover', function (e) {
                     if (!isSortMode) return;
                     e.preventDefault();
@@ -253,19 +220,16 @@
                     const draggedIndex = rows.indexOf(draggedItem);
                     const targetIndex = rows.indexOf(this);
 
-                    // 行の順番を入れ替える
                     if (draggedIndex < targetIndex) {
                         tbody.insertBefore(draggedItem, this.nextSibling);
                     } else {
                         tbody.insertBefore(draggedItem, this);
                     }
 
-                    // 表示順更新
                     updateSortOrderLabels();
                 });
             });
 
-            // 初期表示で番号を整える
             updateSortOrderLabels();
         });
     </script>
@@ -276,6 +240,7 @@
     <div
         id="deleteModal"
         class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 px-4"
+        aria-hidden="true"
     >
         <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
             <h2 class="text-lg font-semibold text-slate-900">カテゴリを削除しますか？</h2>
