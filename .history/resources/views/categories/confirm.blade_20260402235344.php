@@ -190,10 +190,10 @@
                                                 カテゴリ名
                                             </div>
                                             <div class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800">
-                                                {{ $requestData['name'] }}
+                                                {{ $requestData->name }}
                                             </div>
 
-                                            <input type="hidden" name="name" value="{{ $requestData['name'] }}">
+                                            <input type="hidden" name="name" value="{{ $requestData->name }}">
                                         </div>
 
                                     </div>
@@ -213,7 +213,7 @@
 
                         <!-- ボタン -->
                         <div class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
-                            <a href="{{ route('categories.edit',$id) }}"
+                            <a href="{{ route('categories.create') }}"
                             class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
                                 入力画面へ戻る
                             </a>

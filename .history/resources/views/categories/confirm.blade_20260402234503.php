@@ -159,7 +159,6 @@
                 @if($mode === 'edit')
                     <form action="{{ route('categories.update', $id) }}" method="post" class="p-5">
                         @csrf
-                        @method('PUT')
 
                         <div class="rounded-xl border border-slate-200 bg-slate-50/70">
 
@@ -171,33 +170,42 @@
 
                             <!-- 一覧 -->
                             <div class="divide-y divide-slate-200">
-                               <div class="px-4 py-4">
-                                    <div class="grid grid-cols-1 gap-3 md:grid-cols-12 md:items-center">
+                                @foreach ($categoryNames as $index => $categoryName)
+                                    <div class="px-4 py-4">
+                                        <div class="grid grid-cols-1 gap-3 md:grid-cols-12 md:items-center">
 
-                                        <!-- No -->
-                                        <div class="md:col-span-2">
-                                            <div class="mb-1 text-xs font-semibold tracking-wide text-slate-500 md:hidden">
-                                                No.
+                                            <!-- No -->
+                                            <div class="md:col-span-2">
+                                                <div class="mb-1 text-xs font-semibold tracking-wide text-slate-500 md:hidden">
+                                                    No.
+                                                </div>
+                                                <div class="inline-flex min-w-[44px] items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700">
+                                                    <span>1</span>
+                                                </div>
                                             </div>
-                                            <div class="inline-flex min-w-[44px] items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700">
-                                                <span>1</span>
+
+                                             <!-- ID -->
+                                            <input
+                                                    type="hidden"
+                                                    name="id"
+                                                    value="{{ $category->id }}"
+                                            >
+
+                                            <!-- カテゴリ名 -->
+                                            <div class="md:col-span-10">
+                                                <div class="mb-1 text-xs font-semibold tracking-wide text-slate-500 md:hidden">
+                                                    カテゴリ名
+                                                </div>
+                                                <div class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800">
+                                                    {{ $categoryName }}
+                                                </div>
+
+                                                <input type="hidden" name="name" value="{{ $categoryName }}">
                                             </div>
+
                                         </div>
-
-                                        <!-- カテゴリ名 -->
-                                        <div class="md:col-span-10">
-                                            <div class="mb-1 text-xs font-semibold tracking-wide text-slate-500 md:hidden">
-                                                カテゴリ名
-                                            </div>
-                                            <div class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800">
-                                                {{ $requestData['name'] }}
-                                            </div>
-
-                                            <input type="hidden" name="name" value="{{ $requestData['name'] }}">
-                                        </div>
-
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
 
@@ -213,7 +221,7 @@
 
                         <!-- ボタン -->
                         <div class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
-                            <a href="{{ route('categories.edit',$id) }}"
+                            <a href="{{ route('categories.create') }}"
                             class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
                                 入力画面へ戻る
                             </a>

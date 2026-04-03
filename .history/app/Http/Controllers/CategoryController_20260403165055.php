@@ -80,7 +80,6 @@ class CategoryController extends Controller
 
         // セッションを削除
         $request->session()->forget('category_input');
-        
         // 二重送信を防ぐためリダイレクト
         return redirect()->route('categories.complete');
     }
@@ -100,21 +99,14 @@ class CategoryController extends Controller
     {
 
         // バリデーション
-        $requestData = $request->validate(
-            [
-                'name' => [
-                    'required',
-                    'string',
-                    'max:255',
-                    Rule::unique('categories', 'name')->ignore($id),
-                ],
+        $requestData = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories', 'name')->ignore($id),
             ],
-            [
-                'name.required' => 'カテゴリ名を入力してください',
-                'name.max' => 'カテゴリ名は255文字以内で入力してください',
-                'name.unique' => 'このカテゴリ名はすでに存在しています',
-            ]
-        );
+        ]);
 
         // セッションに保存
         session(['category_input' => $requestData]);
@@ -136,15 +128,10 @@ class CategoryController extends Controller
                 'max:255',
                 Rule::unique('categories', 'name')->ignore($id),
             ],
-            [
-                'name.required' => 'カテゴリ名を入力してください',
-                'name.max' => 'カテゴリ名は255文字以内で入力してください',
-                'name.unique' => 'このカテゴリ名はすでに存在しています',
-            ]
         ]);
 
         // カテゴリー名保存
-        $category = Category::findOrFail($id);
+        $category = new Category();
         
         $category->update([
             'name' => $requestData['name']
@@ -152,7 +139,6 @@ class CategoryController extends Controller
 
         // セッションを削除
         $request->session()->forget('category_input');
-
         // 二重送信を防ぐためリダイレクト
         return redirect()->route('categories.complete');
     }
