@@ -76,6 +76,11 @@
                                class="inline-flex items-center justify-center rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-accent-700">
                                 カテゴリ一覧へ
                             </a>
+
+                            <a href="{{ route('categories.create') }}"
+                               class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
+                                続けて登録する
+                            </a>
                         </div>
                     </div>
                 </div>

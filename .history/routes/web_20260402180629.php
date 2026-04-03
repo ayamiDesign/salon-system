@@ -7,8 +7,6 @@ use App\Http\Controllers\CategoryController;
 // カテゴリー
 Route::post('/categories/confirm', [CategoryController::class, 'confirm'])
     ->name('categories.confirm');
-Route::post('/categories/{id}/confirm', [CategoryController::class, 'confirmEdit'])
-    ->name('categories.confirmEdit');
 Route::get('/categories/complete', function () {
     return view('categories.complete');
 })->name('categories.complete');

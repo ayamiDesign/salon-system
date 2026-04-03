@@ -100,21 +100,19 @@ class CategoryController extends Controller
     {
 
         // バリデーション
-        $requestData = $request->validate(
-            [
-                'name' => [
-                    'required',
-                    'string',
-                    'max:255',
-                    Rule::unique('categories', 'name')->ignore($id),
-                ],
+        $requestData = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories', 'name')->ignore($id),
             ],
             [
                 'name.required' => 'カテゴリ名を入力してください',
                 'name.max' => 'カテゴリ名は255文字以内で入力してください',
                 'name.unique' => 'このカテゴリ名はすでに存在しています',
             ]
-        );
+        ]);
 
         // セッションに保存
         session(['category_input' => $requestData]);
