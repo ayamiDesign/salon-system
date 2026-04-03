@@ -215,22 +215,17 @@
             // ドラッグ処理
             // =============================
             sortableRows.forEach(row => {
-
-                // ドラッグ開始
                 row.addEventListener('dragstart', function () {
                     if (!isSortMode) return;
-                    // 今の行を保持
                     draggedItem = this;
                     this.classList.add('opacity-60');
                 });
 
-                // ドロップ許可
                 row.addEventListener('dragend', function () {
                     this.classList.remove('opacity-60');
                     sortableRows.forEach(r => r.classList.remove('ring-2', 'ring-accent-100'));
                 });
 
-                 // ドロップ時
                 row.addEventListener('dragover', function (e) {
                     if (!isSortMode) return;
                     e.preventDefault();
@@ -253,19 +248,16 @@
                     const draggedIndex = rows.indexOf(draggedItem);
                     const targetIndex = rows.indexOf(this);
 
-                    // 行の順番を入れ替える
                     if (draggedIndex < targetIndex) {
                         tbody.insertBefore(draggedItem, this.nextSibling);
                     } else {
                         tbody.insertBefore(draggedItem, this);
                     }
 
-                    // 表示順更新
                     updateSortOrderLabels();
                 });
             });
 
-            // 初期表示で番号を整える
             updateSortOrderLabels();
         });
     </script>

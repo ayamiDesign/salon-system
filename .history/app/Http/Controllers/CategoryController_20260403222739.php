@@ -13,7 +13,7 @@ class CategoryController extends Controller
          // セッションを削除
         $request->session()->forget('category_input');
 
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Category::all();
         return view('categories.index',compact('categories'));
     }
 
