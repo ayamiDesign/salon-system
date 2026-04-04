@@ -134,7 +134,6 @@ class FaqController extends Controller
             'faqs.*.note' => ['nullable', 'string'],
             'faqs.*.url' => ['nullable', 'url'],
             'faqs.*.is_visible' => ['nullable', 'boolean'],
-            'faqs.*.pdf_temp_path' => ['nullable', 'string'],
             'faqs.*.pdf_original_name' => ['nullable', 'string'],
         ], [
             'faqs.required' => 'FAQを1件以上入力してください',
@@ -146,8 +145,6 @@ class FaqController extends Controller
             'faqs.*.question.distinct' => '同じ質問が入力されています',
             'faqs.*.answer.required' => '回答は必須です',
             'faqs.*.url.url' => 'URLの形式が正しくありません',
-            'faqs.*.pdf_temp_path.string' => 'PDFのデータが不正です',
-            'faqs.*.pdf_original_name.string' => 'PDFファイル名が不正です',
         ]);
 
         foreach ($requestData['faqs'] as $faq) {

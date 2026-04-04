@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use App\Models\Category;
 use App\Models\Faq;
 
@@ -114,79 +114,46 @@ class FaqController extends Controller
     {
         // バリデーション
         $requestData = $request->validate([
-            'faqs' => ['required', 'array', 'min:1'],
+                'faqs' => ['required', 'array', 'min:1'],
 
-            'faqs.*.category1_id' => [
-                'required',
-                'integer',
-                'exists:categories,id',
-            ],
+                'faqs.*.category1_id' => [
+                    'required',
+                    'integer',
+                    'exists:categories,id',
+                ],
 
-            'faqs.*.category2_id' => [
-                'nullable',
-                'integer',
-                'exists:categories,id',
-                'different:category1_id',
-            ],
+                'faqs.*.category2_id' => [
+                    'nullable',
+                    'integer',
+                    'exists:categories,id',
+                    'different:category1_id',
+                ],
 
-            'faqs.*.question' => ['required', 'string','distinct'],
-            'faqs.*.answer' => ['required', 'string'],
-            'faqs.*.note' => ['nullable', 'string'],
-            'faqs.*.url' => ['nullable', 'url'],
-            'faqs.*.is_visible' => ['nullable', 'boolean'],
-            'faqs.*.pdf_temp_path' => ['nullable', 'string'],
-            'faqs.*.pdf_original_name' => ['nullable', 'string'],
-        ], [
-            'faqs.required' => 'FAQを1件以上入力してください',
-            'faqs.*.category1_id.required' => 'カテゴリ（メイン）は必須です',
-            'faqs.*.category1_id.exists' => 'カテゴリ（メイン）の値が不正です',
-            'faqs.*.category2_id.exists' => 'カテゴリ（サブ）の値が不正です',
-            'faqs.*.category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
-            'faqs.*.question.required' => '質問は必須です',
-            'faqs.*.question.distinct' => '同じ質問が入力されています',
-            'faqs.*.answer.required' => '回答は必須です',
-            'faqs.*.url.url' => 'URLの形式が正しくありません',
-            'faqs.*.pdf_temp_path.string' => 'PDFのデータが不正です',
-            'faqs.*.pdf_original_name.string' => 'PDFファイル名が不正です',
-        ]);
-
-        foreach ($requestData['faqs'] as $faq) {
-
-            $pdfPath = null;
-
-            // 一時保存済みPDFを正式保存
-            if (!empty($faq['pdf_temp_path']) && Storage::disk('public')->exists($faq['pdf_temp_path'])) {
-                $fileName = basename($faq['pdf_temp_path']);
-                $finalPath = 'faq-pdfs/' . $fileName;
-
-                Storage::disk('public')->move($faq['pdf_temp_path'], $finalPath);
-
-                $pdfPath = $finalPath;
-            }
-
-            // FAQ保存
-            $FaqModel = Faq::create([
-                'category1_id' => $faq['category1_id'],
-                'category2_id' => $faq['category2_id'],
-                'question' => $faq['question'],
-                'answer' => $faq['answer'],
-                'note' => $faq['note'],
-                'url' => $faq['url'],
-                'is_visible' => $faq['is_visible'],
-                'pdf' => $pdfPath,
+                'faqs.*.question' => ['required', 'string','distinct'],
+                'faqs.*.answer' => ['required', 'string'],
+                'faqs.*.note' => ['nullable', 'string'],
+                'faqs.*.url' => ['nullable', 'url'],
+                'faqs.*.is_visible' => ['nullable', 'boolean'],
+                'faqs.*.pdf' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
+            ], [
+                'faqs.required' => 'FAQを1件以上入力してください',
+                'faqs.*.category1_id.required' => 'カテゴリ（メイン）は必須です',
+                'faqs.*.category1_id.exists' => 'カテゴリ（メイン）の値が不正です',
+                'faqs.*.category2_id.exists' => 'カテゴリ（サブ）の値が不正です',
+                'faqs.*.category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
+                'faqs.*.question.required' => '質問は必須です',
+                'faqs.*.question.distinct' => '同じ質問が入力されています',
+                'faqs.*.answer.required' => '回答は必須です',
+                'faqs.*.url.url' => 'URLの形式が正しくありません',
+                'faqs.*.pdf.mimes' => 'PDFファイルのみアップロードできます',
+                'faqs.*.pdf.max' => 'PDFファイルは10MB以下にしてください',
             ]);
-
-            // 表示順保存
-            $FaqModel->update([
-                'sort_order' => $FaqModel->id
-            ]);
-        }
 
         // セッションを削除
-        $request->session()->forget('faq_input');
+        // $request->session()->forget('faq_input');
         
         // 二重送信を防ぐためリダイレクト
-        return redirect()->route('faqs.complete');
+        // return redirect()->route('faqs.complete');
     }
 
     public function edit($id)
