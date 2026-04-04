@@ -70,16 +70,10 @@ class FaqController extends Controller
             'faqs.*.pdf.mimes' => 'PDFファイルのみアップロードできます',
             'faqs.*.pdf.max' => 'PDFファイルは10MB以下にしてください',
         ]);
-
-        // データを形成
-        $faqs = $requestData['faqs'];
-
-        // カテゴリ名取得
-        $categories = Category::pluck('name', 'id');
         
-        foreach ($faqs as $index => &$faq) {
+        // PDF一時保存
+        foreach ($requestData as $index => &$faq) {
 
-            // PDF一時保存
             if ($request->hasFile("faqs.$index.pdf")) {
                 $tempPath = $request->file("faqs.$index.pdf")->store('faq-temp', 'public');
 
@@ -90,22 +84,17 @@ class FaqController extends Controller
                 $faq['pdf_original_name'] = null;
             }
 
-            // 表示用のカテゴリ名を形成
-            $faq['category1_name'] = $categories[$faq['category1_id']] ?? '';
-            $faq['category2_name'] = !empty($faq['category2_id'])
-            ? ($categories[$faq['category2_id']] ?? '')
-            : '';
         }
 
-        //参照を切る
-        unset($faq);
+        // データを形成
+        $faqs = $requestData['faqs'];
 
         // セッションに保存
         session(['faq_input' => $requestData]);
 
         return view('faqs.confirm', [
             'mode' => 'create',
-            'faqs' => $faqs,
+            'categoryNames' => $faqs,
         ]);
 
     }

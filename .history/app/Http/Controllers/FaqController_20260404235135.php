@@ -77,7 +77,7 @@ class FaqController extends Controller
         // カテゴリ名取得
         $categories = Category::pluck('name', 'id');
         
-        foreach ($faqs as $index => &$faq) {
+        foreach ($requestData['faqs'] as $index => &$faq) {
 
             // PDF一時保存
             if ($request->hasFile("faqs.$index.pdf")) {
