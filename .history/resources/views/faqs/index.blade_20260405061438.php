@@ -225,7 +225,7 @@
                                 data-id="{{ $faq->id }}"
                                 data-order="{{ $loop->iteration }}"
                             >
-                                <details class="faq-details">
+                                <details class="faq-details" {{ $loop->first ? 'open' : '' }}>
                                     <summary class="faq-head">
                                         <div class="faq-head-main">
                                             <div class="faq-meta">
@@ -268,7 +268,7 @@
                                                 ≡
                                             </button>
 
-                                            <span class="faq-toggle" aria-hidden="true"></span>
+                                            <span class="faq-toggle" aria-hidden="false"></span>
                                         </div>
                                     </summary>
 
