@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Faq extends Model
+class FaqHistories extends Model
 {
     use SoftDeletes;
     protected $fillable = [
+        'faq_id',
         'category1_id',
         'category2_id',
         'question',
@@ -16,6 +17,7 @@ class Faq extends Model
         'note',
         'pdf',
         'url',
+        'change_summary',
         'sort_order',
         'is_visible',
     ];
