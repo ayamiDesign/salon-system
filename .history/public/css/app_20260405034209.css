@@ -1,0 +1,256 @@
+/* =========================
+   BASE
+========================= */
+
+:root {
+    --bg: #f7f8fc;
+    --bg-soft: #edf3ff;
+    --card: #ffffff;
+    --line: #e5e7eb;
+    --text: #1f2937;
+    --sub: #6b7280;
+    --accent: #2563eb;
+    --accent-deep: #1d4ed8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+}
+
+.topbar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    background: var(--accent-deep);
+}
+
+/* =========================
+   SORT BUTTON AREA
+========================= */
+
+.topbar-actions-sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-button-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.category-button-action:hover {
+    background: #f3f4f6;
+}
+
+/* キャンセル */
+
+.action-button-sub {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+}
+
+/* 保存 */
+
+.action-button-primary {
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+}
+
+.action-button-primary:hover {
+    background: var(--accent-deep);
+}
+
+/* hidden */
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+}
+
+.hero h1 {
+    margin: 0 0 10px;
+    font-size: 24px;
+}
+
+.hero p {
+    margin: 0 0 16px;
+    color: var(--sub);
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-row {
+    display: flex;
+    gap: 10px;
+}
+
+.search-row input {
+    flex: 1;
+    height: 42px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+}
+
+/* =========================
+   CATEGORY
+========================= */
+
+.chips {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #c7d7f7;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    background: #fff;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats-bar {
+    max-width: 1100px;
+    margin: 0 auto 16px;
+    padding: 12px 16px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq-card {
+    max-width: 1100px;
+    margin: 0 auto 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.faq-head {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-toggle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 640px) {
+
+    .topbar-inner {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .topbar-actions-sort {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .topbar-actions-sort button,
+    .topbar-actions-sort a {
+        flex: 1 1 calc(50% - 5px);
+    }
+
+    .search-row {
+        flex-direction: column;
+    }
+}

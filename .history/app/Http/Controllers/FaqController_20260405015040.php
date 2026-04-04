@@ -15,27 +15,10 @@ class FaqController extends Controller
          // セッションを削除
         $request->session()->forget('faq_input');
 
-        // カテゴリを取得
-        $categoriesList = Category::orderBy('sort_order')->get();
-
-        // カテゴリごとのFAQ件数を取得
-        foreach ($categoriesList as $index => $category) {
-            $count = Faq::categoryMatch($category->id)->count();
-            $category['count'] = $count;
-        }
-
-        // 表示用のカテゴリ名を形成
-        $categories = Category::pluck('name', 'id');
         $faqs = Faq::orderBy('sort_order')->get();
-        foreach ($faqs as $index => $faq) {
+        $categories = Category::orderBy('sort_order')->get();
 
-            $faq['category1_name'] = $categories[$faq['category1_id']] ?? '';
-            $faq['category2_name'] = !empty($faq['category2_id'])
-            ? ($categories[$faq['category2_id']] ?? '')
-            : '';
-        }
-
-        return view('faqs.index',compact('faqs','categoriesList'));
+        return view('faqs.index',compact('faqs','categories'));
     }
 
     public function create()

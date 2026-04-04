@@ -70,16 +70,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ検索デモ</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-<div
-    class="app"
-    data-sort-container
-    data-sort-endpoint="{{ url('/faqs/order') }}"
-    data-delete-base-url="{{ url('/faqs') }}"
->
+<div class="app">
     <header class="topbar">
         <div class="topbar-inner">
             <div class="brand">
@@ -212,95 +206,69 @@
                 </div>
             </div>
 
-            <div id="sortGuide" class="sort-guide hidden">
-                ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
-            </div>
-
             @if(count($filteredFaqs) > 0)
-                {{-- PC / 共通DOM --}}
                 <div class="faq-list">
-                    <div id="pc-sortable-body">
-                        @foreach($filteredFaqs as $faq)
-                            <article
-                                class="faq-card js-sort-row"
-                                data-id="{{ $faq->id }}"
-                                data-order="{{ $loop->iteration }}"
-                            >
-                                <details class="faq-details" {{ $loop->first ? 'open' : '' }}>
-                                    <summary class="faq-head">
-                                        <div class="faq-head-main">
-                                            <div class="faq-meta">
-                                                <span class="sort-order-badge js-sort-order-label">{{ $loop->iteration }}</span>
-
-                                                <span class="tag">{{ $faq->category1_name }}</span>
-                                                @if($faq->category2_name)
-                                                    <span class="tag">{{ $faq->category2_name }}</span>
-                                                @endif
-                                            </div>
-
-                                            <h2 class="faq-question">
-                                                {!! highlight_text($faq->question, $keyword) !!}
-                                            </h2>
-
-                                            <div class="faq-updated">{{ $faq->updated_at }}</div>
+                    @foreach($filteredFaqs as $faq)
+                        <article class="faq-card">
+                            <details class="faq-details" {{ $loop->first ? 'open' : '' }}>
+                                <summary class="faq-head">
+                                    <div class="faq-head-main">
+                                        <div class="faq-meta">
+                                            <span class="tag">{{ $faq->category1_name }}</span>
+                                            @if($faq->category2_name)
+                                                <span class="tag">{{ $faq->category2_name }}</span>
+                                            @endif
                                         </div>
 
-                                        <div class="faq-head-side">
-                                            <div class="js-normal-actions faq-action-group">
-                                                <a href="{{ route('faqs.edit', $faq->id) }}" class="row-action-button">変更</a>
+                                        <h2 class="faq-question">
+                                            {!! highlight_text($faq->question, $keyword) !!}
+                                        </h2>
 
-                                                <button
-                                                    type="button"
-                                                    class="row-action-button delete js-delete-open"
-                                                    data-id="{{ $faq->id }}"
-                                                    data-name="{{ $faq->question }}"
-                                                >
-                                                    削除
-                                                </button>
-
-                                                <a href="{{ url('/faqs/' . $faq->id . '/history') }}" class="row-action-button">履歴</a>
-                                            </div>
-
-                                            <button
-                                                type="button"
-                                                class="sort-handle-button js-sort-handle hidden"
-                                                aria-label="並び替え"
-                                            >
-                                                ≡
-                                            </button>
-
-                                            <span class="faq-toggle" aria-hidden="true"></span>
-                                        </div>
-                                    </summary>
-
-                                    <div class="faq-body">
-                                        <div class="answer-block">
-                                            <p class="block-title">回答</p>
-                                            <p class="block-text">{!! highlight_text($faq->answer, $keyword) !!}</p>
-                                        </div>
-
-                                        @if(!empty($faq->note))
-                                            <div class="note-block">
-                                                <p class="block-title">あわせて確認</p>
-                                                <p class="block-text">{!! highlight_text($faq->note, $keyword) !!}</p>
-                                            </div>
-                                        @endif
-
-                                        @if(!empty($faq->url))
-                                            <div class="link-block">
-                                                <p class="block-title">参考リンク</p>
-                                                <ul class="link-list">
-                                                    <li>
-                                                        <a href="{{ $faq->url }}" target="_blank" rel="noopener noreferrer">{{ $faq->url }}</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        @endif
+                                        <div class="faq-updated">{{ $faq->updated_at }}</div>
                                     </div>
-                                </details>
-                            </article>
-                        @endforeach
-                    </div>
+
+                                    <div class="faq-head-side">
+                                        <a href="{{ route('faqs.edit', $faq->id) }}" class="row-action-button">変更</a>
+
+                                        <form method="POST" action="{{ route('faqs.destroy', $faq->id) }}" class="inline-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" value="削除" class="row-action-button delete">
+                                        </form>
+
+                                        <a href="{{ url('/faqs/' . $faq->id . '/history') }}" class="row-action-button">履歴</a>
+
+                                        <span class="faq-toggle" aria-hidden="true"></span>
+                                    </div>
+                                </summary>
+
+                                <div class="faq-body">
+                                    <div class="answer-block">
+                                        <p class="block-title">回答</p>
+                                        <p class="block-text">{!! highlight_text($faq->answer, $keyword) !!}</p>
+                                    </div>
+
+                                    @if(!empty($faq->note))
+                                        <div class="note-block">
+                                            <p class="block-title">あわせて確認</p>
+                                            <p class="block-text">{!! highlight_text($faq->note, $keyword) !!}</p>
+                                        </div>
+                                    @endif
+
+                                    @if(!empty($faq->url))
+                                        <div class="link-block">
+                                            <p class="block-title">参考リンク</p>
+                                            <ul class="link-list">
+                                                <li>
+                                                    <a href="{{ $faq->url }}" target="_blank" rel="noopener noreferrer">{{ $faq->url }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>
+                            </details>
+                        </article>
+                    @endforeach
                 </div>
             @else
                 <div class="empty">
@@ -310,30 +278,7 @@
             @endif
         </section>
     </main>
-
-    {{-- 削除モーダル --}}
-    <div id="deleteModal" class="delete-modal hidden">
-        <div class="delete-modal-backdrop"></div>
-        <div class="delete-modal-card">
-            <p class="delete-modal-title">FAQを削除しますか？</p>
-            <p class="delete-modal-text">
-                「<span id="deleteItemName"></span>」を削除します。<br>
-                この操作は取り消せません。
-            </p>
-
-            <div class="delete-modal-actions">
-                <button type="button" id="deleteModalClose" class="modal-cancel-button">キャンセル</button>
-
-                <form id="deleteForm" method="POST" class="inline-form">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="modal-delete-button">削除する</button>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
-
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
