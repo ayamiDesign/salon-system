@@ -331,7 +331,7 @@
             line-height: 1.5;
         }
 
-        .faq-updated {
+        .faq-sub {
             margin-top: 8px;
             font-size: 13px;
             color: var(--sub);
@@ -754,9 +754,11 @@
                             <div class="faq-head-main">
                                 <div class="faq-meta">
                                     <span class="tag">📁 <span x-text="faq.category"></span></span>
+                                    <span class="tag success">✅ <span x-text="faq.status"></span></span>
+                                    <span class="tag warn">🗓 <span x-text="faq.updated_at"></span></span>
                                 </div>
                                 <h2 class="faq-question" x-html="highlight(faq.question)"></h2>
-                                <div class="faq-updated" x-text="faq.updated_at"></div>
+                                <div class="faq-sub" x-text="faq.summary"></div>
                             </div>
 
                             {{-- 追加：変更・削除ボタン --}}
@@ -766,13 +768,6 @@
                                 </button>
                                 <button type="button" class="row-action-button delete" @click="deleteFaq(faq.id)">
                                     削除
-                                </button>
-                                <button
-                                    type="button"
-                                    class="row-action-button"
-                                    @click="viewHistory(faq.id)"
-                                >
-                                    履歴
                                 </button>
                                 <div class="faq-toggle" x-text="openId === faq.id ? '−' : '+'"></div>
                             </div>
@@ -891,16 +886,19 @@
                 return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
             },
 
+            // 追加：新規
             createFaq() {
                 alert('新規登録');
-                window.location.href = '{{ route("faqs.create") }}';
+                window.location.href = '{{ route("faq.create") }}';
             },
 
+            // 追加：変更
             editFaq(faq) {
                 alert('変更: ' + faq.id);
-                window.location.href = `/faqs/${faq.id}/edit`;
+                window.location.href = `/faq/${faq.id}/edit`;
             },
 
+            // 追加：削除
             deleteFaq(id) {
                 if (confirm('削除しますか？')) {
                     this.faqs = this.faqs.filter(faq => faq.id !== id);
@@ -910,9 +908,6 @@
                     }
                 }
                 // 本番では fetch や form POST に置き換え
-            },
-            viewHistory(id) {
-                window.location.href = `/faqs/${id}/history`;
             }
         }
     }

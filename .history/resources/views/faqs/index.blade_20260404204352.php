@@ -476,6 +476,19 @@
             flex: 1 1 auto;
             min-width: 0;
         }
+        .faq-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .faq-updated {
+            font-size: 13px;
+            color: var(--sub);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
 
         .faq-head-side {
             display: flex;
@@ -577,6 +590,11 @@
                 width: 100%;
                 justify-content: flex-end;
                 flex-wrap: wrap;
+            }
+            .faq-title-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
             }
         }
     </style>
@@ -755,8 +773,10 @@
                                 <div class="faq-meta">
                                     <span class="tag">📁 <span x-text="faq.category"></span></span>
                                 </div>
-                                <h2 class="faq-question" x-html="highlight(faq.question)"></h2>
-                                <div class="faq-updated" x-text="faq.updated_at"></div>
+                                <div class="faq-title-row">
+                                    <h2 class="faq-question" x-html="highlight(faq.question)"></h2>
+                                    <div class="faq-updated" x-text="faq.updated_at"></div>
+                                </div>
                             </div>
 
                             {{-- 追加：変更・削除ボタン --}}

@@ -331,7 +331,7 @@
             line-height: 1.5;
         }
 
-        .faq-updated {
+        .faq-sub {
             margin-top: 8px;
             font-size: 13px;
             color: var(--sub);
@@ -440,79 +440,6 @@
             font-size: 14px;
         }
 
-        /* 追加：操作ボタン用。既存デザインに寄せた最小限のスタイル */
-        .topbar-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-        .action-button {
-            height: 40px;
-            padding: 0 14px;
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            background: #fff;
-            color: var(--text);
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: .2s ease;
-        }
-
-        .action-button:hover {
-            border-color: #bfdbfe;
-            background: var(--accent-soft);
-        }
-
-        .action-button.primary {
-            border-color: var(--accent);
-            background: var(--accent);
-            color: #fff;
-        }
-
-        .faq-head-main {
-            flex: 1 1 auto;
-            min-width: 0;
-        }
-
-        .faq-head-side {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .row-action-button {
-            height: 32px;
-            padding: 0 10px;
-            border: 1px solid var(--line);
-            border-radius: 10px;
-            background: #fff;
-            color: var(--text);
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: .2s ease;
-        }
-
-        .row-action-button:hover {
-            border-color: #bfdbfe;
-            background: var(--accent-soft);
-        }
-
-        .row-action-button.delete {
-            color: #b91c1c;
-            border-color: #fecaca;
-            background: #fff;
-        }
-
-        .row-action-button.delete:hover {
-            background: #fef2f2;
-            border-color: #fca5a5;
-        }
-
         @media (max-width: 960px) {
             .layout {
                 grid-template-columns: 1fr;
@@ -562,21 +489,6 @@
 
             .faq-question {
                 font-size: 16px;
-            }
-
-            /* 追加：スマホ時だけ自然に縦並び */
-            .topbar-inner {
-                align-items: flex-start;
-            }
-
-            .faq-head {
-                flex-direction: column;
-            }
-
-            .faq-head-side {
-                width: 100%;
-                justify-content: flex-end;
-                flex-wrap: wrap;
             }
         }
     </style>
@@ -674,13 +586,6 @@
                     <p class="brand-sub">PC / スマホ対応 Laravel Blade サンプル</p>
                 </div>
             </div>
-
-            {{-- 追加：新規登録ボタン --}}
-            <div class="topbar-actions">
-                <button type="button" class="action-button primary" @click="createFaq()">
-                    新規登録
-                </button>
-            </div>
         </div>
     </header>
 
@@ -751,31 +656,16 @@
                 <template x-for="faq in filteredFaqs" :key="faq.id">
                     <article class="faq-card" :class="{ 'is-open': openId === faq.id }">
                         <div class="faq-head" @click="toggle(faq.id)">
-                            <div class="faq-head-main">
+                            <div>
                                 <div class="faq-meta">
                                     <span class="tag">📁 <span x-text="faq.category"></span></span>
+                                    <span class="tag success">✅ <span x-text="faq.status"></span></span>
+                                    <span class="tag warn">🗓 <span x-text="faq.updated_at"></span></span>
                                 </div>
                                 <h2 class="faq-question" x-html="highlight(faq.question)"></h2>
-                                <div class="faq-updated" x-text="faq.updated_at"></div>
+                                <div class="faq-sub" x-text="faq.summary"></div>
                             </div>
-
-                            {{-- 追加：変更・削除ボタン --}}
-                            <div class="faq-head-side" @click.stop>
-                                <button type="button" class="row-action-button" @click="editFaq(faq)">
-                                    変更
-                                </button>
-                                <button type="button" class="row-action-button delete" @click="deleteFaq(faq.id)">
-                                    削除
-                                </button>
-                                <button
-                                    type="button"
-                                    class="row-action-button"
-                                    @click="viewHistory(faq.id)"
-                                >
-                                    履歴
-                                </button>
-                                <div class="faq-toggle" x-text="openId === faq.id ? '−' : '+'"></div>
-                            </div>
+                            <div class="faq-toggle" x-text="openId === faq.id ? '−' : '+'"></div>
                         </div>
 
                         <div class="faq-body">
@@ -889,30 +779,6 @@
 
                 const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
-            },
-
-            createFaq() {
-                alert('新規登録');
-                window.location.href = '{{ route("faqs.create") }}';
-            },
-
-            editFaq(faq) {
-                alert('変更: ' + faq.id);
-                window.location.href = `/faqs/${faq.id}/edit`;
-            },
-
-            deleteFaq(id) {
-                if (confirm('削除しますか？')) {
-                    this.faqs = this.faqs.filter(faq => faq.id !== id);
-
-                    if (this.openId === id) {
-                        this.openId = this.filteredFaqs[0]?.id ?? null;
-                    }
-                }
-                // 本番では fetch や form POST に置き換え
-            },
-            viewHistory(id) {
-                window.location.href = `/faqs/${id}/history`;
             }
         }
     }

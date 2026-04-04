@@ -15,8 +15,7 @@ class FaqController extends Controller
         $request->session()->forget('faq_input');
 
         // $faqs = Faq::orderBy('sort_order')->get();
-        // return view('faqs.index',compact('faqs'));
-        return view('faqs.index');
+        return view('faqs.index',compact('faqs'));
     }
 
     public function create()

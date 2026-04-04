@@ -17,4 +17,4 @@ Route::post('/categories/order', [CategoryController::class, 'updateOrder'])
 Route::resource('categories', CategoryController::class);
 
 // FAQ
-Route::resource('faqs', FaqController::class);
+Route::resource('faqs', CategoryController::class);
