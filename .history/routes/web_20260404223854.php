@@ -19,11 +19,4 @@ Route::resource('categories', CategoryController::class);
 // FAQ
 Route::post('/faqs/confirm', [CategoryController::class, 'confirm'])
     ->name('faqs.confirm');
-Route::post('/faqs/{id}/confirm', [CategoryController::class, 'confirmEdit'])
-    ->name('faqs.confirmEdit');
-Route::get('/faqs/complete', function () {
-    return view('faqs.complete');
-})->name('faqs.complete');
-Route::post('/faqs/order', [CategoryController::class, 'updateOrder'])
-    ->name('faqs.updateOrder');
 Route::resource('faqs', FaqController::class);
