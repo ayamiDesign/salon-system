@@ -121,17 +121,29 @@
                                         <div class="mt-4 space-y-4">
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">質問</p>
-                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm leading-normal text-slate-800 whitespace-pre-line">{{ trim($faq['question']) }}</div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3">
+                                                    <p class="m-0 text-sm leading-6 text-slate-800 whitespace-pre-line">
+                                                        {{ $faq['question'] }}
+                                                    </p>
+                                                </div>
                                             </div>
 
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">回答</p>
-                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm leading-normal text-slate-800 whitespace-pre-line">{{ trim($faq['question']) }}</div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3">
+                                                    <div class="block text-sm leading-6 text-slate-800 whitespace-pre-line">
+                                                        {{ $faq['answer'] }}
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">あわせて確認</p>
-                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm leading-normal whitespace-pre-line {{ filled($faq['note']) ? 'text-slate-800' : 'text-slate-400' }}">{{ filled($faq['note']) ? trim($faq['note']) : '未入力' }}</div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 min-h-[56px]">
+                                                    <div class="block text-sm leading-6 whitespace-pre-line {{ filled($faq['note']) ? 'text-slate-800' : 'text-slate-400' }}">
+                                                        {{ filled($faq['note']) ? $faq['note'] : '未入力' }}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

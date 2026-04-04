@@ -76,6 +76,8 @@ class FaqController extends Controller
 
         // カテゴリ名取得
         $categories = Category::pluck('name', 'id');
+
+        dd($faqs);
         
         foreach ($faqs as $index => &$faq) {
 

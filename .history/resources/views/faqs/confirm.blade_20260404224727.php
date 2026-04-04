@@ -105,10 +105,8 @@
 
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">カテゴリ（サブ・任意）</p>
-                                                 <div class="rounded-lg border border-slate-300 bg-white px-3 py-2.5 min-h-[40px]">
-                                                    <div class="text-sm {{ filled($faq['category2_name']) ? 'text-slate-800' : 'text-slate-400' }}">
-                                                        {{ filled($faq['category2_name']) ? $faq['category2_name'] : '未選択' }}
-                                                    </div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800">
+                                                    {{ $faq['category2_name'] ?? '-' }}
                                                 </div>
                                             </div>
                                         </div>
@@ -121,17 +119,23 @@
                                         <div class="mt-4 space-y-4">
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">質問</p>
-                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm leading-normal text-slate-800 whitespace-pre-line">{{ trim($faq['question']) }}</div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-3 py-3 text-sm leading-6 text-slate-800 whitespace-pre-line">
+                                                    {{ $faq['question'] }}
+                                                </div>
                                             </div>
 
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">回答</p>
-                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm leading-normal text-slate-800 whitespace-pre-line">{{ trim($faq['question']) }}</div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-3 py-3 text-sm leading-6 text-slate-800 whitespace-pre-line">
+                                                    {{ $faq['answer'] }}
+                                                </div>
                                             </div>
 
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">あわせて確認</p>
-                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm leading-normal whitespace-pre-line {{ filled($faq['note']) ? 'text-slate-800' : 'text-slate-400' }}">{{ filled($faq['note']) ? trim($faq['note']) : '未入力' }}</div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-3 py-3 text-sm leading-6 text-slate-800 whitespace-pre-line">
+                                                    {{ $faq['note'] ?: '-' }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -148,19 +152,15 @@
                                         <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">参考URL</p>
-                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 min-h-[46px]">
-                                                    <div class="block text-sm break-all {{ filled($faq['url']) ? 'text-slate-800' : 'text-slate-400' }}">
-                                                        {{ filled($faq['url']) ? $faq['url'] : '未入力' }}
-                                                    </div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 break-all">
+                                                    {{ $faq['url'] ?: '-' }}
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <p class="mb-2 block text-sm font-medium text-slate-700">PDFファイル</p>
-                                                <div class="rounded-lg border border-slate-300 bg-white px-4 py-3 min-h-[46px]">
-                                                    <div class="block text-sm {{ filled($faq['pdf_original_name']) ? 'text-slate-800' : 'text-slate-400' }}">
-                                                        {{ filled($faq['pdf_original_name']) ? $faq['pdf_original_name'] : '未選択' }}
-                                                    </div>
+                                                <div class="rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800">
+                                                    {{ $faq['pdf_original_name'] ?: 'なし' }}
                                                 </div>
                                             </div>
                                         </div>
@@ -201,17 +201,19 @@
                             <li>・入力画面に戻る場合、ブラウザの仕様によりPDF再選択が必要になることがあります</li>
                         </ul>
                     </div>
-                    
+
                     <!-- ボタン -->
                     <div class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:justify-end">
-                        <a href="{{ route('faqs.create') }}"
-                        class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
-                            入力画面へ戻る
-                        </a>
+                        <button type="button"
+                                onclick="history.back()"
+                                class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
+                            戻る
+                        </button>
 
-                        <input type="submit"
-                            value="登録する"
-                            class="inline-flex cursor-pointer items-center justify-center rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-accent-700">
+                        <button type="submit"
+                                class="inline-flex items-center justify-center rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-accent-700">
+                            この内容で登録する
+                        </button>
                     </div>
                 </form>
             </section>

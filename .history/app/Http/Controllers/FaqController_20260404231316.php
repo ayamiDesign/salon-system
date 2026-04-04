@@ -38,76 +38,54 @@ class FaqController extends Controller
         $requestData = $request->validate([
             'faqs' => ['required', 'array', 'min:1'],
 
-            'faqs.*.category1_id' => [
-                'required',
-                'integer',
-                'exists:categories,id',
-            ],
-
+            'faqs.*.category1_id' => ['required', 'integer', 'exists:categories,id'],
             'faqs.*.category2_id' => [
                 'nullable',
                 'integer',
                 'exists:categories,id',
-                'different:category1_id',
+                'different:faqs.*.category1_id'
             ],
-
-            'faqs.*.question' => ['required', 'string','distinct'],
+            'faqs.*.question' => ['required', 'string'],
             'faqs.*.answer' => ['required', 'string'],
             'faqs.*.note' => ['nullable', 'string'],
             'faqs.*.url' => ['nullable', 'url'],
             'faqs.*.is_visible' => ['nullable', 'boolean'],
             'faqs.*.pdf' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
         ], [
-            'faqs.required' => 'FAQを1件以上入力してください',
             'faqs.*.category1_id.required' => 'カテゴリ（メイン）は必須です',
-            'faqs.*.category1_id.exists' => 'カテゴリ（メイン）の値が不正です',
-            'faqs.*.category2_id.exists' => 'カテゴリ（サブ）の値が不正です',
-            'faqs.*.category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
             'faqs.*.question.required' => '質問は必須です',
-            'faqs.*.question.distinct' => '同じ質問が入力されています',
             'faqs.*.answer.required' => '回答は必須です',
             'faqs.*.url.url' => 'URLの形式が正しくありません',
             'faqs.*.pdf.mimes' => 'PDFファイルのみアップロードできます',
-            'faqs.*.pdf.max' => 'PDFファイルは10MB以下にしてください',
         ]);
+        
+
+
+        // PDF一時保存
+        // foreach ($faqs as $index => &$faq) {
+
+        //     if ($request->hasFile("faqs.$index.pdf")) {
+        //         $tempPath = $request->file("faqs.$index.pdf")->store('faq-temp', 'public');
+
+        //         $faq['pdf_temp_path'] = $tempPath;
+        //         $faq['pdf_original_name'] = $request->file("faqs.$index.pdf")->getClientOriginalName();
+        //     } else {
+        //         $faq['pdf_temp_path'] = null;
+        //         $faq['pdf_original_name'] = null;
+        //     }
+
+        // }
 
         // データを形成
-        $faqs = $requestData['faqs'];
-
-        // カテゴリ名取得
-        $categories = Category::pluck('name', 'id');
-        
-        foreach ($faqs as $index => &$faq) {
-
-            // PDF一時保存
-            if ($request->hasFile("faqs.$index.pdf")) {
-                $tempPath = $request->file("faqs.$index.pdf")->store('faq-temp', 'public');
-
-                $faq['pdf_temp_path'] = $tempPath;
-                $faq['pdf_original_name'] = $request->file("faqs.$index.pdf")->getClientOriginalName();
-            } else {
-                $faq['pdf_temp_path'] = null;
-                $faq['pdf_original_name'] = null;
-            }
-
-            // 表示用のカテゴリ名を形成
-            $faq['category1_name'] = $categories[$faq['category1_id']] ?? '';
-            $faq['category2_name'] = !empty($faq['category2_id'])
-            ? ($categories[$faq['category2_id']] ?? '')
-            : '';
-        }
-
-        //参照を切る
-        unset($faq);
+        // $categoryNames = $requestData['name'];
 
         // セッションに保存
-        session(['faq_input' => $requestData]);
+        // session(['faq_input' => $requestData]);
 
-        return view('faqs.confirm', [
-            'mode' => 'create',
-            'faqs' => $faqs,
-        ]);
-
+        // return view('faqs.confirm', [
+        //     'mode' => 'create',
+        //     // 'categoryNames' => $categoryNames,
+        // ]);
     }
 
     public function store(Request $request)
