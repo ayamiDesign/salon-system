@@ -45,22 +45,6 @@ class FaqController extends Controller
         //     'name.*.unique'   => 'すでに登録されているカテゴリ名です',
         // ]);
 
-
-        // PDF一時保存
-        // foreach ($faqs as $index => &$faq) {
-
-        //     if ($request->hasFile("faqs.$index.pdf")) {
-        //         $tempPath = $request->file("faqs.$index.pdf")->store('faq-temp', 'public');
-
-        //         $faq['pdf_temp_path'] = $tempPath;
-        //         $faq['pdf_original_name'] = $request->file("faqs.$index.pdf")->getClientOriginalName();
-        //     } else {
-        //         $faq['pdf_temp_path'] = null;
-        //         $faq['pdf_original_name'] = null;
-        //     }
-
-        // }
-
         // データを形成
         // $categoryNames = $requestData['name'];
 
