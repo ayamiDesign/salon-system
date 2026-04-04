@@ -816,16 +816,10 @@ mark {
 .delete-modal {
     position: fixed;
     inset: 0;
-    z-index: 1000;
-    display: none;
-}
-
-.delete-modal.hidden {
-    display: none !important;
-}
-
-.delete-modal.flex {
-    display: flex !important;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
 }
 
 .delete-modal-backdrop {
@@ -835,30 +829,26 @@ mark {
 }
 
 .delete-modal-card {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: min(100% - 32px, 580px);
-    transform: translate(-50%, -50%);
-    padding: 28px 32px;
-    border-radius: 24px;
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 22px;
+    border-radius: 20px;
     background: #fff;
-    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
-    z-index: 1;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
 }
 
 .delete-modal-title {
-    margin: 0 0 12px;
+    margin: 0 0 8px;
     font-size: 18px;
     font-weight: 800;
     color: #111827;
-    line-height: 1.5;
 }
 
 .delete-modal-text {
     margin: 0;
     font-size: 14px;
-    line-height: 1.9;
+    line-height: 1.7;
     color: #4b5563;
     word-break: break-word;
 }
@@ -866,18 +856,17 @@ mark {
 .delete-modal-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    margin-top: 24px;
+    gap: 10px;
+    margin-top: 18px;
 }
 
 .modal-cancel-button,
 .modal-delete-button {
-    min-width: 132px;
-    height: 58px;
-    padding: 0 20px;
-    border-radius: 18px;
-    font-size: 15px;
-    font-weight: 800;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
 }
 
@@ -887,654 +876,14 @@ mark {
     color: #111827;
 }
 
-.modal-cancel-button:hover {
-    background: #f8fafc;
-}
-
 .modal-delete-button {
     border: 1px solid #dc2626;
     background: #dc2626;
     color: #fff;
 }
 
-.modal-delete-button:hover {
-    background: #b91c1c;
-    border-color: #b91c1c;
-}
-
 /* ========================================
-   15. カテゴリ登録 / 編集フォーム
-======================================== */
-.form-alert {
-    margin-bottom: 14px;
-    padding: 14px 16px;
-    border: 1px solid #fecaca;
-    border-radius: 16px;
-    background: #fff5f5;
-    color: #991b1b;
-}
-
-.form-alert-title {
-    margin: 0 0 8px;
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.form-alert-list {
-    margin: 0;
-    padding-left: 18px;
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-.form-card {
-    padding: 0;
-}
-
-.form-card-header {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 18px;
-    border-bottom: 1px solid var(--line-soft);
-}
-
-.form-card-title {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--text);
-}
-
-.form-card-sub {
-    margin: 4px 0 0;
-    font-size: 13px;
-    color: var(--sub);
-}
-
-.form-add-button {
-    width: 100%;
-}
-
-.form-body {
-    padding: 18px;
-}
-
-.input-list-card {
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: #f8fafc;
-    overflow: hidden;
-}
-
-.input-list-head {
-    display: none;
-    border-bottom: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--sub);
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.input-list-col-no,
-.input-list-col-name,
-.input-list-col-action {
-    padding: 14px 16px;
-}
-
-.input-list-body {
-    display: block;
-}
-
-.input-row + .input-row {
-    border-top: 1px solid var(--line);
-}
-
-.input-row-grid {
-    display: grid;
-    gap: 12px;
-    padding: 16px;
-    background: transparent;
-}
-
-.input-cell {
-    min-width: 0;
-}
-
-.mobile-label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--sub);
-}
-
-.row-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    height: 40px;
-    padding: 0 12px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.required-badge {
-    color: #ef4444;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.text-input {
-    width: 100%;
-    height: 48px;
-    padding: 0 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 14px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    outline: none;
-    transition: 0.2s ease;
-}
-
-.text-input::placeholder {
-    color: #9ca3af;
-}
-
-.text-input:focus {
-    border-color: #c6d7f7;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
-}
-
-.soft-delete-button {
-    min-width: 88px;
-}
-
-.form-guide {
-    margin-top: 16px;
-}
-
-.form-guide-title {
-    margin: 0 0 8px;
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.form-guide-list {
-    margin: 0;
-    padding-left: 18px;
-    font-size: 13px;
-    line-height: 1.8;
-}
-
-.form-actions {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 12px;
-    margin-top: 22px;
-    padding-top: 18px;
-    border-top: 1px solid var(--line-soft);
-}
-
-.form-back-button,
-.form-submit-button {
-    width: 100%;
-}
-
-/* ========================================
-   16. カテゴリ編集フォーム専用
-======================================== */
-.input-list-head-edit {
-    display: none;
-}
-
-.input-row-grid-edit {
-    display: grid;
-    gap: 12px;
-    padding: 16px;
-}
-
-/* ========================================
-   17. カテゴリ確認画面
-======================================== */
-.confirm-status-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 32px;
-    padding: 0 12px;
-    border: 1px solid #bbf7d0;
-    border-radius: 999px;
-    background: #f0fdf4;
-    color: #15803d;
-    font-size: 12px;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
-.input-list-head-confirm {
-    display: none;
-}
-
-.input-row-grid-confirm {
-    display: grid;
-    gap: 12px;
-    padding: 16px;
-}
-
-.confirm-value-box {
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.6;
-    word-break: break-word;
-}
-
-.confirm-note {
-    margin-top: 16px;
-    padding: 14px 16px;
-    border: 1px solid #fde68a;
-    border-radius: 16px;
-    background: #fffbeb;
-    color: #92400e;
-}
-
-.confirm-note-title {
-    margin: 0 0 8px;
-    font-size: 14px;
-    font-weight: 800;
-}
-
-/* ========================================
-   18. 完了画面
-======================================== */
-.complete-card {
-    padding: 0;
-}
-
-.complete-card-compact {
-    max-width: 920px;
-    margin: 0 auto;
-}
-
-.complete-card-inner {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 44px 20px;
-    text-align: center;
-}
-
-.complete-icon-wrap {
-    width: 76px;
-    height: 76px;
-    margin: 0 auto 18px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, #ecfdf3 0%, #dcfce7 100%);
-    border: 1px solid #bbf7d0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.complete-icon {
-    width: 34px;
-    height: 34px;
-    color: #16a34a;
-}
-
-.complete-kicker {
-    margin: 0 0 6px;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    color: #16a34a;
-}
-
-.complete-title {
-    margin: 0;
-    font-size: 24px;
-    line-height: 1.35;
-    font-weight: 800;
-    color: var(--text);
-}
-
-.complete-text {
-    margin: 14px 0 0;
-    font-size: 14px;
-    line-height: 1.9;
-    color: var(--sub);
-}
-
-.complete-status-chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-    min-height: 40px;
-    padding: 0 16px;
-    border: 1px solid #bbf7d0;
-    border-radius: 999px;
-    background: #f0fdf4;
-    color: #15803d;
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.complete-status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: #22c55e;
-    flex-shrink: 0;
-}
-
-.complete-actions {
-    margin-top: 24px;
-    padding-top: 0;
-    border-top: 0;
-}
-
-.complete-actions-centered {
-    justify-content: center;
-}
-
-.complete-actions .form-primary-button {
-    width: 100%;
-}
-
-.complete-cta {
-    margin-top: 28px;
-    display: flex;
-    justify-content: center;
-}
-
-.complete-cta .form-primary-button {
-    width: 100%;
-}
-
-/* ========================================
-   19. FAQ登録フォーム
-======================================== */
-.faq-add-button {
-    width: 100%;
-}
-
-.faq-form-list {
-    display: grid;
-    gap: 18px;
-}
-
-.faq-form-block {
-    border: 1px solid var(--line);
-    border-radius: 22px;
-    background: #f8fafc;
-    padding: 16px;
-}
-
-.faq-form-block-head {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--line);
-}
-
-.faq-form-block-title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-}
-
-.faq-form-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    font-weight: 800;
-    flex-shrink: 0;
-}
-
-.faq-form-block-title {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--text);
-}
-
-.faq-form-block-sub {
-    margin: 4px 0 0;
-    font-size: 12px;
-    color: var(--sub);
-}
-
-.faq-remove-button {
-    align-self: flex-start;
-}
-
-.faq-form-sections {
-    display: grid;
-    gap: 18px;
-    margin-top: 18px;
-}
-
-.faq-form-section {
-    display: grid;
-    gap: 12px;
-}
-
-.faq-form-section-title {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--text);
-}
-
-.faq-form-grid {
-    display: grid;
-    gap: 14px;
-}
-
-.faq-form-stack {
-    display: grid;
-    gap: 14px;
-}
-
-.faq-label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-}
-
-.text-select,
-.text-input,
-.text-textarea,
-.file-input {
-    width: 100%;
-    border: 1px solid #d1d5db;
-    border-radius: 14px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    outline: none;
-    transition: 0.2s ease;
-}
-
-.text-select,
-.text-input,
-.file-input {
-    min-height: 48px;
-    padding: 0 14px;
-}
-
-.text-textarea {
-    padding: 12px 14px;
-    line-height: 1.7;
-    resize: vertical;
-}
-
-.text-select:focus,
-.text-input:focus,
-.text-textarea:focus,
-.file-input:focus {
-    border-color: #c6d7f7;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
-}
-
-.file-input {
-    padding: 10px 12px;
-}
-
-.faq-help-text {
-    margin: 8px 0 0;
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--sub);
-}
-
-.toggle-box {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 48px;
-    padding: 0 14px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.toggle-input {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--accent);
-    flex-shrink: 0;
-}
-
-/* ========================================
-   20. フォーム専用ボタン
-======================================== */
-.form-primary-button,
-.form-secondary-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: none;
-    min-height: 52px;
-    padding: 0 24px;
-    border-radius: 16px;
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 1;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.2s ease;
-    appearance: none;
-    -webkit-appearance: none;
-    box-shadow: none;
-}
-
-.form-primary-button {
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: #fff;
-}
-
-.form-primary-button:hover {
-    background: var(--accent-deep);
-    border-color: var(--accent-deep);
-    color: #fff;
-}
-
-.form-secondary-button {
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--text);
-}
-
-.form-secondary-button:hover {
-    background: #f8fafc;
-    border-color: #d8e0eb;
-    color: var(--text);
-}
-
-/* ========================================
-   21. FAQ確認画面
-======================================== */
-.faq-confirm-block {
-    background: #f8fafc;
-}
-
-.confirm-value-box {
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.confirm-value-box-multiline {
-    min-height: 52px;
-    align-items: flex-start;
-    padding: 12px 14px;
-    word-break: break-word;
-}
-
-.confirm-value-box.is-empty {
-    color: #9ca3af;
-}
-
-.faq-confirm-note {
-    margin-top: 18px;
-}
-
-/* ========================================
-   22. フォーム下部ボタンのつぶれ防止
-======================================== */
-.form-actions > .form-back-button,
-.form-actions > .form-submit-button {
-    flex: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 48px;
-    padding: 0 18px;
-    line-height: 1;
-}
-
-/* ========================================
-   23. PC表示
+   15. PC表示
 ======================================== */
 @media (min-width: 961px) {
     .topbar-inner {
@@ -1575,7 +924,6 @@ mark {
         font-size: 14px;
     }
 
-    /* FAQ一覧など2カラムページ用 */
     .layout {
         padding: 22px 20px 40px;
         display: grid;
@@ -1583,11 +931,7 @@ mark {
         gap: 22px;
     }
 
-    /* カテゴリ一覧など1カラムページ用 */
     .category-layout-single {
-        display: block;
-        max-width: 1200px;
-        margin: 0 auto;
         padding: 22px 20px 40px;
     }
 
@@ -1705,138 +1049,10 @@ mark {
         width: 38px;
         height: 38px;
     }
-
-    /* カテゴリ登録 / 編集フォーム */
-    .form-card-header {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 22px;
-    }
-
-    .form-add-button {
-        width: auto;
-    }
-
-    .form-body {
-        padding: 22px;
-    }
-
-    .input-list-head {
-        display: grid;
-        grid-template-columns: 120px minmax(0, 1fr) 160px;
-        align-items: center;
-    }
-
-    .input-row-grid {
-        grid-template-columns: 120px minmax(0, 1fr) 160px;
-        align-items: center;
-        gap: 16px;
-        padding: 16px;
-    }
-
-    .mobile-label {
-        display: none;
-    }
-
-    .input-cell-action {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .form-actions {
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-
-    .form-back-button,
-    .form-submit-button {
-        width: auto;
-    }
-
-    .input-list-head-edit {
-        display: grid;
-        grid-template-columns: 120px minmax(0, 1fr);
-        align-items: center;
-    }
-
-    .input-row-grid-edit {
-        grid-template-columns: 120px minmax(0, 1fr);
-        align-items: center;
-        gap: 16px;
-        padding: 16px;
-    }
-
-    /* カテゴリ確認画面 */
-    .input-list-head-confirm {
-        display: grid;
-        grid-template-columns: 120px minmax(0, 1fr);
-        align-items: center;
-    }
-
-    .input-row-grid-confirm {
-        grid-template-columns: 120px minmax(0, 1fr);
-        align-items: center;
-        gap: 16px;
-        padding: 16px;
-    }
-
-    /* 完了画面 */
-    .complete-card-inner {
-        padding: 56px 32px;
-    }
-
-    .complete-title {
-        font-size: 32px;
-    }
-
-    .complete-actions .form-primary-button {
-        width: auto;
-        min-width: 240px;
-    }
-    .complete-cta .form-primary-button {
-        width: auto;
-        min-width: 240px;
-    }
-
-    /* FAQ登録フォーム */
-     .faq-add-button {
-        width: auto;
-    }
-
-    .faq-form-block {
-        padding: 20px;
-    }
-
-    .faq-form-block-head {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .faq-remove-button {
-        align-self: auto;
-    }
-
-    .faq-form-grid-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    /* FAQ確認画面 */
-    .faq-confirm-block {
-        padding: 20px;
-    }
-
-     /* フォーム下部ボタンのつぶれ防止 */
-    .form-actions > .form-back-button,
-    .form-actions > .form-submit-button {
-        width: auto;
-        min-width: 160px;
-    }
 }
 
 /* ========================================
-   24. スマホ表示
+   16. スマホ表示
 ======================================== */
 @media (max-width: 640px) {
     .category-card-head {
@@ -1846,9 +1062,8 @@ mark {
     }
 
     .delete-modal-card {
-        width: calc(100% - 24px);
-        padding: 22px 18px;
-        border-radius: 20px;
+        padding: 18px;
+        border-radius: 18px;
     }
 
     .delete-modal-actions {
@@ -1858,8 +1073,5 @@ mark {
     .modal-cancel-button,
     .modal-delete-button {
         width: 100%;
-        min-width: 0;
-        height: 50px;
-        border-radius: 14px;
     }
 }

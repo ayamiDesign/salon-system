@@ -28,41 +28,48 @@
             </div>
         </div>
     </header>
-
     <main class="category-layout-single">
         <section class="content">
-            <section class="faq-card complete-card complete-card-compact">
+            <section class="faq-card complete-card">
                 <div class="complete-card-inner">
-                    <div class="complete-icon-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg"
+                    <div class="complete-icon-wrap" aria-hidden="true">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
                             class="complete-icon"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
-                            stroke-width="2.4">
+                            stroke-width="2"
+                        >
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
 
-                    <p class="complete-kicker">完了しました</p>
-
-                    <h1 class="complete-title">
-                        登録が完了しました
-                    </h1>
+                    <h1 class="complete-title">登録が完了しました</h1>
 
                     <p class="complete-text">
-                        FAQ情報の登録処理が正常に完了しました。<br>
+                        FAQの登録処理が正常に完了しました。<br>
                         登録した内容はFAQ一覧画面から確認できます。
                     </p>
 
-                    <div class="complete-cta">
-                        <a href="{{ route('faqs.index') }}"
-                        class="form-primary-button">
+                    <div class="complete-status-box">
+                        <div class="complete-status-row">
+                            <span class="complete-status-label">処理状態</span>
+                            <span class="complete-status-value">正常に完了</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions complete-actions">
+                        <a
+                            href="{{ route('faqs.index') }}"
+                            class="form-primary-button form-submit-button"
+                        >
                             FAQ一覧へ
                         </a>
                     </div>
                 </div>
             </section>
+
         </section>
     </main>
 </div>

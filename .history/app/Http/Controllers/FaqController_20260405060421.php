@@ -225,42 +225,24 @@ class FaqController extends Controller
     {
 
         // バリデーション
-        $requestData = $request->validate([
-           'faq.category1_id' => [
-                'required',
-                'integer',
-                'exists:categories,id',
-            ],
-
-            'category2_id' => [
-                'nullable',
-                'integer',
-                'exists:categories,id',
-                'different:category1_id',
-            ],
-
-            'question' => ['required', 'string','distinct'],
-            'answer' => ['required', 'string'],
-            'note' => ['nullable', 'string'],
-            'url' => ['nullable', 'url'],
-            'is_visible' => ['nullable', 'boolean'],
-            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
-        ], [
-            'required' => 'FAQを1件以上入力してください',
-            'category1_id.required' => 'カテゴリ（メイン）は必須です',
-            'category1_id.exists' => 'カテゴリ（メイン）の値が不正です',
-            'category2_id.exists' => 'カテゴリ（サブ）の値が不正です',
-            'category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
-            'question.required' => '質問は必須です',
-            'question.distinct' => '同じ質問が入力されています',
-            'answer.required' => '回答は必須です',
-            'url.url' => 'URLの形式が正しくありません',
-            'pdf.mimes' => 'PDFファイルのみアップロードできます',
-            'pdf.max' => 'PDFファイルは10MB以下にしてください',
-        ]);
+        // $requestData = $request->validate(
+        //     [
+        //         'name' => [
+        //             'required',
+        //             'string',
+        //             'max:255',
+        //             Rule::unique('categories', 'name')->ignore($id),
+        //         ],
+        //     ],
+        //     [
+        //         'name.required' => 'カテゴリ名を入力してください',
+        //         'name.max' => 'カテゴリ名は255文字以内で入力してください',
+        //         'name.unique' => 'このカテゴリ名はすでに存在しています',
+        //     ]
+        // );
 
         // セッションに保存
-        session(['faq_input' => $requestData]);
+        // session(['faq_input' => $requestData]);
 
         return view('faqs.confirm', [
             'mode' => 'edit',

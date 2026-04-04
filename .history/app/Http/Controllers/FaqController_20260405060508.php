@@ -226,37 +226,40 @@ class FaqController extends Controller
 
         // バリデーション
         $requestData = $request->validate([
-           'faq.category1_id' => [
+            'faqs' => ['required', 'array', 'min:1'],
+
+            'faqs.*.category1_id' => [
                 'required',
                 'integer',
                 'exists:categories,id',
             ],
 
-            'category2_id' => [
+            'faqs.*.category2_id' => [
                 'nullable',
                 'integer',
                 'exists:categories,id',
                 'different:category1_id',
             ],
 
-            'question' => ['required', 'string','distinct'],
-            'answer' => ['required', 'string'],
-            'note' => ['nullable', 'string'],
-            'url' => ['nullable', 'url'],
-            'is_visible' => ['nullable', 'boolean'],
-            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
+            'faqs.*.question' => ['required', 'string','distinct'],
+            'faqs.*.answer' => ['required', 'string'],
+            'faqs.*.note' => ['nullable', 'string'],
+            'faqs.*.url' => ['nullable', 'url'],
+            'faqs.*.is_visible' => ['nullable', 'boolean'],
+            'faqs.*.pdf_temp_path' => ['nullable', 'string'],
+            'faqs.*.pdf_original_name' => ['nullable', 'string'],
         ], [
-            'required' => 'FAQを1件以上入力してください',
-            'category1_id.required' => 'カテゴリ（メイン）は必須です',
-            'category1_id.exists' => 'カテゴリ（メイン）の値が不正です',
-            'category2_id.exists' => 'カテゴリ（サブ）の値が不正です',
-            'category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
-            'question.required' => '質問は必須です',
-            'question.distinct' => '同じ質問が入力されています',
-            'answer.required' => '回答は必須です',
-            'url.url' => 'URLの形式が正しくありません',
-            'pdf.mimes' => 'PDFファイルのみアップロードできます',
-            'pdf.max' => 'PDFファイルは10MB以下にしてください',
+            'faqs.required' => 'FAQを1件以上入力してください',
+            'faqs.*.category1_id.required' => 'カテゴリ（メイン）は必須です',
+            'faqs.*.category1_id.exists' => 'カテゴリ（メイン）の値が不正です',
+            'faqs.*.category2_id.exists' => 'カテゴリ（サブ）の値が不正です',
+            'faqs.*.category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
+            'faqs.*.question.required' => '質問は必須です',
+            'faqs.*.question.distinct' => '同じ質問が入力されています',
+            'faqs.*.answer.required' => '回答は必須です',
+            'faqs.*.url.url' => 'URLの形式が正しくありません',
+            'faqs.*.pdf_temp_path.string' => 'PDFのデータが不正です',
+            'faqs.*.pdf_original_name.string' => 'PDFファイル名が不正です',
         ]);
 
         // セッションに保存

@@ -253,18 +253,15 @@
                             <li>表示順は登録後の一覧画面で調整してください</li>
                         </ul>
                     </div>
+
                     <div class="form-actions">
-                        <a
-                            href="{{ route('faqs.index') }}"
-                            class="header-sub-button form-back-button"
-                        >
+                        <a href="{{ route('faqs.index') }}"
+                        class="header-sub-button">
                             キャンセル
                         </a>
 
-                        <button
-                            type="submit"
-                            class="header-main-button form-submit-button"
-                        >
+                        <button type="submit"
+                            class="header-main-button">
                             確認する
                         </button>
                     </div>

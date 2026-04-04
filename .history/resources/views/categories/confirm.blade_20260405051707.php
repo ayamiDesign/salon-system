@@ -30,7 +30,6 @@
             </div>
         </div>
     </header>
-
     <main class="category-layout-single">
         <section class="content">
             <div class="search-panel">
@@ -77,6 +76,7 @@
                                 @foreach ($categoryNames as $index => $categoryName)
                                     <div class="input-row">
                                         <div class="input-row-grid input-row-grid-confirm">
+
                                             <div class="input-cell input-cell-no">
                                                 <div class="mobile-label">No.</div>
                                                 <div class="row-number">{{ $index + 1 }}</div>
@@ -87,6 +87,7 @@
                                                 <div class="confirm-value-box">{{ $categoryName }}</div>
                                                 <input type="hidden" name="name[]" value="{{ $categoryName }}">
                                             </div>
+
                                         </div>
                                     </div>
                                 @endforeach
@@ -110,12 +111,11 @@
                                 入力画面へ戻る
                             </a>
 
-                            <button
+                            <input
                                 type="submit"
-                                class="header-main-button form-submit-button"
+                                value="登録する"
+                                class="header-main-button form-submit-button confirm-submit-input"
                             >
-                                登録する
-                            </button>
                         </div>
                     </form>
                 </section>
@@ -145,6 +145,7 @@
                             <div class="input-list-body">
                                 <div class="input-row">
                                     <div class="input-row-grid input-row-grid-confirm">
+
                                         <div class="input-cell input-cell-no">
                                             <div class="mobile-label">No.</div>
                                             <div class="row-number">1</div>
@@ -155,6 +156,7 @@
                                             <div class="confirm-value-box">{{ $requestData['name'] }}</div>
                                             <input type="hidden" name="name" value="{{ $requestData['name'] }}">
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -177,12 +179,11 @@
                                 入力画面へ戻る
                             </a>
 
-                            <button
+                            <input
                                 type="submit"
-                                class="header-main-button form-submit-button"
+                                value="登録する"
+                                class="header-main-button form-submit-button confirm-submit-input"
                             >
-                                登録する
-                            </button>
                         </div>
                     </form>
                 </section>

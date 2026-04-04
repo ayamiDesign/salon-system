@@ -1437,89 +1437,7 @@ mark {
 }
 
 /* ========================================
-   20. フォーム専用ボタン
-======================================== */
-.form-primary-button,
-.form-secondary-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: none;
-    min-height: 52px;
-    padding: 0 24px;
-    border-radius: 16px;
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 1;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.2s ease;
-    appearance: none;
-    -webkit-appearance: none;
-    box-shadow: none;
-}
-
-.form-primary-button {
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: #fff;
-}
-
-.form-primary-button:hover {
-    background: var(--accent-deep);
-    border-color: var(--accent-deep);
-    color: #fff;
-}
-
-.form-secondary-button {
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--text);
-}
-
-.form-secondary-button:hover {
-    background: #f8fafc;
-    border-color: #d8e0eb;
-    color: var(--text);
-}
-
-/* ========================================
-   21. FAQ確認画面
-======================================== */
-.faq-confirm-block {
-    background: #f8fafc;
-}
-
-.confirm-value-box {
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.confirm-value-box-multiline {
-    min-height: 52px;
-    align-items: flex-start;
-    padding: 12px 14px;
-    word-break: break-word;
-}
-
-.confirm-value-box.is-empty {
-    color: #9ca3af;
-}
-
-.faq-confirm-note {
-    margin-top: 18px;
-}
-
-/* ========================================
-   22. フォーム下部ボタンのつぶれ防止
+   20. フォーム下部ボタンのつぶれ防止
 ======================================== */
 .form-actions > .form-back-button,
 .form-actions > .form-submit-button {
@@ -1534,7 +1452,7 @@ mark {
 }
 
 /* ========================================
-   23. PC表示
+   21. PC表示
 ======================================== */
 @media (min-width: 961px) {
     .topbar-inner {
@@ -1799,6 +1717,13 @@ mark {
         min-width: 240px;
     }
 
+     /* フォーム下部ボタンのつぶれ防止 */
+    .form-actions > .form-back-button,
+    .form-actions > .form-submit-button {
+        width: auto;
+        min-width: 160px;
+    }
+
     /* FAQ登録フォーム */
      .faq-add-button {
         width: auto;
@@ -1821,22 +1746,10 @@ mark {
     .faq-form-grid-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
-    /* FAQ確認画面 */
-    .faq-confirm-block {
-        padding: 20px;
-    }
-
-     /* フォーム下部ボタンのつぶれ防止 */
-    .form-actions > .form-back-button,
-    .form-actions > .form-submit-button {
-        width: auto;
-        min-width: 160px;
-    }
 }
 
 /* ========================================
-   24. スマホ表示
+   22. スマホ表示
 ======================================== */
 @media (max-width: 640px) {
     .category-card-head {
