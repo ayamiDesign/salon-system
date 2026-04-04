@@ -755,8 +755,10 @@
                                 <div class="faq-meta">
                                     <span class="tag">📁 <span x-text="faq.category"></span></span>
                                 </div>
-                                <h2 class="faq-question" x-html="highlight(faq.question)"></h2>
-                                <div class="faq-updated" x-text="faq.updated_at"></div>
+                                <div class="faq-title-row">
+                                    <h2 class="faq-question" x-html="highlight(faq.question)"></h2>
+                                    <div class="faq-updated" x-text="faq.updated_at"></div>
+                                </div>
                             </div>
 
                             {{-- 追加：変更・削除ボタン --}}

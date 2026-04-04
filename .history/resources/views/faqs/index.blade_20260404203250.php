@@ -331,7 +331,7 @@
             line-height: 1.5;
         }
 
-        .faq-updated {
+        .faq-sub {
             margin-top: 8px;
             font-size: 13px;
             color: var(--sub);
@@ -754,9 +754,11 @@
                             <div class="faq-head-main">
                                 <div class="faq-meta">
                                     <span class="tag">📁 <span x-text="faq.category"></span></span>
+                                    <span class="tag success">✅ <span x-text="faq.status"></span></span>
+                                    <span class="tag warn">🗓 <span x-text="faq.updated_at"></span></span>
                                 </div>
                                 <h2 class="faq-question" x-html="highlight(faq.question)"></h2>
-                                <div class="faq-updated" x-text="faq.updated_at"></div>
+                                <div class="faq-sub" x-text="faq.summary"></div>
                             </div>
 
                             {{-- 追加：変更・削除ボタン --}}
