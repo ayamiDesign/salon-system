@@ -17,12 +17,7 @@ class FaqController extends Controller
 
         // カテゴリを取得
         $categoriesList = Category::orderBy('sort_order')->get();
-
-        // カテゴリごとのFAQ件数を取得
-        foreach ($categoriesList as $index => $category) {
-            $count = Faq::categoryMatch($category->id)->count();
-            $category['count'] = $count;
-        }
+        dd($categoriesList->toArray());
 
         // 表示用のカテゴリ名を形成
         $categories = Category::pluck('name', 'id');

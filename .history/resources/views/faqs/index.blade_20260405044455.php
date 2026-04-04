@@ -302,6 +302,8 @@
                         @endforeach
                     </div>
                 </div>
+
+                {{-- スマホ用同期ラベルが必要なら残す。今は同一DOMなので不要 --}}
             @else
                 <div class="empty">
                     該当するFAQが見つかりませんでした。<br>
