@@ -77,7 +77,7 @@
                     <button
                         type="button"
                         onclick="addFaqBlock()"
-                        class="action-button action-button-primary form-add-button"
+                        class="form-primary-button faq-add-button"
                     >
                         ＋ 入力欄を追加
                     </button>
@@ -253,18 +253,15 @@
                             <li>表示順は登録後の一覧画面で調整してください</li>
                         </ul>
                     </div>
+
                     <div class="form-actions">
-                        <a
-                            href="{{ route('faqs.index') }}"
-                            class="header-sub-button form-back-button"
-                        >
+                        <a href="{{ route('faqs.index') }}"
+                        class="header-sub-button">
                             キャンセル
                         </a>
 
-                        <button
-                            type="submit"
-                            class="header-main-button form-submit-button"
-                        >
+                        <button type="submit"
+                            class="header-main-button">
                             確認する
                         </button>
                     </div>

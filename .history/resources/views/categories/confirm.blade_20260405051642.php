@@ -1,3 +1,4 @@
+{{-- resources/views/categories/confirm.blade.php --}}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +9,9 @@
 </head>
 <body>
 <div class="app">
+    {{-- ========================================
+       01. ヘッダー
+    ======================================== --}}
     <header class="topbar">
         <div class="topbar-inner">
             <div class="brand">
@@ -31,8 +35,15 @@
         </div>
     </header>
 
+    {{-- ========================================
+       02. メイン
+    ======================================== --}}
     <main class="category-layout-single">
         <section class="content">
+
+            {{-- ========================================
+               03. ページ説明カード
+            ======================================== --}}
             <div class="search-panel">
                 <div class="search-copy">
                     <h1 class="search-heading">入力内容をご確認ください</h1>
@@ -42,6 +53,9 @@
                 </div>
             </div>
 
+            {{-- ========================================
+               04. エラー表示
+            ======================================== --}}
             @if ($errors->any())
                 <div class="form-alert">
                     <p class="form-alert-title">入力内容を確認してください</p>
@@ -77,6 +91,7 @@
                                 @foreach ($categoryNames as $index => $categoryName)
                                     <div class="input-row">
                                         <div class="input-row-grid input-row-grid-confirm">
+
                                             <div class="input-cell input-cell-no">
                                                 <div class="mobile-label">No.</div>
                                                 <div class="row-number">{{ $index + 1 }}</div>
@@ -87,6 +102,7 @@
                                                 <div class="confirm-value-box">{{ $categoryName }}</div>
                                                 <input type="hidden" name="name[]" value="{{ $categoryName }}">
                                             </div>
+
                                         </div>
                                     </div>
                                 @endforeach
@@ -110,12 +126,11 @@
                                 入力画面へ戻る
                             </a>
 
-                            <button
+                            <input
                                 type="submit"
-                                class="header-main-button form-submit-button"
+                                value="登録する"
+                                class="header-main-button form-submit-button confirm-submit-input"
                             >
-                                登録する
-                            </button>
                         </div>
                     </form>
                 </section>
@@ -145,6 +160,7 @@
                             <div class="input-list-body">
                                 <div class="input-row">
                                     <div class="input-row-grid input-row-grid-confirm">
+
                                         <div class="input-cell input-cell-no">
                                             <div class="mobile-label">No.</div>
                                             <div class="row-number">1</div>
@@ -155,6 +171,7 @@
                                             <div class="confirm-value-box">{{ $requestData['name'] }}</div>
                                             <input type="hidden" name="name" value="{{ $requestData['name'] }}">
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -177,12 +194,11 @@
                                 入力画面へ戻る
                             </a>
 
-                            <button
+                            <input
                                 type="submit"
-                                class="header-main-button form-submit-button"
+                                value="登録する"
+                                class="header-main-button form-submit-button confirm-submit-input"
                             >
-                                登録する
-                            </button>
                         </div>
                     </form>
                 </section>

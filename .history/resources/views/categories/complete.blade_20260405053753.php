@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ登録完了</title>
+    <title>カテゴリ登録完了</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
@@ -13,14 +13,14 @@
             <div class="brand">
                 <div class="brand-badge">FAQ</div>
                 <div class="brand-text">
-                    <p class="brand-title">FAQ登録完了</p>
+                    <p class="brand-title">カテゴリ登録完了</p>
                     <p class="brand-sub">一覧・登録・編集・確認と同じデザインルールで統一した完了画面</p>
                 </div>
             </div>
 
             <div class="topbar-actions topbar-actions-sort">
                 <a
-                    href="{{ route('faqs.index') }}"
+                    href="{{ route('categories.index') }}"
                     class="header-sub-button"
                 >
                     一覧へ戻る
@@ -51,14 +51,15 @@
                     </h1>
 
                     <p class="complete-text">
-                        FAQ情報の登録処理が正常に完了しました。<br>
-                        登録した内容はFAQ一覧画面から確認できます。
+                        カテゴリ情報の登録処理が正常に完了しました。<br>
+                        登録した内容はカテゴリ一覧画面から確認できます。
                     </p>
 
+                    {{-- ★ここが最重要 --}}
                     <div class="complete-cta">
-                        <a href="{{ route('faqs.index') }}"
+                        <a href="{{ route('categories.index') }}"
                         class="form-primary-button">
-                            FAQ一覧へ
+                            カテゴリ一覧へ
                         </a>
                     </div>
                 </div>

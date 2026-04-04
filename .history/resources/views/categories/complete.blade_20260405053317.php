@@ -1,9 +1,10 @@
+{{-- resources/views/categories/complete.blade.php --}}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ登録完了</title>
+    <title>カテゴリ登録完了</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
@@ -13,14 +14,14 @@
             <div class="brand">
                 <div class="brand-badge">FAQ</div>
                 <div class="brand-text">
-                    <p class="brand-title">FAQ登録完了</p>
+                    <p class="brand-title">カテゴリ登録完了</p>
                     <p class="brand-sub">一覧・登録・編集・確認と同じデザインルールで統一した完了画面</p>
                 </div>
             </div>
 
             <div class="topbar-actions topbar-actions-sort">
                 <a
-                    href="{{ route('faqs.index') }}"
+                    href="{{ route('categories.index') }}"
                     class="header-sub-button"
                 >
                     一覧へ戻る
@@ -33,32 +34,38 @@
         <section class="content">
             <section class="faq-card complete-card complete-card-compact">
                 <div class="complete-card-inner">
-                    <div class="complete-icon-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg"
+                    <div class="complete-icon-wrap" aria-hidden="true">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
                             class="complete-icon"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
-                            stroke-width="2.4">
+                            stroke-width="2.4"
+                        >
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
 
                     <p class="complete-kicker">完了しました</p>
-
-                    <h1 class="complete-title">
-                        登録が完了しました
-                    </h1>
+                    <h1 class="complete-title">登録が完了しました</h1>
 
                     <p class="complete-text">
-                        FAQ情報の登録処理が正常に完了しました。<br>
-                        登録した内容はFAQ一覧画面から確認できます。
+                        カテゴリ情報の登録処理が正常に完了しました。<br>
+                        登録した内容はカテゴリ一覧画面から確認できます。
                     </p>
 
-                    <div class="complete-cta">
-                        <a href="{{ route('faqs.index') }}"
-                        class="form-primary-button">
-                            FAQ一覧へ
+                    <div class="complete-status-chip">
+                        <span class="complete-status-dot"></span>
+                        <span>正常に完了</span>
+                    </div>
+
+                    <div class="form-actions complete-actions complete-actions-centered">
+                        <a
+                            href="{{ route('categories.index') }}"
+                            class="form-primary-button form-submit-button"
+                        >
+                            カテゴリ一覧へ
                         </a>
                     </div>
                 </div>

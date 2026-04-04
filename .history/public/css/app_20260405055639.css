@@ -1507,6 +1507,7 @@ mark {
     min-height: 52px;
     align-items: flex-start;
     padding: 12px 14px;
+    white-space: pre-line;
     word-break: break-word;
 }
 

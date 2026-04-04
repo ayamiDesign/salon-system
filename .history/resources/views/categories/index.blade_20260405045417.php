@@ -74,6 +74,10 @@
                     <span class="stats-label">総カテゴリ件数</span>
                     <span class="stats-inline-value">{{ $categories->count() }}</span>
                 </div>
+                <div class="stats-item">
+                    <span class="stats-label">並び順管理</span>
+                    <span class="stats-inline-value">ドラッグ対応</span>
+                </div>
             </div>
 
             <div id="sortGuide" class="sort-guide hidden">

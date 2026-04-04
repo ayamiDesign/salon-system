@@ -1,3 +1,4 @@
+{{-- resources/views/categories/create.blade.php --}}
 @php
     $categoryNames = old('name', $sessionInput['name'] ?? ['']);
 @endphp
@@ -12,6 +13,9 @@
 </head>
 <body>
 <div class="app">
+    {{-- ========================================
+       01. ヘッダー
+    ======================================== --}}
     <header class="topbar">
         <div class="topbar-inner">
             <div class="brand">
@@ -33,8 +37,15 @@
         </div>
     </header>
 
+    {{-- ========================================
+       02. メイン
+    ======================================== --}}
     <main class="category-layout-single">
         <section class="content">
+
+            {{-- ========================================
+               03. ページ説明カード
+            ======================================== --}}
             <div class="search-panel">
                 <div class="search-copy">
                     <h1 class="search-heading">カテゴリを登録</h1>
@@ -44,6 +55,9 @@
                 </div>
             </div>
 
+            {{-- ========================================
+               04. エラー表示
+            ======================================== --}}
             @if ($errors->any())
                 <div class="form-alert">
                     <p class="form-alert-title">入力内容を確認してください</p>
@@ -55,6 +69,9 @@
                 </div>
             @endif
 
+            {{-- ========================================
+               05. 登録フォームカード
+            ======================================== --}}
             <section class="faq-card form-card">
                 <div class="form-card-header">
                     <div>
@@ -74,6 +91,9 @@
                 <form action="{{ route('categories.confirm') }}" method="post" class="form-body">
                     @csrf
 
+                    {{-- ========================================
+                       06. 入力エリア
+                    ======================================== --}}
                     <div class="input-list-card">
                         <div class="input-list-head">
                             <div class="input-list-col-no">No.</div>
@@ -122,6 +142,9 @@
                         </div>
                     </div>
 
+                    {{-- ========================================
+                       07. 補足ルール
+                    ======================================== --}}
                     <div class="sort-guide form-guide">
                         <p class="form-guide-title">入力ルール</p>
                         <ul class="form-guide-list">
@@ -132,6 +155,9 @@
                         </ul>
                     </div>
 
+                    {{-- ========================================
+                       08. 送信ボタン
+                    ======================================== --}}
                     <div class="form-actions">
                         <a
                             href="{{ route('categories.index') }}"
@@ -153,6 +179,9 @@
     </main>
 </div>
 
+{{-- ========================================
+   09. 入力行追加JS
+======================================== --}}
 <script>
     function refreshCategoryNumbers() {
         const rows = document.querySelectorAll('.category-row');

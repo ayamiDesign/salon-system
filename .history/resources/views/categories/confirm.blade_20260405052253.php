@@ -1,3 +1,4 @@
+{{-- resources/views/categories/confirm.blade.php --}}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +9,9 @@
 </head>
 <body>
 <div class="app">
+    {{-- ========================================
+       01. ヘッダー
+    ======================================== --}}
     <header class="topbar">
         <div class="topbar-inner">
             <div class="brand">
@@ -31,8 +35,15 @@
         </div>
     </header>
 
+    {{-- ========================================
+       02. メイン
+    ======================================== --}}
     <main class="category-layout-single">
         <section class="content">
+
+            {{-- ========================================
+               03. ページ説明カード
+            ======================================== --}}
             <div class="search-panel">
                 <div class="search-copy">
                     <h1 class="search-heading">入力内容をご確認ください</h1>
@@ -42,6 +53,9 @@
                 </div>
             </div>
 
+            {{-- ========================================
+               04. エラー表示
+            ======================================== --}}
             @if ($errors->any())
                 <div class="form-alert">
                     <p class="form-alert-title">入力内容を確認してください</p>
@@ -53,6 +67,9 @@
                 </div>
             @endif
 
+            {{-- ========================================
+               05. 新規登録確認
+            ======================================== --}}
             @if($mode === 'create')
                 <section class="faq-card form-card">
                     <div class="form-card-header">
@@ -121,6 +138,9 @@
                 </section>
             @endif
 
+            {{-- ========================================
+               06. 編集確認
+            ======================================== --}}
             @if($mode === 'edit')
                 <section class="faq-card form-card">
                     <div class="form-card-header">

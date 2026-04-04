@@ -226,7 +226,7 @@ class FaqController extends Controller
 
         // バリデーション
         $requestData = $request->validate([
-           'faq.category1_id' => [
+            'category1_id' => [
                 'required',
                 'integer',
                 'exists:categories,id',
@@ -244,7 +244,8 @@ class FaqController extends Controller
             'note' => ['nullable', 'string'],
             'url' => ['nullable', 'url'],
             'is_visible' => ['nullable', 'boolean'],
-            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
+            'pdf_temp_path' => ['nullable', 'string'],
+            'pdf_original_name' => ['nullable', 'string'],
         ], [
             'required' => 'FAQを1件以上入力してください',
             'category1_id.required' => 'カテゴリ（メイン）は必須です',
@@ -255,8 +256,8 @@ class FaqController extends Controller
             'question.distinct' => '同じ質問が入力されています',
             'answer.required' => '回答は必須です',
             'url.url' => 'URLの形式が正しくありません',
-            'pdf.mimes' => 'PDFファイルのみアップロードできます',
-            'pdf.max' => 'PDFファイルは10MB以下にしてください',
+            'pdf_temp_path.string' => 'PDFのデータが不正です',
+            'pdf_original_name.string' => 'PDFファイル名が不正です',
         ]);
 
         // セッションに保存
