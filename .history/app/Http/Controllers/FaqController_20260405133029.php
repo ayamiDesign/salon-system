@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Category;
 use App\Models\Faq;
-use App\Models\FaqHistories;
 
 class FaqController extends Controller
 {
@@ -316,15 +314,15 @@ class FaqController extends Controller
 
         if ($request->boolean('delete_pdf')) {
             $requestData['pdf_original_name'] = null;
-            $requestData['pdf'] = null;
+            $requestData['pdf_path'] = null;
         } elseif ($request->hasFile('pdf')) {
             $file = $request->file('pdf');
             $requestData['pdf_temp_path'] = $file->store('tmp/faq_pdfs');
             $requestData['pdf_original_name'] = $file->getClientOriginalName();
-            $requestData['pdf'] = null;
+            $requestData['pdf_path'] = null;
         } else {
             $requestData['pdf_original_name'] = $request->input('current_pdf_original_name');
-            $requestData['pdf'] = $request->input('current_pdf_path');
+            $requestData['pdf_path'] = $request->input('current_pdf_path');
         }
 
         return view('faqs.confirm', [
@@ -338,147 +336,33 @@ class FaqController extends Controller
 
     public function update(Request $request, $id)
     {
-     
-        $faq = Faq::findOrFail($id);
+        // バリデーション
+        // $requestData = $request->validate([
+        //     'name' => [
+        //         'required',
+        //         'string',
+        //         'max:255',
+        //         Rule::unique('categories', 'name')->ignore($id),
+        //     ],
+        //     [
+        //         'name.required' => 'カテゴリ名を入力してください',
+        //         'name.max' => 'カテゴリ名は255文字以内で入力してください',
+        //         'name.unique' => 'このカテゴリ名はすでに存在しています',
+        //     ]
+        // ]);
 
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'category1_id' => ['required', 'integer', 'exists:categories,id'],
-                'category2_id' => ['nullable', 'integer', 'exists:categories,id', 'different:category1_id'],
-                'question' => ['required', 'string'],
-                'answer' => ['required', 'string'],
-                'note' => ['nullable', 'string'],
-                'url' => ['nullable', 'url'],
-                'is_visible' => ['nullable', 'boolean'],
+        // カテゴリー名保存
+        // $faq = Faq::findOrFail($id);
+        
+        // $faq->update([
+        //     'name' => $requestData['name']
+        // ]);
 
-                // confirm画面から来るPDF関連
-                'pdf_temp_path' => ['nullable', 'string'],
-                'pdf_original_name' => ['nullable', 'string'],
-                'pdf' => ['nullable', 'string'],
-                'delete_pdf' => ['nullable', 'boolean'],
+        // セッションを削除
+        $request->session()->forget('faq_input');
 
-                'faq_history' => ['nullable', 'boolean'],
-                'change_summary' => ['nullable', 'string', 'max:1000'],
-            ],
-            [
-                'category1_id.required' => 'カテゴリ（メイン）は必須です',
-                'category1_id.integer' => 'カテゴリ（メイン）の値が不正です',
-                'category1_id.exists' => 'カテゴリ（メイン）の値が不正です',
-
-                'category2_id.integer' => 'カテゴリ（サブ）の値が不正です',
-                'category2_id.exists' => 'カテゴリ（サブ）の値が不正です',
-                'category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
-
-                'question.required' => '質問は必須です',
-                'answer.required' => '回答は必須です',
-                'url.url' => 'URLの形式が正しくありません',
-
-                'change_summary.max' => '変更メモは1000文字以内で入力してください',
-            ]
-        );
-
-        $requestData = $validator->validate();
-
-        DB::beginTransaction();
-
-        try {
-            /*
-            |--------------------------------------------------------------------------
-            | 1. 履歴保存（変更前情報）
-            |--------------------------------------------------------------------------
-            | faq_history = 1 の時だけ、更新前の内容を履歴に保存
-            */
-            if (!empty($requestData['faq_history'])) {
-                FaqHistories::create([
-                    'faq_id' => $faq->id,
-
-                    'category1_id' => $faq->category1_id,
-                    'category2_id' => $faq->category2_id,
-                    'question' => $faq->question,
-                    'answer' => $faq->answer,
-                    'note' => $faq->note,
-                    'url' => $faq->url,
-                    'pdf' => $faq->pdf,
-                    'pdf_original_name' => $faq->pdf_original_name,
-                    'is_visible' => $faq->is_visible,
-
-                    'change_summary' => $requestData['change_summary'] ?? null,
-                ]);
-            }
-
-            /*
-            |--------------------------------------------------------------------------
-            | 2. PDF処理
-            |--------------------------------------------------------------------------
-            | パターンは3つ
-            | - delete_pdf = 1       -> 削除
-            | - pdf_temp_pathあり    -> 差し替え
-            | - それ以外             -> 変更なし
-            |--------------------------------------------------------------------------
-            */
-            $newPdfPath = $faq->pdf;
-            $newPdfOriginalName = $faq->pdf_original_name;
-
-            if (!empty($requestData['delete_pdf'])) {
-                // PDF削除
-                if (!empty($faq->pdf) && Storage::exists($faq->pdf)) {
-                    Storage::delete($faq->pdf);
-                }
-
-                $newPdfPath = null;
-                $newPdfOriginalName = null;
-
-            } elseif (!empty($requestData['pdf_temp_path'])) {
-                // PDF差し替え
-                $tempPath = $requestData['pdf_temp_path'];
-
-                if (Storage::exists($tempPath)) {
-                    // 古いPDF削除
-                    if (!empty($faq->pdf) && Storage::exists($faq->pdf)) {
-                        Storage::delete($faq->pdf);
-                    }
-
-                    // tmp から本保存へ移動
-                    $fileName = basename($tempPath);
-                    $finalPath = 'faq_pdfs/' . $fileName;
-
-                    Storage::move($tempPath, $finalPath);
-
-                    $newPdfPath = $finalPath;
-                    $newPdfOriginalName = $requestData['pdf_original_name'] ?? null;
-                }
-            }
-
-            /*
-            |--------------------------------------------------------------------------
-            | 3. FAQ本体更新
-            |--------------------------------------------------------------------------
-            */
-            $faq->update([
-                'category1_id' => $requestData['category1_id'],
-                'category2_id' => $requestData['category2_id'] ?: null,
-                'question' => $requestData['question'],
-                'answer' => $requestData['answer'],
-                'note' => $requestData['note'] ?? null,
-                'url' => $requestData['url'] ?? null,
-                'is_visible' => !empty($requestData['is_visible']) ? 1 : 0,
-
-                'pdf' => $newPdfPath,
-                'pdf_original_name' => $newPdfOriginalName,
-            ]);
-
-            DB::commit();
-
-            // セッション削除
-            $request->session()->forget('faq_input');
-
-            return redirect()->route('faqs.complete');
-
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            throw $e;
-        }
+        // 二重送信を防ぐためリダイレクト
+        return redirect()->route('faqs.complete');
     }
 
     public function complete()

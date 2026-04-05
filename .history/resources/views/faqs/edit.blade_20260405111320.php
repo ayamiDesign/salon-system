@@ -200,7 +200,6 @@
 
                                         <div>
                                             <label class="faq-label">PDFファイル</label>
-
                                             <input
                                                 type="file"
                                                 name="pdf"
@@ -208,28 +207,18 @@
                                                 class="file-input"
                                             >
 
-                                            <input type="hidden" name="current_pdf_original_name" value="{{ $faq->pdf_original_name ?? '' }}">
-                                            <input type="hidden" name="current_pdf_path" value="{{ $faq->pdf ?? '' }}">
-                                            <input type="hidden" name="delete_pdf" value="0">
-
                                             @if (!empty($faq->pdf_original_name))
-                                                <div class="pdf-current-row">
-                                                    <div class="pdf-current-info">
-                                                        <span class="pdf-current-label">現在のファイル</span>
-                                                        <span class="file-badge">{{ $faq->pdf_original_name }}</span>
-                                                    </div>
-
-                                                    <label class="pdf-delete-check">
-                                                        <input
-                                                            type="checkbox"
-                                                            name="delete_pdf"
-                                                            value="1"
-                                                            class="toggle-input"
-                                                            {{ old('delete_pdf') ? 'checked' : '' }}
-                                                        >
-                                                        <span>削除する</span>
-                                                    </label>
-                                                </div>
+                                                <p class="faq-help-text">
+                                                    現在のファイル：
+                                                    <span class="file-badge">
+                                                        {{ $faq->pdf_original_name }}
+                                                    </span>
+                                                </p>
+                                                <label class="toggle-box">
+                                                    <input type="hidden" name="delete_pdf" value="0">
+                                                    <input type="checkbox" name="delete_pdf" value="1">
+                                                    <span>PDFを削除する</span>
+                                                </label>
                                             @else
                                                 <p class="faq-help-text">PDFのみアップロードできます。</p>
                                             @endif

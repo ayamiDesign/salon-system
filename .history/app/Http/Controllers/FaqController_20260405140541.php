@@ -316,15 +316,15 @@ class FaqController extends Controller
 
         if ($request->boolean('delete_pdf')) {
             $requestData['pdf_original_name'] = null;
-            $requestData['pdf'] = null;
+            $requestData['pdf_path'] = null;
         } elseif ($request->hasFile('pdf')) {
             $file = $request->file('pdf');
             $requestData['pdf_temp_path'] = $file->store('tmp/faq_pdfs');
             $requestData['pdf_original_name'] = $file->getClientOriginalName();
-            $requestData['pdf'] = null;
+            $requestData['pdf_path'] = null;
         } else {
             $requestData['pdf_original_name'] = $request->input('current_pdf_original_name');
-            $requestData['pdf'] = $request->input('current_pdf_path');
+            $requestData['pdf_path'] = $request->input('current_pdf_path');
         }
 
         return view('faqs.confirm', [
@@ -399,7 +399,7 @@ class FaqController extends Controller
                     'answer' => $faq->answer,
                     'note' => $faq->note,
                     'url' => $faq->url,
-                    'pdf' => $faq->pdf,
+                    'pdf_path' => $faq->pdf_path,
                     'pdf_original_name' => $faq->pdf_original_name,
                     'is_visible' => $faq->is_visible,
 
@@ -417,13 +417,13 @@ class FaqController extends Controller
             | - それ以外             -> 変更なし
             |--------------------------------------------------------------------------
             */
-            $newPdfPath = $faq->pdf;
+            $newPdfPath = $faq->pdf_path;
             $newPdfOriginalName = $faq->pdf_original_name;
 
             if (!empty($requestData['delete_pdf'])) {
                 // PDF削除
-                if (!empty($faq->pdf) && Storage::exists($faq->pdf)) {
-                    Storage::delete($faq->pdf);
+                if (!empty($faq->pdf_path) && Storage::exists($faq->pdf_path)) {
+                    Storage::delete($faq->pdf_path);
                 }
 
                 $newPdfPath = null;
@@ -435,8 +435,8 @@ class FaqController extends Controller
 
                 if (Storage::exists($tempPath)) {
                     // 古いPDF削除
-                    if (!empty($faq->pdf) && Storage::exists($faq->pdf)) {
-                        Storage::delete($faq->pdf);
+                    if (!empty($faq->pdf_path) && Storage::exists($faq->pdf_path)) {
+                        Storage::delete($faq->pdf_path);
                     }
 
                     // tmp から本保存へ移動
@@ -464,7 +464,7 @@ class FaqController extends Controller
                 'url' => $requestData['url'] ?? null,
                 'is_visible' => !empty($requestData['is_visible']) ? 1 : 0,
 
-                'pdf' => $newPdfPath,
+                'pdf_path' => $newPdfPath,
                 'pdf_original_name' => $newPdfOriginalName,
             ]);
 

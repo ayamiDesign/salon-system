@@ -208,10 +208,6 @@
                                                 class="file-input"
                                             >
 
-                                            <input type="hidden" name="current_pdf_original_name" value="{{ $faq->pdf_original_name ?? '' }}">
-                                            <input type="hidden" name="current_pdf_path" value="{{ $faq->pdf ?? '' }}">
-                                            <input type="hidden" name="delete_pdf" value="0">
-
                                             @if (!empty($faq->pdf_original_name))
                                                 <div class="pdf-current-row">
                                                     <div class="pdf-current-info">
@@ -220,18 +216,21 @@
                                                     </div>
 
                                                     <label class="pdf-delete-check">
+                                                        <input type="hidden" name="delete_pdf" value="0">
                                                         <input
                                                             type="checkbox"
                                                             name="delete_pdf"
                                                             value="1"
                                                             class="toggle-input"
-                                                            {{ old('delete_pdf') ? 'checked' : '' }}
                                                         >
                                                         <span>削除する</span>
                                                     </label>
                                                 </div>
                                             @else
                                                 <p class="faq-help-text">PDFのみアップロードできます。</p>
+                                                <input type="hidden" name="current_pdf_original_name" value="">
+                                                <input type="hidden" name="current_pdf_path" value="">
+                                                <input type="hidden" name="delete_pdf" value="0">
                                             @endif
                                         </div>
                                     </div>

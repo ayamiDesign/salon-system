@@ -1575,6 +1575,7 @@ mark {
    22. FAQ編集画面
 ======================================== */
 .file-badge {
+    display: inline-block;
     padding: 4px 10px;
     border-radius: 999px;
     background: #f1f5f9;
@@ -1884,12 +1885,6 @@ mark {
 
     .faq-form-grid-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    
-    .pdf-current-row {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
     }
 
     /* FAQ確認画面 */
