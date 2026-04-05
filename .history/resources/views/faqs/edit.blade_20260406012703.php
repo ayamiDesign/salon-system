@@ -1,5 +1,5 @@
 @php
-    $session = session('faq_input');
+   $session = session('faq_input');
 @endphp
 
 <!DOCTYPE html>
@@ -103,10 +103,7 @@
                                             >
                                                 <option value="">選択してください</option>
                                                 @foreach ($categoriesList as $category)
-                                                    <option
-                                                        value="{{ $category->id }}"
-                                                        @selected(old('category1_id', $session['category1_id'] ?? $faq->category1_id ?? '') == $category->id)
-                                                    >
+                                                    <option value="{{ $category->id }}" @selected($faqInput['category1_id'] == $category->id)>
                                                         {{ $category->name }}
                                                     </option>
                                                 @endforeach
@@ -123,10 +120,7 @@
                                             >
                                                 <option value="">選択してください</option>
                                                 @foreach ($categoriesList as $category)
-                                                    <option
-                                                        value="{{ $category->id }}"
-                                                        @selected(old('category2_id', $session['category2_id'] ?? $faq->category2_id ?? '') == $category->id)
-                                                    >
+                                                    <option value="{{ $category->id }}" @selected($faqInput['category2_id'] == $category->id)>
                                                         {{ $category->name }}
                                                     </option>
                                                 @endforeach
@@ -163,7 +157,7 @@
                                                 placeholder="例：① 施術が先に終わった人が優先&#10;② 直前の予約状況が同じ場合は出勤順"
                                                 class="text-textarea"
                                                 required
-                                            >{{ old('answer', $session['answer'] ?? $faq->answer ?? '') }}</textarea>
+                                            >{{ $faqInput['answer'] }}</textarea>
                                         </div>
 
                                         <div>
@@ -175,7 +169,7 @@
                                                 rows="4"
                                                 placeholder="例：予約表で押さえられている時間を基準に判断してください。"
                                                 class="text-textarea"
-                                            >{{ old('note', $session['note'] ?? $faq->note ?? '') }}</textarea>
+                                            >{{ $faqInput['note'] }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +184,7 @@
                                             <input
                                                 type="url"
                                                 name="url"
-                                                value="{{ old('url', $session['url'] ?? $faq->url ?? '') }}"
+                                                value="{{ $faqInput['url'] }}"
                                                 placeholder="https://example.com"
                                                 class="text-input"
                                             >
@@ -206,29 +200,15 @@
                                                 class="file-input"
                                             >
 
-                                            <input
-                                                type="hidden"
-                                                name="current_pdf_original_name"
-                                                value="{{ old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '') }}"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="current_pdf_path"
-                                                value="{{ old('current_pdf_path', $session['current_pdf_path'] ?? $faq->current_pdf_path ?? '') }}"
-                                            >
-                                            <input
-                                                type="hidden"
-                                                name="delete_pdf"
-                                                value="0"
-                                            >
+                                            <input type="hidden" name="current_pdf_original_name" value="{{ $faqInput['current_pdf_original_name'] }}">
+                                            <input type="hidden" name="current_pdf_path" value="{{ $faqInput['current_pdf_path'] }}">
+                                            <input type="hidden" name="delete_pdf" value="0">
 
-                                            @if (!empty(old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '')))
+                                            @if (!empty($faqInput['current_pdf_original_name']))
                                                 <div class="pdf-current-row">
                                                     <div class="pdf-current-info">
                                                         <span class="pdf-current-label">現在のファイル</span>
-                                                        <span class="file-badge">
-                                                            {{ old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '') }}
-                                                        </span>
+                                                        <span class="file-badge">{{ $faqInput['current_pdf_original_name'] }}</span>
                                                     </div>
 
                                                     <label class="pdf-delete-check">
@@ -237,7 +217,7 @@
                                                             name="delete_pdf"
                                                             value="1"
                                                             class="toggle-input"
-                                                            {{ old('delete_pdf', $session['delete_pdf'] ?? 0) == 1 ? 'checked' : '' }}
+                                                            {{ $faqInput['delete_pdf'] ? 'checked' : '' }}
                                                         >
                                                         <span>削除する</span>
                                                     </label>
@@ -260,7 +240,7 @@
                                             name="is_visible"
                                             value="1"
                                             class="toggle-input"
-                                            {{ old('is_visible', $session['is_visible'] ?? $faq->is_visible ?? 0) == 1 ? 'checked' : '' }}
+                                            {{ (int)$faqInput['is_visible'] === 1 ? 'checked' : '' }}
                                         >
                                         <span>表示する</span>
                                     </label>
@@ -279,14 +259,13 @@
                                                 rows="3"
                                                 placeholder="例：回答内容を最新ルールに更新 / 表現を修正 など"
                                                 class="text-textarea"
-                                            >{{ old('change_summary', $session['change_summary'] ?? $faq->change_summary ?? '') }}</textarea>
+                                            >{{ $faqInput['change_summary'] }}</textarea>
 
                                             <p class="faq-help-text">
                                                 変更内容の要約を入力しておくと、履歴管理がしやすくなります。
                                             </p>
                                         </div>
                                     </div>
-
                                     <input type="hidden" name="faq_history" value="0">
                                     <label class="toggle-box">
                                         <input
@@ -294,7 +273,7 @@
                                             name="faq_history"
                                             value="1"
                                             class="toggle-input"
-                                            {{ old('faq_history', $session['faq_history'] ?? $faq->faq_history ?? 1) == 1 ? 'checked' : '' }}
+                                            {{ $faqInput['faq_history'] == 1 ? 'checked' : '' }}
                                         >
                                         <span>変更前の情報を残す</span>
                                     </label>

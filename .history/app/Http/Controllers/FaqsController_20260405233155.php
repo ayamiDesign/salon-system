@@ -49,6 +49,8 @@ class FaqsController extends Controller
         // セッションを保存
         $sessionInput = session('faq_input');
 
+        dd($sessionInput->toArray());
+
         return view('faqs.create',compact('categories','sessionInput'));
     }
 
@@ -330,9 +332,6 @@ class FaqsController extends Controller
             $requestData['pdf_original_name'] = $request->input('current_pdf_original_name');
             $requestData['pdf'] = $request->input('current_pdf_path');
         }
-
-        // セッションに保存
-        session(['faq_input' => $requestData]);
 
         return view('faqs.confirm', [
             'mode' => 'edit',
