@@ -170,7 +170,6 @@
                                     <input type="hidden" name="faqs[{{ $index }}][pdf_temp_path]" value="{{ $faq['pdf_temp_path'] ?? '' }}">
                                     <input type="hidden" name="faqs[{{ $index }}][pdf_original_name]" value="{{ $faq['pdf_original_name'] ?? '' }}">
                                     <input type="hidden" name="faqs[{{ $index }}][is_visible]" value="{{ !empty($faq['is_visible']) ? 1 : 0 }}">
-                                    <input type="hidden" name="faqs[{{ $index }}][change_summary]" value="{{ $faq['change_summary'] }}">
                                 </div>
                             @endforeach
                         </div>
@@ -342,7 +341,7 @@
                                 <input type="hidden" name="pdf_path" value="{{ $requestData['pdf'] ?? '' }}">
                                 <input type="hidden" name="is_visible" value="{{ !empty($requestData['is_visible']) ? 1 : 0 }}">
                                 <input type="hidden" name="faq_history" value="{{ !empty($requestData['faq_history']) ? 1 : 0 }}">
-                                <input type="hidden" name="change_summary" value="{{ $requestData['change_summary'] ?? '' }}">
+                                <input type="hidden" name="change_summary" value="{{ $requestData['change_summary']}}">
                             </div>
                         </div>
 

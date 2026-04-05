@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>変更履歴</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+
+<div class="app">
+    {{-- ヘッダー --}}
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <div class="brand-badge">FAQ</div>
+                <div class="brand-text">
+                    <p class="brand-title">変更履歴</p>
+                    <p class="brand-sub">FAQの更新内容を時系列で確認できます</p>
+                </div>
+            </div>
+
+            <div class="topbar-actions">
+                <a href="{{ route('faqs.index') }}" class="header-sub-button">一覧へ戻る</a>
+            </div>
+        </div>
+    </header>
+
+    {{-- メイン --}}
+    <main class="category-layout-single">
+        <section class="content">
+
+            {{-- 上部 --}}
+            <div class="search-panel">
+                <div class="search-copy">
+                    <h1 class="search-heading">変更履歴</h1>
+                    <p class="search-sub">対象FAQの過去の内容を確認できます。</p>
+                </div>
+
+                <div class="history-target-card">
+                    <div class="history-target-label">対象FAQ</div>
+                    <h2 class="history-target-question">{{ $faq->question }}</h2>
+
+                    <div class="history-target-meta">
+                        @if(!empty($faq->category1_name))
+                            <span class="tag">{{ $faq->category1_name }}</span>
+                        @endif
+
+                        @if(!empty($faq->category2_name))
+                            <span class="tag">{{ $faq->category2_name }}</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            {{-- フラッシュ --}}
+            @if(session('status'))
+                <div class="history-flash">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            {{-- 履歴一覧 --}}
+            @if($histories->count())
+                <div class="faq-list">
+                    @foreach($histories as $history)
+                        <article class="faq-card">
+                            <div class="history-card-head">
+                                <div>
+                                    <span class="history-type-badge">
+                                        @switch($history->action_type)
+                                            @case('created') 新規作成 @break
+                                            @case('deleted') 削除前 @break
+                                            @default 更新
+                                        @endswitch
+                                    </span>
+
+                                    <div class="history-date">
+                                        {{ optional($history->created_at)->format('Y-m-d H:i:s') }}
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="row-action-button delete js-history-delete-open"
+                                    data-id="{{ $history->id }}"
+                                    data-name="{{ $history->question }}"
+                                    data-action="{{ route('faq-histories.destroy', $history->id) }}"
+                                >
+                                    履歴削除
+                                </button>
+                            </div>
+
+                            <div class="history-body-visible">
+
+                                {{-- カテゴリ --}}
+                                <div class="history-section">
+                                    <div class="history-section-label">カテゴリ</div>
+                                    <div class="faq-meta">
+                                        @if(!empty($history->category1_name))
+                                            <span class="tag">{{ $history->category1_name }}</span>
+                                        @endif
+
+                                        @if(!empty($history->category2_name))
+                                            <span class="tag">{{ $history->category2_name }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                {{-- 質問 --}}
+                                <div class="history-section">
+                                    <div class="history-section-label">質問</div>
+                                    <h2 class="faq-question">{{ $history->question }}</h2>
+                                </div>
+
+                                {{-- 回答 --}}
+                                <div class="answer-block">
+                                    <p class="block-title">回答</p>
+                                    <p class="block-text" style="white-space: pre-wrap;">{{ $history->answer }}</p>
+                                </div>
+
+                                {{-- メモ --}}
+                                @if(!empty($history->note))
+                                    <div class="note-block">
+                                        <p class="block-title">あわせて確認</p>
+                                        <p class="block-text" style="white-space: pre-wrap;">{{ $history->note }}</p>
+                                    </div>
+                                @endif
+
+                                {{-- URL --}}
+                                @if(!empty($history->url))
+                                    <div class="link-block">
+                                        <p class="block-title">参考リンク</p>
+                                        <ul class="link-list">
+                                            <li>
+                                                <a href="{{ $history->url }}" target="_blank">
+                                                    {{ $history->url }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endif
+
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            @else
+                <div class="empty">
+                    履歴はありません。
+                </div>
+            @endif
+
+        </section>
+    </main>
+</div>
+
+{{-- 削除モーダル --}}
+<div id="deleteModal" class="delete-modal hidden">
+    <div class="delete-modal-backdrop"></div>
+    <div class="delete-modal-card">
+        <p class="delete-modal-title">履歴を削除しますか？</p>
+        <p class="delete-modal-text">
+            「<span id="deleteItemName"></span>」を削除します。<br>
+            この操作は取り消せません。
+        </p>
+
+        <div class="delete-modal-actions">
+            <button type="button" id="deleteModalClose" class="modal-cancel-button">キャンセル</button>
+
+            <form id="deleteForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="modal-delete-button">削除する</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('js/app.js') }}"></script>
+</body>
+</html>

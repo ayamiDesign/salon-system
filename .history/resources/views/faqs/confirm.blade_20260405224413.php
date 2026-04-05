@@ -318,8 +318,8 @@
                                         <div class="faq-form-stack faq-form-stack-tight">
                                             <div>
                                                 <p class="faq-label">変更メモ</p>
-                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($requestData['change_summary'] ?? '') ? '' : 'is-empty' }}">
-                                                    {{ filled($requestData['change_summary'] ?? '') ? trim($requestData['change_summary']) : '未入力' }}
+                                                <div class="confirm-value-box confirm-value-box-multiline">
+                                                    {{ trim($requestData['change_summary'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -342,7 +342,7 @@
                                 <input type="hidden" name="pdf_path" value="{{ $requestData['pdf'] ?? '' }}">
                                 <input type="hidden" name="is_visible" value="{{ !empty($requestData['is_visible']) ? 1 : 0 }}">
                                 <input type="hidden" name="faq_history" value="{{ !empty($requestData['faq_history']) ? 1 : 0 }}">
-                                <input type="hidden" name="change_summary" value="{{ $requestData['change_summary'] ?? '' }}">
+                                <input type="hidden" name="change_summary" value="{{ $requestData['change_summary']}}">
                             </div>
                         </div>
 

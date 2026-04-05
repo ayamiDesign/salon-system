@@ -1601,90 +1601,71 @@ mark {
    24. 履歴ページ専用
 ======================================== */
 .history-page-head {
-    margin-bottom: 14px;
     padding: 18px;
+    margin-bottom: 14px;
 }
 
-.history-page-title {
-    margin: 0;
-    font-size: 28px;
-    line-height: 1.35;
-    letter-spacing: 0.01em;
+.history-target-card {
+    margin-top: 14px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: #fff;
 }
 
-.history-page-sub {
-    margin: 8px 0 0;
-    color: var(--sub);
-    font-size: 14px;
-}
-
-.history-target-inline {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 18px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line-soft);
-}
-
-.history-target-kicker {
+.history-target-label {
     font-size: 12px;
     font-weight: 700;
     color: var(--sub);
 }
 
-.history-target-main {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .history-target-question {
-    margin: 0;
-    font-size: 22px;
-    line-height: 1.45;
+    margin: 8px 0 0;
+    font-size: 20px;
+    line-height: 1.5;
     letter-spacing: 0.01em;
 }
 
-.history-list {
-    display: grid;
-    gap: 12px;
+.history-target-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.history-flash {
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    border: 1px solid #bbf7d0;
+    border-radius: 16px;
+    background: #f0fdf4;
+    color: #15803d;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .history-card {
     overflow: hidden;
 }
 
-.history-details {
-    display: block;
-}
-
-.history-details summary {
-    list-style: none;
-    cursor: pointer;
-}
-
-.history-details summary::-webkit-details-marker {
-    display: none;
-}
-
-.history-summary {
+.history-card-head {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    padding: 18px 20px;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--line-soft);
+    background: rgba(255, 255, 255, 0.72);
 }
 
-.history-summary-main {
+.history-card-head-main {
     min-width: 0;
 }
 
-.history-summary-top {
+.history-meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
 }
 
 .history-type-badge {
@@ -1704,95 +1685,16 @@ mark {
 .history-date {
     font-size: 13px;
     color: var(--sub);
-    white-space: nowrap;
 }
 
-.history-summary-line {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.history-summary-content {
-    min-width: 0;
-}
-
-.history-inline-label {
+.history-body-visible {
     display: block;
-    margin-bottom: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--sub);
-    letter-spacing: 0.02em;
-}
-
-.history-summary-text {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1.5;
-    color: var(--text);
-    word-break: break-word;
-}
-
-.history-summary-text.is-empty {
-    font-size: 15px;
-    font-weight: 500;
-    color: #9ca3af;
-}
-
-.history-summary-side {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.history-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: #fff;
-    color: var(--sub);
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1;
-    transition: 0.2s ease;
-    flex-shrink: 0;
-}
-
-.history-toggle::before {
-    content: "+";
-}
-
-.history-details[open] .history-toggle {
-    background: #f8fbff;
-    color: var(--accent);
-    border-color: #d7e4fb;
-}
-
-.history-details[open] .history-toggle::before {
-    content: "−";
-}
-
-.history-body {
-    display: none;
-    padding: 18px 20px 20px;
-    border-top: 1px solid var(--line-soft);
+    padding: 16px;
     background: #fcfdff;
 }
 
-.history-details[open] .history-body {
-    display: block;
-}
-
 .history-section + .history-section {
-    margin-top: 16px;
+    margin-top: 14px;
 }
 
 .history-section-label {
@@ -1802,21 +1704,17 @@ mark {
     color: var(--sub);
 }
 
+.history-question {
+    font-size: 18px;
+}
+
 .history-pre {
     white-space: pre-wrap;
     word-break: break-word;
 }
 
-.history-body .faq-question {
-    margin: 0;
-    font-size: 18px;
-    line-height: 1.55;
-}
-
-.history-meta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+.history-pagination {
+    margin-top: 20px;
 }
 
 /* ========================================
@@ -2132,44 +2030,19 @@ mark {
         margin-bottom: 16px;
     }
 
-    .history-page-title {
-        font-size: 32px;
-    }
-
-    .history-target-inline {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
-    }
-
-    .history-target-main {
-        flex-direction: row;
-        align-items: center;
-        gap: 14px;
-    }
-
     .history-target-question {
         font-size: 24px;
     }
 
-    .history-summary-line {
+    .history-card-head {
         flex-direction: row;
-        align-items: center;
         justify-content: space-between;
-        gap: 18px;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 20px;
     }
 
-    .history-summary-content {
-        flex: 1 1 auto;
-        min-width: 0;
-    }
-
-    .history-summary-text {
-        font-size: 18px;
-    }
-
-    .history-body {
+    .history-body-visible {
         padding: 20px;
     }
 }
@@ -2203,32 +2076,20 @@ mark {
     }
 
     /*履歴ページ*/
-     .history-page-title {
-        font-size: 24px;
-    }
-
-    .history-target-question {
+     .history-target-question {
         font-size: 18px;
     }
 
-    .history-summary {
-        padding: 16px;
-    }
-
-    .history-summary-text {
-        font-size: 17px;
-    }
-
-    .history-summary-side {
+    .history-card-head .faq-action-group {
         width: 100%;
     }
 
-    .history-summary-side .row-action-button {
-        flex: 1 1 auto;
-        justify-content: center;
+    .history-card-head .faq-action-group form {
+        width: 100%;
     }
 
-    .history-body {
-        padding: 16px;
+    .history-card-head .row-action-button {
+        width: 100%;
+        height: 42px;
     }
 }

@@ -2127,50 +2127,34 @@ mark {
     }
 
     /* 履歴ページ */
-     .history-page-head {
-        padding: 22px;
-        margin-bottom: 16px;
-    }
-
-    .history-page-title {
-        font-size: 32px;
-    }
-
-    .history-target-inline {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
-    }
-
-    .history-target-main {
-        flex-direction: row;
-        align-items: center;
-        gap: 14px;
-    }
-
     .history-target-question {
         font-size: 24px;
     }
 
-    .history-summary-line {
+    .history-summary {
         flex-direction: row;
-        align-items: center;
         justify-content: space-between;
-        gap: 18px;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 20px;
     }
 
-    .history-summary-content {
-        flex: 1 1 auto;
-        min-width: 0;
-    }
-
-    .history-summary-text {
-        font-size: 18px;
+    .history-summary-side {
+        width: auto;
+        flex-shrink: 0;
+        justify-content: flex-end;
     }
 
     .history-body {
         padding: 20px;
+    }
+
+    .history-inline-meta {
+        gap: 18px;
+    }
+
+    .history-inline-item {
+        max-width: 360px;
     }
 }
 
@@ -2203,32 +2187,16 @@ mark {
     }
 
     /*履歴ページ*/
-     .history-page-title {
-        font-size: 24px;
-    }
-
     .history-target-question {
         font-size: 18px;
     }
 
-    .history-summary {
-        padding: 16px;
-    }
-
-    .history-summary-text {
-        font-size: 17px;
-    }
-
     .history-summary-side {
-        width: 100%;
+        align-items: stretch;
     }
 
     .history-summary-side .row-action-button {
         flex: 1 1 auto;
         justify-content: center;
-    }
-
-    .history-body {
-        padding: 16px;
     }
 }

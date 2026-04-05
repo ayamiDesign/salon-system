@@ -260,7 +260,7 @@
                                      <div class="faq-form-stack faq-form-stack-tight">
                                         <div>
                                             <label class="faq-label">
-                                                変更メモ <span class="required-badge">（履歴を残す場合は必須）</span>
+                                                変更メモ <span class="required-badge">必須</span>
                                             </label>
                                             <textarea
                                                 name="change_summary"
