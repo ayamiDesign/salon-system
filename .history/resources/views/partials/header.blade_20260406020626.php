@@ -1,0 +1,147 @@
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="brand">
+            <a href="{{ url('/faqs') }}" class="brand-link">
+                <div class="brand-badge">FAQ</div>
+                <div class="brand-text">
+                    <p class="brand-title">社内FAQ検索デモ</p>
+                    <p class="brand-sub">PC / スマホ対応 Laravel Blade サンプル</p>
+                </div>
+            </a>
+        </div>
+
+        {{-- PC用グローバルメニュー --}}
+        <nav class="global-nav pc-only" aria-label="グローバルメニュー">
+            <ul class="global-nav-list">
+                <li>
+                    <a
+                        href="{{ route('faqs.index') }}"
+                        class="global-nav-link {{ request()->routeIs('faqs.index') ? 'is-active' : '' }}"
+                    >
+                        FAQ一覧
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="{{ route('categories.index') }}"
+                        class="global-nav-link {{ request()->routeIs('categories.*') ? 'is-active' : '' }}"
+                    >
+                        カテゴリ管理
+                    </a>
+                </li>
+                {{-- <li>
+                    <a
+                        href="{{ route('histories.index') }}"
+                        class="global-nav-link {{ request()->routeIs('histories.*') ? 'is-active' : '' }}"
+                    >
+                        履歴
+                    </a>
+                </li> --}}
+                {{-- <li>
+                    <a
+                        href="{{ route('settings.index') }}"
+                        class="global-nav-link {{ request()->routeIs('settings.*') ? 'is-active' : '' }}"
+                    >
+                        設定
+                    </a>
+                </li> --}}
+            </ul>
+        </nav>
+
+        <div class="topbar-actions">
+            <button
+                type="button"
+                id="cancelSortButton"
+                class="action-button action-button-sub hidden"
+            >
+                キャンセル
+            </button>
+
+            <button
+                type="button"
+                id="saveSortButton"
+                class="action-button action-button-primary hidden"
+            >
+                保存する
+            </button>
+
+            <button
+                type="button"
+                id="sortModeButton"
+                class="header-sub-button pc-only"
+            >
+                並び替え
+            </button>
+
+            <a
+                href="{{ route('faqs.create') }}"
+                class="header-main-button"
+            >
+                新規登録
+            </a>
+
+            {{-- スマホ用メニューボタン --}}
+            <button
+                type="button"
+                class="menu-toggle sp-only"
+                aria-controls="mobileGlobalMenu"
+                aria-expanded="false"
+                aria-label="メニューを開く"
+                data-menu-toggle
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+
+    {{-- スマホ用グローバルメニュー --}}
+    <div id="mobileGlobalMenu" class="mobile-global-menu sp-only" hidden>
+        <nav class="mobile-global-nav" aria-label="スマホ用グローバルメニュー">
+            <ul class="mobile-global-nav-list">
+                <li>
+                    <a
+                        href="{{ route('faqs.index') }}"
+                        class="mobile-global-nav-link {{ request()->routeIs('faqs.index') ? 'is-active' : '' }}"
+                    >
+                        FAQ一覧
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="{{ route('categories.index') }}"
+                        class="mobile-global-nav-link {{ request()->routeIs('categories.*') ? 'is-active' : '' }}"
+                    >
+                        カテゴリ管理
+                    </a>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        id="mobileSortModeButton"
+                        class="mobile-global-nav-link mobile-global-nav-button"
+                    >
+                        並び替え
+                    </button>
+                </li>
+                {{-- <li>
+                    <a
+                        href="{{ route('histories.index') }}"
+                        class="mobile-global-nav-link {{ request()->routeIs('histories.*') ? 'is-active' : '' }}"
+                    >
+                        履歴
+                    </a>
+                </li> --}}
+                {{-- <li>
+                    <a
+                        href="{{ route('settings.index') }}"
+                        class="mobile-global-nav-link {{ request()->routeIs('settings.*') ? 'is-active' : '' }}"
+                    >
+                        設定
+                    </a>
+                </li> --}}
+            </ul>
+        </nav>
+    </div>
+</header>
