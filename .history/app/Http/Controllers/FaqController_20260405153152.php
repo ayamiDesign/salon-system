@@ -501,7 +501,7 @@ class FaqController extends Controller
     {
         $request->validate([
             'ids' => ['required', 'array'],
-            'ids.*' => ['required', 'integer', 'exists:faqs,id'],
+            'ids.*' => ['required', 'integer', 'exists:categories,id'],
         ]);
 
         foreach ($request->ids as $index => $id) {
