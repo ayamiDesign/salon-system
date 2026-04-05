@@ -7,7 +7,12 @@
         'answer'       => old('answer', $faq->answer ?? ''),
         'note'         => old('note', $faq->note ?? ''),
         'url'          => old('url', $faq->url ?? ''),
+        'save_history' => old('save_history', 1),
+        'change_summary' => old('change_summary', ''),
     ];
+
+    $beforeCategory1Name = optional($categories->firstWhere('id', $faq->category1_id))->name ?? '未設定';
+    $beforeCategory2Name = optional($categories->firstWhere('id', $faq->category2_id))->name ?? '未設定';
 @endphp
 
 <!DOCTYPE html>
@@ -26,7 +31,7 @@
                 <div class="brand-badge">FAQ</div>
                 <div class="brand-text">
                     <p class="brand-title">FAQ編集</p>
-                    <p class="brand-sub">FAQ一覧と同じデザインルールで統一した編集画面</p>
+                    <p class="brand-sub">変更前の内容を確認しながらFAQを編集できます</p>
                 </div>
             </div>
 
@@ -47,7 +52,7 @@
                 <div class="search-copy">
                     <h1 class="search-heading">FAQを編集</h1>
                     <p class="search-sub">
-                        登録済みFAQの内容を編集できます。内容を確認して更新してください。
+                        変更前の情報を確認しながら編集できます。必要なら履歴として保存できます。
                     </p>
                 </div>
             </div>
@@ -67,7 +72,7 @@
                 <div class="form-card-header">
                     <div>
                         <h2 class="form-card-title">編集フォーム</h2>
-                        <p class="form-card-sub">FAQの質問・回答・参考資料を修正できます。</p>
+                        <p class="form-card-sub">変更内容を確認してから更新画面へ進めます。</p>
                     </div>
                 </div>
 
@@ -95,6 +100,116 @@
                             </div>
 
                             <div class="faq-form-sections">
+                                {{-- 変更前情報 --}}
+                                <div class="faq-form-section">
+                                    <h3 class="faq-form-section-title">変更前の情報</h3>
+
+                                    <div class="before-summary-grid">
+                                        <div class="before-summary-item">
+                                            <span class="before-summary-label">メインカテゴリ</span>
+                                            <span class="before-summary-value">{{ $category1_name }}</span>
+                                        </div>
+
+                                        <div class="before-summary-item">
+                                            <span class="before-summary-label">表示設定</span>
+                                            <span class="before-summary-value">{{ !empty($faq->is_visible) ? '表示する' : '非表示' }}</span>
+                                        </div>
+                                    </div>
+
+                                    <details class="before-details">
+                                        <summary class="before-details-summary">
+                                            変更前の詳細を見る
+                                        </summary>
+
+                                        <div class="before-details-body">
+                                            <div class="faq-form-stack">
+                                                <div>
+                                                    <p class="faq-label">カテゴリ（メイン）</p>
+                                                    <div class="confirm-value-box">
+                                                        {{ $beforeCategory1Name }}
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <p class="faq-label">カテゴリ（サブ）</p>
+                                                    <div class="confirm-value-box {{ $faq->category2_id ? '' : 'is-empty' }}">
+                                                        {{ $faq->category2_id ? $beforeCategory2Name : '未設定' }}
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <p class="faq-label">質問</p>
+                                                    <div class="confirm-value-box confirm-value-box-multiline">
+                                                        {{ trim($faq->question ?? '') }}
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <p class="faq-label">回答</p>
+                                                    <div class="confirm-value-box confirm-value-box-multiline">
+                                                        {{ trim($faq->answer ?? '') }}
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <p class="faq-label">あわせて確認</p>
+                                                    <div class="confirm-value-box confirm-value-box-multiline {{ filled($faq->note) ? '' : 'is-empty' }}">
+                                                        {{ filled($faq->note) ? trim($faq->note) : '未入力' }}
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <p class="faq-label">参考URL</p>
+                                                    <div class="confirm-value-box confirm-value-box-multiline {{ filled($faq->url) ? '' : 'is-empty' }}">
+                                                        {{ filled($faq->url) ? $faq->url : '未入力' }}
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <p class="faq-label">PDFファイル</p>
+                                                    <div class="confirm-value-box {{ filled($faq->pdf_original_name) ? '' : 'is-empty' }}">
+                                                        {{ filled($faq->pdf_original_name) ? $faq->pdf_original_name : '未設定' }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </details>
+                                </div>
+
+                                {{-- 履歴保存設定 --}}
+                                <div class="faq-form-section">
+                                    <h3 class="faq-form-section-title">履歴保存設定</h3>
+
+                                    <label class="toggle-box">
+                                        <input type="hidden" name="save_history" value="0">
+                                        <input
+                                            type="checkbox"
+                                            name="save_history"
+                                            value="1"
+                                            class="toggle-input"
+                                            {{ (int)$faqInput['save_history'] === 1 ? 'checked' : '' }}
+                                        >
+                                        <span>変更前の情報を faq_history に残す</span>
+                                    </label>
+
+                                    <div class="faq-form-stack faq-form-stack-tight">
+                                        <div>
+                                            <label class="faq-label">
+                                                変更メモ
+                                            </label>
+                                            <textarea
+                                                name="change_summary"
+                                                rows="3"
+                                                placeholder="例：回答内容を2026年版の運用ルールに更新"
+                                                class="text-textarea"
+                                            >{{ $faqInput['change_summary'] }}</textarea>
+                                            <p class="faq-help-text">
+                                                履歴を残す際に、変更内容の要約として使えるようにしておくと管理しやすいです。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {{-- 基本情報 --}}
                                 <div class="faq-form-section">
                                     <h3 class="faq-form-section-title">基本情報</h3>
@@ -110,7 +225,7 @@
                                                 required
                                             >
                                                 <option value="">選択してください</option>
-                                                @foreach ($categoriesList as $category)
+                                                @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}" @selected($faqInput['category1_id'] == $category->id)>
                                                         {{ $category->name }}
                                                     </option>
@@ -127,7 +242,7 @@
                                                 class="text-select"
                                             >
                                                 <option value="">選択してください</option>
-                                                @foreach ($categoriesList as $category)
+                                                @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}" @selected($faqInput['category2_id'] == $category->id)>
                                                         {{ $category->name }}
                                                     </option>
@@ -209,10 +324,7 @@
 
                                             @if (!empty($faq->pdf_original_name))
                                                 <p class="faq-help-text">
-                                                    現在のファイル：
-                                                    <span class="file-badge">
-                                                        {{ $faq->pdf_original_name }}
-                                                    </span>
+                                                    現在のファイル：{{ $faq->pdf_original_name }}
                                                 </p>
                                             @else
                                                 <p class="faq-help-text">PDFのみアップロードできます。</p>
@@ -237,39 +349,6 @@
                                         <span>表示する</span>
                                     </label>
                                 </div>
-
-                                {{-- 変更履歴 --}}
-                                <div class="faq-form-section">
-                                    <h3 class="faq-form-section-title">変更履歴</h3>
-                                     <div class="faq-form-stack faq-form-stack-tight">
-                                        <div>
-                                            <label class="faq-label">
-                                                変更メモ
-                                            </label>
-                                            <textarea
-                                                name="change_summary"
-                                                rows="3"
-                                                placeholder="例：回答内容を最新ルールに更新 / 表現を修正 など"
-                                                class="text-textarea"
-                                            >{{ old('change_summary') }}</textarea>
-
-                                            <p class="faq-help-text">
-                                                変更内容の要約を入力しておくと、履歴管理がしやすくなります。
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <label class="toggle-box">
-                                        <input type="hidden" name="faq_history" value="0">
-                                        <input
-                                            type="checkbox"
-                                            name="faq_history"
-                                            value="1"
-                                            class="toggle-input"
-                                            {{ old('faq_history', 1) ? 'checked' : '' }}
-                                        >
-                                        <span>変更前の情報を残す</span>
-                                    </label>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -280,6 +359,7 @@
                             <li>カテゴリはメイン1つ、必要に応じてサブ1つまで設定してください</li>
                             <li>表示順は一覧画面で調整してください</li>
                             <li>PDFを差し替える場合は再アップロードしてください</li>
+                            <li>履歴を残す場合は変更メモも入れておくと管理しやすいです</li>
                         </ul>
                     </div>
 

@@ -192,7 +192,6 @@ class FaqController extends Controller
                 'url' => $faq['url'],
                 'is_visible' => $faq['is_visible'],
                 'pdf' => $pdfPath,
-                'pdf_original_name' => $faq['pdf_original_name'],
             ]);
 
             // 表示順保存

@@ -209,10 +209,7 @@
 
                                             @if (!empty($faq->pdf_original_name))
                                                 <p class="faq-help-text">
-                                                    現在のファイル：
-                                                    <span class="file-badge">
-                                                        {{ $faq->pdf_original_name }}
-                                                    </span>
+                                                    現在のファイル：{{ $faq->pdf_original_name }}
                                                 </p>
                                             @else
                                                 <p class="faq-help-text">PDFのみアップロードできます。</p>
@@ -241,7 +238,20 @@
                                 {{-- 変更履歴 --}}
                                 <div class="faq-form-section">
                                     <h3 class="faq-form-section-title">変更履歴</h3>
-                                     <div class="faq-form-stack faq-form-stack-tight">
+
+                                    <label class="toggle-box">
+                                        <input type="hidden" name="faq_history" value="0">
+                                        <input
+                                            type="checkbox"
+                                            name="faq_history"
+                                            value="1"
+                                            class="toggle-input"
+                                            {{ old('faq_history', 1) ? 'checked' : '' }}
+                                        >
+                                        <span>変更前の情報を残す</span>
+                                    </label>
+
+                                    <div class="faq-form-stack faq-form-stack-tight">
                                         <div>
                                             <label class="faq-label">
                                                 変更メモ
@@ -258,17 +268,6 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <label class="toggle-box">
-                                        <input type="hidden" name="faq_history" value="0">
-                                        <input
-                                            type="checkbox"
-                                            name="faq_history"
-                                            value="1"
-                                            class="toggle-input"
-                                            {{ old('faq_history', 1) ? 'checked' : '' }}
-                                        >
-                                        <span>変更前の情報を残す</span>
-                                    </label>
                                 </div>
                             </div>
                         </div>

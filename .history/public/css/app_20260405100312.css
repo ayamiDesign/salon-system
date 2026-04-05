@@ -1519,15 +1519,10 @@ mark {
 }
 
 /* ========================================
-   22. FAQ編集画面
+   22. FAQ編集画面 / 変更前情報
 ======================================== */
-.file-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: #f1f5f9;
-    font-size: 12px;
-    font-weight: 600;
+.toggle-input:not(:checked) ~ * .text-textarea {
+    opacity: 0.5;
 }
 
 /* ========================================

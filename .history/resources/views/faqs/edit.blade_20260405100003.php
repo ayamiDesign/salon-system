@@ -209,10 +209,7 @@
 
                                             @if (!empty($faq->pdf_original_name))
                                                 <p class="faq-help-text">
-                                                    現在のファイル：
-                                                    <span class="file-badge">
-                                                        {{ $faq->pdf_original_name }}
-                                                    </span>
+                                                    現在のファイル：{{ $faq->pdf_original_name }}
                                                 </p>
                                             @else
                                                 <p class="faq-help-text">PDFのみアップロードできます。</p>
