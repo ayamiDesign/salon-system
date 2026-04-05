@@ -274,7 +274,6 @@ class FaqController extends Controller
                 'category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
 
                 'question.required' => '質問は必須です',
-                'question.unique' => '同じ質問が既に存在します',
                 'answer.required' => '回答は必須です',
                 'url.url' => 'URLの形式が正しくありません',
 
