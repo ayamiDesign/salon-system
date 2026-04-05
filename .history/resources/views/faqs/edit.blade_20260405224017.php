@@ -260,7 +260,7 @@
                                      <div class="faq-form-stack faq-form-stack-tight">
                                         <div>
                                             <label class="faq-label">
-                                                変更メモ <span class="required-badge">（履歴を残す場合は必須）</span>
+                                                変更メモ<span class="required-badge">必須</span>
                                             </label>
                                             <textarea
                                                 name="change_summary"
@@ -274,14 +274,14 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="faq_history" value="0">
                                     <label class="toggle-box">
+                                        <input type="hidden" name="faq_history" value="0">
                                         <input
                                             type="checkbox"
                                             name="faq_history"
                                             value="1"
                                             class="toggle-input"
-                                            {{ old('faq_history', 1) == 1 ? 'checked' : '' }}
+                                            {{ old('faq_history', 1) ? 'checked' : '' }}
                                         >
                                         <span>変更前の情報を残す</span>
                                     </label>

@@ -2203,32 +2203,16 @@ mark {
     }
 
     /*履歴ページ*/
-     .history-page-title {
-        font-size: 24px;
-    }
-
     .history-target-question {
         font-size: 18px;
     }
 
-    .history-summary {
-        padding: 16px;
-    }
-
-    .history-summary-text {
-        font-size: 17px;
-    }
-
     .history-summary-side {
-        width: 100%;
+        align-items: stretch;
     }
 
     .history-summary-side .row-action-button {
         flex: 1 1 auto;
         justify-content: center;
-    }
-
-    .history-body {
-        padding: 16px;
     }
 }

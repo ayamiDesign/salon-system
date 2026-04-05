@@ -32,5 +32,5 @@ Route::resource('faqs', FaqsController::class);
 // FAQ履歴
 Route::get('/faqs/{id}/histories', [FaqHistoriesController::class, 'histories'])
     ->name('faqs.histories.index');
-Route::delete('/faq-histories/{id}', [FaqHistoriesController::class, 'destroyHistory'])
+Route::delete('/faq-histories/{history}', [FaqHistoriesController::class, 'destroy'])
     ->name('faq-histories.destroy');

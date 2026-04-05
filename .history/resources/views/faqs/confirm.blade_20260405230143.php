@@ -318,8 +318,8 @@
                                         <div class="faq-form-stack faq-form-stack-tight">
                                             <div>
                                                 <p class="faq-label">変更メモ</p>
-                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($requestData['change_summary'] ?? '') ? '' : 'is-empty' }}">
-                                                    {{ filled($requestData['change_summary'] ?? '') ? trim($requestData['change_summary']) : '未入力' }}
+                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($requestData['change_summary']) ? '' : 'is-empty' }}">
+                                                    {{ filled($requestData['change_summary']) ? trim($requestData['change_summary']) : '未入力' }}
                                                 </div>
                                             </div>
                                         </div>
