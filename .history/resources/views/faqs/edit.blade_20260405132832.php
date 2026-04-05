@@ -209,7 +209,7 @@
                                             >
 
                                             <input type="hidden" name="current_pdf_original_name" value="{{ $faq->pdf_original_name ?? '' }}">
-                                            <input type="hidden" name="current_pdf_path" value="{{ $faq->pdf ?? '' }}">
+                                            <input type="hidden" name="current_pdf_path" value="{{ $faq->pdf_path ?? '' }}">
                                             <input type="hidden" name="delete_pdf" value="0">
 
                                             @if (!empty($faq->pdf_original_name))

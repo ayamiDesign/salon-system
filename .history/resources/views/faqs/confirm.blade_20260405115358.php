@@ -239,14 +239,14 @@
                                             <div>
                                                 <p class="faq-label">カテゴリ（メイン）</p>
                                                 <div class="confirm-value-box">
-                                                    {{ $requestData['category1_name'] ?? '-' }}
+                                                    {{ $faqData['category1_name'] ?? '-' }}
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <p class="faq-label">カテゴリ（サブ・任意）</p>
-                                                <div class="confirm-value-box {{ filled($requestData['category2_name']) ? '' : 'is-empty' }}">
-                                                    {{ filled($requestData['category2_name']) ? $requestData['category2_name'] : '未選択' }}
+                                                <div class="confirm-value-box {{ filled($faqData['category2_name']) ? '' : 'is-empty' }}">
+                                                    {{ filled($faqData['category2_name']) ? $faqData['category2_name'] : '未選択' }}
                                                 </div>
                                             </div>
                                         </div>
@@ -260,21 +260,21 @@
                                             <div>
                                                 <p class="faq-label">質問</p>
                                                 <div class="confirm-value-box confirm-value-box-multiline">
-                                                    {{ trim($requestData['question']) }}
+                                                    {{ trim($faqData['question']) }}
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <p class="faq-label">回答</p>
                                                 <div class="confirm-value-box confirm-value-box-multiline">
-                                                    {{ trim($requestData['answer']) }}
+                                                    {{ trim($faqData['answer']) }}
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <p class="faq-label">あわせて確認</p>
-                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($requestData['note']) ? '' : 'is-empty' }}">
-                                                    {{ filled($requestData['note']) ? trim($requestData['note']) : '未入力' }}
+                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($faqData['note']) ? '' : 'is-empty' }}">
+                                                    {{ filled($faqData['note']) ? trim($faqData['note']) : '未入力' }}
                                                 </div>
                                             </div>
                                         </div>
@@ -287,15 +287,15 @@
                                         <div class="faq-form-grid faq-form-grid-2">
                                             <div>
                                                 <p class="faq-label">参考URL</p>
-                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($requestData['url']) ? '' : 'is-empty' }}">
-                                                    {{ filled($requestData['url']) ? $requestData['url'] : '未入力' }}
+                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($faqData['url']) ? '' : 'is-empty' }}">
+                                                    {{ filled($faqData['url']) ? $faqData['url'] : '未入力' }}
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <p class="faq-label">PDFファイル</p>
-                                                <div class="confirm-value-box {{ filled($requestData['pdf_original_name'] ?? null) ? '' : 'is-empty' }}">
-                                                    {{ filled($requestData['pdf_original_name'] ?? null) ? $requestData['pdf_original_name'] : '未選択' }}
+                                                <div class="confirm-value-box {{ filled($faqData['pdf_original_name']) ? '' : 'is-empty' }}">
+                                                    {{ filled($faqData['pdf_original_name']) ? $faqData['pdf_original_name'] : '未選択' }}
                                                 </div>
                                             </div>
                                         </div>
@@ -306,7 +306,7 @@
                                         <h3 class="faq-form-section-title">表示設定</h3>
 
                                         <div class="toggle-box">
-                                            {{ !empty($requestData['is_visible']) ? '表示する' : '非表示' }}
+                                            {{ !empty($faqData['is_visible']) ? '表示する' : '非表示' }}
                                         </div>
                                     </div>
 
@@ -317,31 +317,30 @@
                                         <div class="faq-form-stack faq-form-stack-tight">
                                             <div>
                                                 <p class="faq-label">変更メモ</p>
-                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($requestData['change_summary'] ?? '') ? '' : 'is-empty' }}">
-                                                    {{ filled($requestData['change_summary'] ?? '') ? trim($requestData['change_summary']) : '未入力' }}
+                                                <div class="confirm-value-box confirm-value-box-multiline {{ filled($faqData['change_summary'] ?? '') ? '' : 'is-empty' }}">
+                                                    {{ filled($faqData['change_summary'] ?? '') ? trim($faqData['change_summary']) : '未入力' }}
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="toggle-box">
-                                            {{ !empty($requestData['faq_history']) ? '変更前の情報を残す' : '変更前の情報は残さない' }}
+                                            {{ !empty($faqData['faq_history']) ? '変更前の情報を残す' : '変更前の情報は残さない' }}
                                         </div>
                                     </div>
                                 </div>
 
                                 {{-- hidden --}}
-                                <input type="hidden" name="category1_id" value="{{ $requestData['category1_id'] }}">
-                                <input type="hidden" name="category2_id" value="{{ $requestData['category2_id'] ?? '' }}">
-                                <input type="hidden" name="question" value="{{ $requestData['question'] }}">
-                                <input type="hidden" name="answer" value="{{ $requestData['answer'] }}">
-                                <input type="hidden" name="note" value="{{ $requestData['note'] ?? '' }}">
-                                <input type="hidden" name="url" value="{{ $requestData['url'] ?? '' }}">
-                                <input type="hidden" name="pdf_temp_path" value="{{ $requestData['pdf_temp_path'] ?? '' }}">
-                                <input type="hidden" name="pdf_original_name" value="{{ $requestData['pdf_original_name'] ?? '' }}">
-                                <input type="hidden" name="pdf_path" value="{{ $requestData['pdf'] ?? '' }}">
-                                <input type="hidden" name="is_visible" value="{{ !empty($requestData['is_visible']) ? 1 : 0 }}">
-                                <input type="hidden" name="faq_history" value="{{ !empty($requestData['faq_history']) ? 1 : 0 }}">
-                                <input type="hidden" name="change_summary" value="{{ $requestData['change_summary'] ?? '' }}">
+                                <input type="hidden" name="category1_id" value="{{ $faqData['category1_id'] }}">
+                                <input type="hidden" name="category2_id" value="{{ $faqData['category2_id'] ?? '' }}">
+                                <input type="hidden" name="question" value="{{ $faqData['question'] }}">
+                                <input type="hidden" name="answer" value="{{ $faqData['answer'] }}">
+                                <input type="hidden" name="note" value="{{ $faqData['note'] ?? '' }}">
+                                <input type="hidden" name="url" value="{{ $faqData['url'] ?? '' }}">
+                                <input type="hidden" name="pdf_temp_path" value="{{ $faqData['pdf_temp_path'] ?? '' }}">
+                                <input type="hidden" name="pdf_original_name" value="{{ $faqData['pdf_original_name'] ?? '' }}">
+                                <input type="hidden" name="is_visible" value="{{ !empty($faqData['is_visible']) ? 1 : 0 }}">
+                                <input type="hidden" name="faq_history" value="{{ !empty($faqData['faq_history']) ? 1 : 0 }}">
+                                <input type="hidden" name="change_summary" value="{{ $faqData['change_summary'] ?? '' }}">
                             </div>
                         </div>
 
@@ -356,7 +355,7 @@
 
                         <div class="form-actions">
                             <a
-                                href="{{ route('faqs.edit', $id) }}"
+                                href="{{ route('faqs.edit', $faq->id) }}"
                                 class="header-sub-button form-back-button"
                             >
                                 入力画面へ戻る

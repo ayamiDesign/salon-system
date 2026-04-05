@@ -208,11 +208,11 @@
                                                 class="file-input"
                                             >
 
-                                            <input type="hidden" name="current_pdf_original_name" value="{{ $faq->pdf_original_name ?? '' }}">
-                                            <input type="hidden" name="current_pdf_path" value="{{ $faq->pdf ?? '' }}">
-                                            <input type="hidden" name="delete_pdf" value="0">
-
                                             @if (!empty($faq->pdf_original_name))
+                                                <input type="hidden" name="current_pdf_original_name" value="{{ $faq->pdf_original_name }}">
+                                                <input type="hidden" name="current_pdf_path" value="{{ $faq->pdf_path }}">
+                                                <input type="hidden" name="delete_pdf" value="0">
+
                                                 <div class="pdf-current-row">
                                                     <div class="pdf-current-info">
                                                         <span class="pdf-current-label">現在のファイル</span>
@@ -232,6 +232,9 @@
                                                 </div>
                                             @else
                                                 <p class="faq-help-text">PDFのみアップロードできます。</p>
+                                                <input type="hidden" name="current_pdf_original_name" value="">
+                                                <input type="hidden" name="current_pdf_path" value="">
+                                                <input type="hidden" name="delete_pdf" value="0">
                                             @endif
                                         </div>
                                     </div>

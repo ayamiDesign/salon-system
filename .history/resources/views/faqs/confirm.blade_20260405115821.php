@@ -294,8 +294,8 @@
 
                                             <div>
                                                 <p class="faq-label">PDFファイル</p>
-                                                <div class="confirm-value-box {{ filled($requestData['pdf_original_name'] ?? null) ? '' : 'is-empty' }}">
-                                                    {{ filled($requestData['pdf_original_name'] ?? null) ? $requestData['pdf_original_name'] : '未選択' }}
+                                                <div class="confirm-value-box {{ filled($requestData['pdf_original_name']) ? '' : 'is-empty' }}">
+                                                    {{ filled($requestData['pdf_original_name']) ? $requestData['pdf_original_name'] : '未選択' }}
                                                 </div>
                                             </div>
                                         </div>
@@ -338,7 +338,6 @@
                                 <input type="hidden" name="url" value="{{ $requestData['url'] ?? '' }}">
                                 <input type="hidden" name="pdf_temp_path" value="{{ $requestData['pdf_temp_path'] ?? '' }}">
                                 <input type="hidden" name="pdf_original_name" value="{{ $requestData['pdf_original_name'] ?? '' }}">
-                                <input type="hidden" name="pdf_path" value="{{ $requestData['pdf'] ?? '' }}">
                                 <input type="hidden" name="is_visible" value="{{ !empty($requestData['is_visible']) ? 1 : 0 }}">
                                 <input type="hidden" name="faq_history" value="{{ !empty($requestData['faq_history']) ? 1 : 0 }}">
                                 <input type="hidden" name="change_summary" value="{{ $requestData['change_summary'] ?? '' }}">
