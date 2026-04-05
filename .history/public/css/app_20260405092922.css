@@ -1519,15 +1519,94 @@ mark {
 }
 
 /* ========================================
-   22. FAQ編集画面
+   22. FAQ編集画面 / 変更前情報
 ======================================== */
-.file-badge {
-    display: inline-block;
-    padding: 4px 10px;
+.before-summary-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.before-summary-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #fff;
+}
+
+.before-summary-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sub);
+}
+
+.before-summary-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    text-align: right;
+}
+
+.before-details {
+    margin-top: 14px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.before-details-summary {
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 44px 14px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    user-select: none;
+}
+
+.before-details-summary::-webkit-details-marker {
+    display: none;
+}
+
+.before-details-summary::after {
+    content: "+";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
     border-radius: 999px;
-    background: #f1f5f9;
-    font-size: 12px;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--sub);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.before-details[open] .before-details-summary::after {
+    content: "−";
+    color: var(--accent);
+    border-color: #d7e4fb;
+    background: #f8fbff;
+}
+
+.before-details-body {
+    padding: 0 16px 16px;
+    border-top: 1px solid var(--line-soft);
+    background: #fcfdff;
+}
+
+.faq-form-stack-tight {
+    gap: 10px;
 }
 
 /* ========================================
@@ -1837,6 +1916,11 @@ mark {
     /* FAQ確認画面 */
     .faq-confirm-block {
         padding: 20px;
+    }
+
+    /* FAQ編集画面 / 変更前情報 */
+    .before-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
      /* フォーム下部ボタンのつぶれ防止 */

@@ -1518,17 +1518,6 @@ mark {
     margin-top: 18px;
 }
 
-/* ========================================
-   22. FAQ編集画面
-======================================== */
-.file-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: #f1f5f9;
-    font-size: 12px;
-    font-weight: 600;
-}
 
 /* ========================================
    23. フォーム下部ボタンのつぶれ防止

@@ -192,7 +192,6 @@ class FaqController extends Controller
                 'url' => $faq['url'],
                 'is_visible' => $faq['is_visible'],
                 'pdf' => $pdfPath,
-                'pdf_original_name' => $faq['pdf_original_name'],
             ]);
 
             // 表示順保存
@@ -214,7 +213,7 @@ class FaqController extends Controller
         $faq = Faq::findOrFail($id);
 
         // カテゴリを取得
-        $categoriesList = Category::orderBy('sort_order')->get();
+        $categories = Category::orderBy('sort_order')->get();
 
         // カテゴリ名取得
         $categories = Category::pluck('name', 'id');
@@ -228,7 +227,7 @@ class FaqController extends Controller
         // セッションを保存
         $sessionInput = session('faq_input');
 
-        return view('faqs.edit',compact('faq','categoriesList','sessionInput'));
+        return view('faqs.edit',compact('faq','categories','sessionInput'));
     }
 
     public function confirmEdit(Request $request, $id)

@@ -110,7 +110,7 @@
                                                 required
                                             >
                                                 <option value="">選択してください</option>
-                                                @foreach ($categoriesList as $category)
+                                                @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}" @selected($faqInput['category1_id'] == $category->id)>
                                                         {{ $category->name }}
                                                     </option>
@@ -127,7 +127,7 @@
                                                 class="text-select"
                                             >
                                                 <option value="">選択してください</option>
-                                                @foreach ($categoriesList as $category)
+                                                @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}" @selected($faqInput['category2_id'] == $category->id)>
                                                         {{ $category->name }}
                                                     </option>
@@ -209,10 +209,7 @@
 
                                             @if (!empty($faq->pdf_original_name))
                                                 <p class="faq-help-text">
-                                                    現在のファイル：
-                                                    <span class="file-badge">
-                                                        {{ $faq->pdf_original_name }}
-                                                    </span>
+                                                    現在のファイル：{{ $faq->pdf_original_name }}
                                                 </p>
                                             @else
                                                 <p class="faq-help-text">PDFのみアップロードできます。</p>
@@ -235,39 +232,6 @@
                                             {{ (int)$faqInput['is_visible'] === 1 ? 'checked' : '' }}
                                         >
                                         <span>表示する</span>
-                                    </label>
-                                </div>
-
-                                {{-- 変更履歴 --}}
-                                <div class="faq-form-section">
-                                    <h3 class="faq-form-section-title">変更履歴</h3>
-                                     <div class="faq-form-stack faq-form-stack-tight">
-                                        <div>
-                                            <label class="faq-label">
-                                                変更メモ
-                                            </label>
-                                            <textarea
-                                                name="change_summary"
-                                                rows="3"
-                                                placeholder="例：回答内容を最新ルールに更新 / 表現を修正 など"
-                                                class="text-textarea"
-                                            >{{ old('change_summary') }}</textarea>
-
-                                            <p class="faq-help-text">
-                                                変更内容の要約を入力しておくと、履歴管理がしやすくなります。
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <label class="toggle-box">
-                                        <input type="hidden" name="faq_history" value="0">
-                                        <input
-                                            type="checkbox"
-                                            name="faq_history"
-                                            value="1"
-                                            class="toggle-input"
-                                            {{ old('faq_history', 1) ? 'checked' : '' }}
-                                        >
-                                        <span>変更前の情報を残す</span>
                                     </label>
                                 </div>
                             </div>

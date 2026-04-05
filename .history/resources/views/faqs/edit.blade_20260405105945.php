@@ -211,7 +211,7 @@
                                                 <p class="faq-help-text">
                                                     現在のファイル：
                                                     <span class="file-badge">
-                                                        {{ $faq->pdf_original_name }}
+                                                        ラインPOP_A4.pdf
                                                     </span>
                                                 </p>
                                             @else
