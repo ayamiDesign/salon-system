@@ -236,6 +236,8 @@ class FaqsController extends Controller
         // セッションを保存
         $sessionInput = session('faq_input');
 
+        dd($sessionInput);
+
         return view('faqs.edit',compact('faq','categoriesList','sessionInput'));
     }
 

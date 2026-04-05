@@ -294,7 +294,7 @@
                                             name="faq_history"
                                             value="1"
                                             class="toggle-input"
-                                            {{ old('faq_history', $session['faq_history'] ?? $faq->faq_history ?? 1) == 1 ? 'checked' : '' }}
+                                            {{ old('faq_history', $session['faq_history'] ?? $faq->faq_history ?? 0) == 1 ? 'checked' : '' }}
                                         >
                                         <span>変更前の情報を残す</span>
                                     </label>

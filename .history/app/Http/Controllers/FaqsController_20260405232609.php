@@ -331,9 +331,6 @@ class FaqsController extends Controller
             $requestData['pdf'] = $request->input('current_pdf_path');
         }
 
-        // セッションに保存
-        session(['faq_input' => $requestData]);
-
         return view('faqs.confirm', [
             'mode' => 'edit',
             'id' => $faq->id,
