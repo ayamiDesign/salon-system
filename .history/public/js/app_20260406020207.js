@@ -10,11 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (toggle && menu) {
         toggle.addEventListener('click', function () {
             const expanded = toggle.getAttribute('aria-expanded') === 'true';
-            const nextExpanded = !expanded;
-
-            toggle.setAttribute('aria-expanded', nextExpanded ? 'true' : 'false');
-            menu.hidden = !nextExpanded;
-            menu.classList.toggle('is-open', nextExpanded);
+            toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            menu.hidden = expanded;
         });
     }
 

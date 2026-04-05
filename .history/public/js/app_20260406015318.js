@@ -5,16 +5,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // =============================
     const toggle = document.querySelector('[data-menu-toggle]');
     const menu = document.getElementById('mobileGlobalMenu');
+    const sortModeButton = document.getElementById('sortModeButton');
     const mobileSortModeButton = document.getElementById('mobileSortModeButton');
 
     if (toggle && menu) {
         toggle.addEventListener('click', function () {
             const expanded = toggle.getAttribute('aria-expanded') === 'true';
-            const nextExpanded = !expanded;
+            toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            menu.hidden = expanded;
+        });
+    }
 
-            toggle.setAttribute('aria-expanded', nextExpanded ? 'true' : 'false');
-            menu.hidden = !nextExpanded;
-            menu.classList.toggle('is-open', nextExpanded);
+    if (mobileSortModeButton && sortModeButton) {
+        mobileSortModeButton.addEventListener('click', function () {
+            sortModeButton.click();
+
+            if (toggle && menu) {
+                toggle.setAttribute('aria-expanded', 'false');
+                menu.hidden = true;
+            }
         });
     }
 
