@@ -22,8 +22,8 @@
                 <h2 class="sidebar-title">カテゴリ</h2>
                 <div class="category-list">
                     <a
-                        href="{{ route('faqs.index', ['category' => 0, 'keyword' => request('keyword', '')]) }}"
-                        class="category-button {{ ($searchCategory ?? '0') == '0' ? 'is-active' : '' }}"
+                        href="{{ route('faqs.search', ['category' => 0, 'keyword' => request('keyword', '')]) }}"
+                        class="category-button {{ ($category ?? '0') == '0' ? 'is-active' : '' }}"
                     >
                         <span class="category-name">すべて</span>
                         <span class="category-count">{{ count($faqs) }}件</span>
@@ -31,8 +31,8 @@
 
                     @foreach($categoriesList as $category)
                         <a
-                            href="{{ route('faqs.index', ['category' => $category['id'], 'keyword' => request('keyword', '')]) }}"
-                            class="category-button {{ ($searchCategory ?? '0') == $category['id'] ? 'is-active' : '' }}"
+                            href="{{ route('faqs.search', ['category' => $category['id'], 'keyword' => request('keyword', '')]) }}"
+                            class="category-button {{ ($category ?? '0') == $category['id'] ? 'is-active' : '' }}"
                         >
                             <span class="category-name">{{ $category['name'] }}</span>
                             <span class="category-count">{{ $category['count'] }}件</span>
@@ -49,12 +49,12 @@
                     <p class="search-sub">検索しやすさを最優先にした、スマホでも使いやすいFAQ一覧です。</p>
                 </div>
 
-                <form method="GET" action="{{ route('faqs.index') }}" class="search-form">
+                <form method="GET" action="{{ route('faqs.search') }}" class="search-form">
                     <div class="search-box">
                         <input
                             type="text"
                             name="keyword"
-                            value="{{ $searchKeyword ?? '' }}"
+                            value="{{ $keyword ?? '' }}"
                             placeholder="例：施術順 / 予約 / ブロック / サロンボード"
                         >
                         <span class="search-icon">⌕</span>
@@ -76,36 +76,51 @@
                 <div class="chips-label">よく使うキーワード</div>
                 <div class="chips">
                     <a
-                        href="{{ route('faqs.index', ['keyword' => '施術順', 'category' => request('category', 0)]) }}"
-                        class="chip {{ $searchKeyword === '施術順' ? 'is-active' : '' }}"
+                        href="{{ route('faqs.search', ['keyword' => '施術順', 'category' => request('category', 0)]) }}"
+                        class="chip {{ $keyword === '施術順' ? 'is-active' : '' }}"
                     >
                         施術順
                     </a>
 
                     <a
-                        href="{{ route('faqs.index', ['keyword' => '予約', 'category' => request('category', 0)]) }}"
-                        class="chip {{ $searchKeyword === '予約' ? 'is-active' : '' }}"
+                        href="{{ route('faqs.search', ['keyword' => '予約', 'category' => request('category', 0)]) }}"
+                        class="chip {{ $keyword === '予約' ? 'is-active' : '' }}"
                     >
                         予約
                     </a>
 
                     <a
-                        href="{{ route('faqs.index', ['keyword' => 'ブロック', 'category' => request('category', 0)]) }}"
-                        class="chip {{ $searchKeyword === 'ブロック' ? 'is-active' : '' }}"
+                        href="{{ route('faqs.search', ['keyword' => 'ブロック', 'category' => request('category', 0)]) }}"
+                        class="chip {{ $keyword === 'ブロック' ? 'is-active' : '' }}"
                     >
                         ブロック
                     </a>
 
                     <a
-                        href="{{ route('faqs.index', ['keyword' => 'サロンボード', 'category' => request('category', 0)]) }}"
-                        class="chip {{ $searchKeyword === 'サロンボード' ? 'is-active' : '' }}"
+                        href="{{ route('faqs.search', ['keyword' => 'サロンボード', 'category' => request('category', 0)]) }}"
+                        class="chip {{ $keyword === 'サロンボード' ? 'is-active' : '' }}"
                     >
                         サロンボード
                     </a>
                 </div>
 
                 <div class="hero-actions">
-                    <a href="{{ route('faqs.index') }}" class="clear-button">条件をクリア</a>
+                    <a href="{{ route('faqs.search') }}" class="clear-button">条件をクリア</a>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stats-item">
+                    <span class="stats-label">総FAQ件数</span>
+                    <span class="stats-inline-value">{{ count($faqs) }}</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">検索結果</span>
+                    <span class="stats-inline-value">{{ count($faqs) }}</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">カテゴリ</span>
+                    <span class="stats-inline-value">{{ count($categoriesList) }}</span>
                 </div>
             </div>
 
@@ -197,38 +212,6 @@
                             </article>
                         @endforeach
                     </div>
-                </div>
-                <div class="faq-pagination-wrap">
-                    <div class="faq-pagination-info">
-                        {{ $faqs->firstItem() ?? 0 }}〜{{ $faqs->lastItem() ?? 0 }}件 / {{ $faqs->total() }}件
-                    </div>
-
-                    @if ($faqs->hasPages())
-                        <nav class="faq-pagination" aria-label="ページネーション">
-                            {{-- 前へ --}}
-                            @if ($faqs->onFirstPage())
-                                <span class="page-button is-disabled">前へ</span>
-                            @else
-                                <a class="page-button" href="{{ $faqs->previousPageUrl() }}">前へ</a>
-                            @endif
-
-                            {{-- ページ番号 --}}
-                            @foreach ($faqs->getUrlRange(1, $faqs->lastPage()) as $page => $url)
-                                @if ($page == $faqs->currentPage())
-                                    <span class="page-number is-current">{{ $page }}</span>
-                                @else
-                                    <a class="page-number" href="{{ $url }}">{{ $page }}</a>
-                                @endif
-                            @endforeach
-
-                            {{-- 次へ --}}
-                            @if ($faqs->hasMorePages())
-                                <a class="page-button" href="{{ $faqs->nextPageUrl() }}">次へ</a>
-                            @else
-                                <span class="page-button is-disabled">次へ</span>
-                            @endif
-                        </nav>
-                    @endif
                 </div>
             @else
                 <div class="empty">

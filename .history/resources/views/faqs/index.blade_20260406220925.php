@@ -109,6 +109,21 @@
                 </div>
             </div>
 
+            <div class="stats-bar">
+                <div class="stats-item">
+                    <span class="stats-label">総FAQ件数</span>
+                    <span class="stats-inline-value">{{ count($faqs) }}</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">検索結果</span>
+                    <span class="stats-inline-value">{{ count($faqs) }}</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">カテゴリ</span>
+                    <span class="stats-inline-value">{{ count($categoriesList) }}</span>
+                </div>
+            </div>
+
             <div id="sortGuide" class="sort-guide hidden">
                 ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
             </div>
@@ -197,38 +212,6 @@
                             </article>
                         @endforeach
                     </div>
-                </div>
-                <div class="faq-pagination-wrap">
-                    <div class="faq-pagination-info">
-                        {{ $faqs->firstItem() ?? 0 }}〜{{ $faqs->lastItem() ?? 0 }}件 / {{ $faqs->total() }}件
-                    </div>
-
-                    @if ($faqs->hasPages())
-                        <nav class="faq-pagination" aria-label="ページネーション">
-                            {{-- 前へ --}}
-                            @if ($faqs->onFirstPage())
-                                <span class="page-button is-disabled">前へ</span>
-                            @else
-                                <a class="page-button" href="{{ $faqs->previousPageUrl() }}">前へ</a>
-                            @endif
-
-                            {{-- ページ番号 --}}
-                            @foreach ($faqs->getUrlRange(1, $faqs->lastPage()) as $page => $url)
-                                @if ($page == $faqs->currentPage())
-                                    <span class="page-number is-current">{{ $page }}</span>
-                                @else
-                                    <a class="page-number" href="{{ $url }}">{{ $page }}</a>
-                                @endif
-                            @endforeach
-
-                            {{-- 次へ --}}
-                            @if ($faqs->hasMorePages())
-                                <a class="page-button" href="{{ $faqs->nextPageUrl() }}">次へ</a>
-                            @else
-                                <span class="page-button is-disabled">次へ</span>
-                            @endif
-                        </nav>
-                    @endif
                 </div>
             @else
                 <div class="empty">
