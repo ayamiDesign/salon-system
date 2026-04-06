@@ -32,13 +32,11 @@ class FaqsController extends Controller
         $searchCategory = $request->input('category', '0');
         $searchKeyword = $request->input('keyword', '');
 
-        $faqs = Faqs::search($searchCategory, $searchKeyword)
-            ->paginate(10)
-            ->appends($request->query());
+        $faqs = Faqs::search($searchCategory, $searchKeyword)->get();
 
         // 表示用のカテゴリ名を形成
-        $categories = $categoriesList->pluck('name', 'id');
-        foreach ($faqs as $faq) {
+        $categories = Categories::pluck('name', 'id');
+        foreach ($faqs as $index => $faq) {
 
             $faq['category1_name'] = $categories[$faq['category1_id']] ?? '';
             $faq['category2_name'] = !empty($faq['category2_id'])
@@ -46,14 +44,7 @@ class FaqsController extends Controller
             : '';
         }
 
-        return view('faqs.index',
-            compact(
-                'faqs',
-                'categoriesList',
-                'searchCategory',
-                'searchKeyword'
-            )
-        );
+        return view('faqs.index',compact('faqs','categoriesList','searchCategory','searchKeyword'));
     }
 
     public function create()

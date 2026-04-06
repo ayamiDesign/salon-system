@@ -15,8 +15,7 @@ class FaqsController extends Controller
 
     public function index(Request $request)
     {
-
-        // セッションを削除
+         // セッションを削除
         $request->session()->forget('faq_input');
 
         // カテゴリを取得
@@ -28,17 +27,10 @@ class FaqsController extends Controller
             $category['count'] = $count;
         }
 
-        // 検索を実行
-        $searchCategory = $request->input('category', '0');
-        $searchKeyword = $request->input('keyword', '');
-
-        $faqs = Faqs::search($searchCategory, $searchKeyword)
-            ->paginate(10)
-            ->appends($request->query());
-
         // 表示用のカテゴリ名を形成
-        $categories = $categoriesList->pluck('name', 'id');
-        foreach ($faqs as $faq) {
+        $categories = Categories::pluck('name', 'id');
+        $faqs = Faqs::orderBy('sort_order')->get();
+        foreach ($faqs as $index => $faq) {
 
             $faq['category1_name'] = $categories[$faq['category1_id']] ?? '';
             $faq['category2_name'] = !empty($faq['category2_id'])
@@ -46,14 +38,7 @@ class FaqsController extends Controller
             : '';
         }
 
-        return view('faqs.index',
-            compact(
-                'faqs',
-                'categoriesList',
-                'searchCategory',
-                'searchKeyword'
-            )
-        );
+        return view('faqs.index',compact('faqs','categoriesList'));
     }
 
     public function create()
@@ -538,5 +523,17 @@ class FaqsController extends Controller
         return response()->json([
             'message' => '表示順を保存しました'
         ]);
+    }
+    
+    public function search(Request $request)
+    {
+
+        dd($request);
+        // $category = $request->input('category');
+        // $keyword  = $request->input('keyword');
+
+
+
+        return view('faqs.search',compact('faq'));    
     }
 }

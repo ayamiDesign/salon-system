@@ -33,10 +33,7 @@ class Faqs extends Model
     {
         return $query
             ->when($searchCategory !== '0', function ($q) use ($searchCategory) {
-                $q->where(function ($sub) use ($searchCategory) {
-                    $sub->where('category1_id', $searchCategory)
-                        ->orWhere('category2_id', $searchCategory);
-                });
+                $q->where('category_id', $searchCategory);
             })
             ->when(!empty($searchKeyword), function ($q) use ($searchKeyword) {
                 $q->where(function ($sub) use ($searchKeyword) {

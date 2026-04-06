@@ -109,6 +109,17 @@
                 </div>
             </div>
 
+            <div class="stats-bar">
+                <div class="stats-item">
+                    <span class="stats-label">総FAQ件数</span>
+                    <span class="stats-inline-value">{{ $totalFaqs }}</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">検索結果</span>
+                    <span class="stats-inline-value">{{ count($faqs) }}</span>
+                </div>
+            </div>
+
             <div id="sortGuide" class="sort-guide hidden">
                 ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
             </div>

@@ -28,12 +28,15 @@ class FaqsController extends Controller
             $category['count'] = $count;
         }
 
+        // 総件数を取得
+        $totalFaqs = Faqs::count();
+
         // 検索を実行
         $searchCategory = $request->input('category', '0');
         $searchKeyword = $request->input('keyword', '');
 
         $faqs = Faqs::search($searchCategory, $searchKeyword)
-            ->paginate(10)
+            ->paginate(5)
             ->appends($request->query());
 
         // 表示用のカテゴリ名を形成
@@ -49,6 +52,7 @@ class FaqsController extends Controller
         return view('faqs.index',
             compact(
                 'faqs',
+                'totalFaqs',
                 'categoriesList',
                 'searchCategory',
                 'searchKeyword'

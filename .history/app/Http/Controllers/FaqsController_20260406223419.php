@@ -33,7 +33,7 @@ class FaqsController extends Controller
         $searchKeyword = $request->input('keyword', '');
 
         $faqs = Faqs::search($searchCategory, $searchKeyword)
-            ->paginate(10)
+            ->paginate(5)
             ->appends($request->query());
 
         // 表示用のカテゴリ名を形成

@@ -29,20 +29,17 @@ class Faqs extends Model
         });
     }
 
-    public function scopeSearch($query, $searchCategory, $searchKeyword)
+    public function scopeSearch($query, $category, $keyword)
     {
         return $query
-            ->when($searchCategory !== '0', function ($q) use ($searchCategory) {
-                $q->where(function ($sub) use ($searchCategory) {
-                    $sub->where('category1_id', $searchCategory)
-                        ->orWhere('category2_id', $searchCategory);
-                });
+            ->when($category !== '0', function ($q) use ($category) {
+                $q->where('category_id', $category);
             })
-            ->when(!empty($searchKeyword), function ($q) use ($searchKeyword) {
-                $q->where(function ($sub) use ($searchKeyword) {
-                    $sub->where('question', 'like', "%{$searchKeyword}%")
-                        ->orWhere('answer', 'like', "%{$searchKeyword}%")
-                        ->orWhere('note', 'like', "%{$searchKeyword}%");
+            ->when(!empty($keyword), function ($q) use ($keyword) {
+                $q->where(function ($sub) use ($keyword) {
+                    $sub->where('question', 'like', "%{$keyword}%")
+                        ->orWhere('answer', 'like', "%{$keyword}%")
+                        ->orWhere('note', 'like', "%{$keyword}%");
                 });
             })
             ->orderBy('sort_order');

@@ -49,7 +49,7 @@
                     <p class="search-sub">検索しやすさを最優先にした、スマホでも使いやすいFAQ一覧です。</p>
                 </div>
 
-                <form method="GET" action="{{ route('faqs.index') }}" class="search-form">
+                <form method="GET" action="{{ route('faqs.search') }}" class="search-form">
                     <div class="search-box">
                         <input
                             type="text"
@@ -106,6 +106,21 @@
 
                 <div class="hero-actions">
                     <a href="{{ route('faqs.index') }}" class="clear-button">条件をクリア</a>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stats-item">
+                    <span class="stats-label">総FAQ件数</span>
+                    <span class="stats-inline-value">{{ count($faqs) }}</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">検索結果</span>
+                    <span class="stats-inline-value">{{ count($faqs) }}</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">カテゴリ</span>
+                    <span class="stats-inline-value">{{ count($categoriesList) }}</span>
                 </div>
             </div>
 
@@ -197,38 +212,6 @@
                             </article>
                         @endforeach
                     </div>
-                </div>
-                <div class="faq-pagination-wrap">
-                    <div class="faq-pagination-info">
-                        {{ $faqs->firstItem() ?? 0 }}〜{{ $faqs->lastItem() ?? 0 }}件 / {{ $faqs->total() }}件
-                    </div>
-
-                    @if ($faqs->hasPages())
-                        <nav class="faq-pagination" aria-label="ページネーション">
-                            {{-- 前へ --}}
-                            @if ($faqs->onFirstPage())
-                                <span class="page-button is-disabled">前へ</span>
-                            @else
-                                <a class="page-button" href="{{ $faqs->previousPageUrl() }}">前へ</a>
-                            @endif
-
-                            {{-- ページ番号 --}}
-                            @foreach ($faqs->getUrlRange(1, $faqs->lastPage()) as $page => $url)
-                                @if ($page == $faqs->currentPage())
-                                    <span class="page-number is-current">{{ $page }}</span>
-                                @else
-                                    <a class="page-number" href="{{ $url }}">{{ $page }}</a>
-                                @endif
-                            @endforeach
-
-                            {{-- 次へ --}}
-                            @if ($faqs->hasMorePages())
-                                <a class="page-button" href="{{ $faqs->nextPageUrl() }}">次へ</a>
-                            @else
-                                <span class="page-button is-disabled">次へ</span>
-                            @endif
-                        </nav>
-                    @endif
                 </div>
             @else
                 <div class="empty">
