@@ -1,14 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\FaqHistoriesController;
-use App\Http\Controllers\UsersController;
-
-// ログイン
-Route::get('/login', [LoginController::class, 'create'])->name('login');
+use App\Http\Controllers\AccountsController;
 
 // カテゴリー
 Route::post('/categories/confirm', [CategoriesController::class, 'confirm'])
@@ -41,11 +37,11 @@ Route::delete('/faq-histories/{id}', [FaqHistoriesController::class, 'destroyHis
     ->name('faq-histories.destroy');
 
 // アカウント
-Route::post('/users/confirm', [UsersController::class, 'confirm'])
-    ->name('users.confirm');
-Route::post('/users/{id}/confirm', [UsersController::class, 'confirmEdit'])
-    ->name('users.confirmEdit');
-Route::get('/users/complete', function () {
-    return view('users.complete');
-})->name('users.complete');
-Route::resource('users', UsersController::class);
+Route::post('/accounts/confirm', [AccountsController::class, 'confirm'])
+    ->name('accounts.confirm');
+Route::post('/accounts/{id}/confirm', [AccountsController::class, 'confirmEdit'])
+    ->name('accounts.confirmEdit');
+Route::get('/accounts/complete', function () {
+    return view('accounts.complete');
+})->name('accounts.complete');
+Route::resource('accounts', AccountsController::class);

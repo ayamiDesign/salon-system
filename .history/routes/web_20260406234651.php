@@ -8,7 +8,9 @@ use App\Http\Controllers\FaqHistoriesController;
 use App\Http\Controllers\UsersController;
 
 // ログイン
-Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
 // カテゴリー
 Route::post('/categories/confirm', [CategoriesController::class, 'confirm'])

@@ -144,8 +144,32 @@
             </div>
         @elseif(request()->routeIs('users.index'))
          <div class="topbar-actions">
+                <button
+                    type="button"
+                    id="cancelSortButton"
+                    class="action-button action-button-sub hidden"
+                >
+                    キャンセル
+                </button>
+
+                <button
+                    type="button"
+                    id="saveSortButton"
+                    class="action-button action-button-primary hidden"
+                >
+                    保存する
+                </button>
+
+                <button
+                    type="button"
+                    id="sortModeButton"
+                    class="header-sub-button"
+                >
+                    並び替え
+                </button>
+
                 <a
-                    href="{{ route('users.create') }}"
+                    href="{{ route('categories.create') }}"
                     class="header-main-button"
                 >
                     新規登録
@@ -188,15 +212,15 @@
                         カテゴリ管理
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <button
                         type="button"
                         id="mobileSortModeButton"
                         class="mobile-global-nav-link mobile-global-nav-button"
                     >
-                        アカウント管理
+                        並び替え
                     </button>
-                </li>
+                </li> --}}
                 {{-- <li>
                     <a
                         href="{{ route('histories.index') }}"

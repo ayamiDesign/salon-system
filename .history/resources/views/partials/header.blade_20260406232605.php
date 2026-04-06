@@ -188,15 +188,15 @@
                         カテゴリ管理
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <button
                         type="button"
                         id="mobileSortModeButton"
                         class="mobile-global-nav-link mobile-global-nav-button"
                     >
-                        アカウント管理
+                        並び替え
                     </button>
-                </li>
+                </li> --}}
                 {{-- <li>
                     <a
                         href="{{ route('histories.index') }}"

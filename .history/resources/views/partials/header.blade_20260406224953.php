@@ -31,10 +31,10 @@
                 </li>
                 <li>
                     <a
-                        href="{{ route('users.index') }}"
-                        class="global-nav-link {{ request()->routeIs('users.*') ? 'is-active' : '' }}"
+                        href="{{ route('accounts.index') }}"
+                        class="global-nav-link {{ request()->routeIs('accounts.*') ? 'is-active' : '' }}"
                     >
-                        アカウント管理
+                        アカウント
                     </a>
                 </li>
                 {{-- <li>
@@ -142,29 +142,6 @@
                     <span></span>
                 </button>
             </div>
-        @elseif(request()->routeIs('users.index'))
-         <div class="topbar-actions">
-                <a
-                    href="{{ route('users.create') }}"
-                    class="header-main-button"
-                >
-                    新規登録
-                </a>
-
-                {{-- スマホ用メニューボタン --}}
-                <button
-                    type="button"
-                    class="menu-toggle sp-only"
-                    aria-controls="mobileGlobalMenu"
-                    aria-expanded="false"
-                    aria-label="メニューを開く"
-                    data-menu-toggle
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
         @endif
     </div>
 
@@ -188,15 +165,15 @@
                         カテゴリ管理
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <button
                         type="button"
                         id="mobileSortModeButton"
                         class="mobile-global-nav-link mobile-global-nav-button"
                     >
-                        アカウント管理
+                        並び替え
                     </button>
-                </li>
+                </li> --}}
                 {{-- <li>
                     <a
                         href="{{ route('histories.index') }}"

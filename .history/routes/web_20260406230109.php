@@ -1,14 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\FaqHistoriesController;
 use App\Http\Controllers\UsersController;
-
-// ログイン
-Route::get('/login', [LoginController::class, 'create'])->name('login');
 
 // カテゴリー
 Route::post('/categories/confirm', [CategoriesController::class, 'confirm'])
