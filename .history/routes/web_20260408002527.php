@@ -13,7 +13,6 @@ Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
 // ログアウト
 Route::post('/logout', [LoginController::class, 'destroy'])
-    ->middleware('auth')
     ->name('logout');
 
 // カテゴリー
@@ -31,9 +30,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 // FAQ
-Route::middleware('auth')->get('/faqs', [FaqsController::class, 'index'])
-    ->name('faqs.index');
-
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/faqs/confirm', [FaqsController::class, 'confirm'])
         ->name('faqs.confirm');
@@ -44,12 +40,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('faqs.complete');
     Route::post('/faqs/order', [FaqsController::class, 'updateOrder'])
         ->name('faqs.updateOrder');
-    Route::resource('faqs', FaqsController::class)->except(['index']);
+    Route::resource('faqs', FaqsController::class);
 });
 
 
 // FAQ履歴
-Route::middleware('auth')->get('/faqs/{id}/histories', [FaqHistoriesController::class, 'histories'])
+Route::get('/faqs/{id}/histories', [FaqHistoriesController::class, 'histories'])
     ->name('faqs.histories.index');
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/faq-histories/{id}', [FaqHistoriesController::class, 'destroyHistory'])

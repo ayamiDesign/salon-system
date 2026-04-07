@@ -143,8 +143,8 @@
                                         </div>
 
                                         <div class="faq-head-side">
-                                            <div class="js-normal-actions faq-action-group">
-                                                @if(auth()->user()->role === 'admin')
+                                            @if(auth()->user()->role === 'admin')
+                                                <div class="js-normal-actions faq-action-group">
                                                     <a href="{{ route('faqs.edit', $faq->id) }}" class="row-action-button">変更</a>
 
                                                     <button
@@ -155,9 +155,9 @@
                                                     >
                                                         削除
                                                     </button>
-                                                 @endif
+                                                @endif
                                                 <a href="{{ route('faqs.histories.index', $faq->id) }}" class="row-action-button">履歴</a>
-                                            </div>
+                                                </div>
                                           
                                             <button
                                                 type="button"

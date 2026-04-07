@@ -31,9 +31,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 // FAQ
-Route::middleware('auth')->get('/faqs', [FaqsController::class, 'index'])
-    ->name('faqs.index');
-
+Route::middleware('auth')->get('/faqs.index', [FaqsController::class, 'index']);
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/faqs/confirm', [FaqsController::class, 'confirm'])
         ->name('faqs.confirm');
@@ -44,7 +42,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('faqs.complete');
     Route::post('/faqs/order', [FaqsController::class, 'updateOrder'])
         ->name('faqs.updateOrder');
-    Route::resource('faqs', FaqsController::class)->except(['index']);
+    Route::resource('faqs.index', FaqsController::class)->except(['index']);
 });
 
 
