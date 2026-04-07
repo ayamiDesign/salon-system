@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Categories;
 use App\Models\Faq;
 use App\Models\FaqHistory;
 

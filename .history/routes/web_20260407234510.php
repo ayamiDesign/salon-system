@@ -11,9 +11,10 @@ use App\Http\Controllers\UsersController;
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-// ログアウト
-Route::post('/logout', [LoginController::class, 'destroy'])
-    ->name('logout');
+// ダッシュボード
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 // カテゴリー
 Route::post('/categories/confirm', [CategoriesController::class, 'confirm'])

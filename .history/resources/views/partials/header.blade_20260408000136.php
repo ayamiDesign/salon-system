@@ -38,9 +38,9 @@
                     </a>
                 </li>
                 <li>
-                    <form method="post" action="{{ route('logout') }}" class="inline-form">
+                    <form method="post" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="global-nav-link logout-link">
+                        <button type="submit" class="global-nav-link">
                             ログアウト
                         </button>
                     </form>
@@ -197,14 +197,22 @@
                         アカウント管理
                     </button>
                 </li>
-                <li>
-                    <form method="post" action="{{ route('logout') }}" class="mobile-inline-form">
-                        @csrf
-                        <button type="submit" class="mobile-global-nav-link mobile-global-nav-button">
-                            ログアウト
-                        </button>
-                    </form>
-                </li>
+                {{-- <li>
+                    <a
+                        href="{{ route('histories.index') }}"
+                        class="mobile-global-nav-link {{ request()->routeIs('histories.*') ? 'is-active' : '' }}"
+                    >
+                        履歴
+                    </a>
+                </li> --}}
+                {{-- <li>
+                    <a
+                        href="{{ route('settings.index') }}"
+                        class="mobile-global-nav-link {{ request()->routeIs('settings.*') ? 'is-active' : '' }}"
+                    >
+                        設定
+                    </a>
+                </li> --}}
             </ul>
         </nav>
     </div>

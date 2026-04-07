@@ -20,11 +20,11 @@ class FaqsController extends Controller
         $request->session()->forget('faq_input');
 
         // カテゴリを取得
-        $categoriesList = Category::orderBy('sort_order')->get();
+        $categoriesList = Categories::orderBy('sort_order')->get();
 
         // カテゴリごとのFAQ件数を取得
         foreach ($categoriesList as $index => $category) {
-            $count = Faq::categoryMatch($category->id)->count();
+            $count = Faqs::categoryMatch($category->id)->count();
             $category['count'] = $count;
         }
 
@@ -32,7 +32,7 @@ class FaqsController extends Controller
         $searchCategory = $request->input('category', '0');
         $searchKeyword = $request->input('keyword', '');
 
-        $faqs = Faq::search($searchCategory, $searchKeyword)
+        $faqs = Faqs::search($searchCategory, $searchKeyword)
             ->paginate(10)
             ->appends($request->query());
 
@@ -59,7 +59,7 @@ class FaqsController extends Controller
     public function create()
     {
         // カテゴリを取得
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Categories::orderBy('sort_order')->get();
 
         // セッションを保存
         $sessionInput = session('faq_input');
@@ -114,7 +114,7 @@ class FaqsController extends Controller
         $faqs = $requestData['faqs'];
 
         // カテゴリ名取得
-        $categories = Category::pluck('name', 'id');
+        $categories = Categories::pluck('name', 'id');
         
         foreach ($faqs as $index => &$faq) {
 
@@ -206,7 +206,7 @@ class FaqsController extends Controller
             }
 
             // FAQ保存
-            $FaqModel = Faq::create([
+            $FaqModel = Faqs::create([
                 'category1_id' => $faq['category1_id'],
                 'category2_id' => $faq['category2_id'],
                 'question' => $faq['question'],
@@ -234,13 +234,13 @@ class FaqsController extends Controller
     public function edit($id)
     {
         // データを取得する
-        $faq = Faq::findOrFail($id);
+        $faq = Faqs::findOrFail($id);
 
         // カテゴリを取得
-        $categoriesList = Category::orderBy('sort_order')->get();
+        $categoriesList = Categories::orderBy('sort_order')->get();
 
         // カテゴリ名取得
-        $categories = Category::pluck('name', 'id');
+        $categories = Categories::pluck('name', 'id');
         
         // 表示用のカテゴリ名を形成
         $faq['category1_name'] = $categories[$faq['category1_id']] ?? '';
@@ -258,7 +258,7 @@ class FaqsController extends Controller
     {
 
         // バリデーション
-        $faq = Faq::findOrFail($id);
+        $faq = Faqs::findOrFail($id);
 
         $validator = Validator::make(
             $request->all(),
@@ -313,7 +313,7 @@ class FaqsController extends Controller
 
         $requestData = $validator->validate();
 
-        $categoriesList = Category::select('id', 'name')->get();
+        $categoriesList = Categories::select('id', 'name')->get();
 
         $requestData['category1_name'] = optional(
             $categoriesList->firstWhere('id', $requestData['category1_id'])
@@ -361,7 +361,7 @@ class FaqsController extends Controller
     public function update(Request $request, $id)
     {
      
-        $faq = Faq::findOrFail($id);
+        $faq = Faqs::findOrFail($id);
 
         $validator = Validator::make(
             $request->all(),
@@ -413,7 +413,7 @@ class FaqsController extends Controller
             | faq_history = 1 の時だけ、更新前の内容を履歴に保存
             */
             if (!empty($requestData['faq_history'])) {
-                FaqHistory::create([
+                FaqHistories::create([
                     'faq_id' => $faq->id,
 
                     'category1_id' => $faq->category1_id,
@@ -506,10 +506,10 @@ class FaqsController extends Controller
 
     public function destroy($id)
     {
-        $faq = Faq::findOrFail($id);
+        $faq = Faqs::findOrFail($id);
 
         // 履歴削除
-        FaqHistory::where('faq_id', $id)->delete();
+        FaqHistories::where('faq_id', $id)->delete();
 
         // FAQ削除
         $faq->delete();
@@ -525,7 +525,7 @@ class FaqsController extends Controller
         ]);
 
         foreach ($request->ids as $index => $id) {
-            Faq::where('id', $id)->update([
+            Faqs::where('id', $id)->update([
                 'sort_order' => $index + 1
             ]);
         }

@@ -14,11 +14,11 @@ class CategoriesController extends Controller
          // セッションを削除
         $request->session()->forget('category_input');
 
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Categories::orderBy('sort_order')->get();
 
         // カテゴリごとのFAQ件数を取得
         foreach ($categories as $index => $category) {
-            $count = Faq::categoryMatch($category->id)->count();
+            $count = Faqs::categoryMatch($category->id)->count();
             $category['count'] = $count;
         }
         return view('categories.index',compact('categories'));
@@ -73,7 +73,7 @@ class CategoriesController extends Controller
 
         foreach ($requestData['name'] as $name) {
 
-            $category = new Category();
+            $category = new Categories();
 
             // カテゴリー名保存
             $category->name = $name;
@@ -95,7 +95,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         // データを取得する
-        $category = Category::findOrFail($id);
+        $category = Categories::findOrFail($id);
 
         // セッションを保存
         $sessionInput = session('category_input');
@@ -151,7 +151,7 @@ class CategoriesController extends Controller
         ]);
 
         // カテゴリー名保存
-        $category = Category::findOrFail($id);
+        $category = Categories::findOrFail($id);
         
         $category->update([
             'name' => $requestData['name']
@@ -166,7 +166,7 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Categories::findOrFail($id);
         $category->delete();
 
         return redirect()->route('categories.index');
@@ -180,7 +180,7 @@ class CategoriesController extends Controller
         ]);
 
         foreach ($request->ids as $index => $id) {
-            Category::where('id', $id)->update([
+            Categories::where('id', $id)->update([
                 'sort_order' => $index + 1
             ]);
         }

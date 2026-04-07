@@ -198,9 +198,9 @@
                     </button>
                 </li>
                 <li>
-                    <form method="post" action="{{ route('logout') }}" class="mobile-inline-form">
+                    <form method="post" action="{{ route('logout') }}" class="inline-form">
                         @csrf
-                        <button type="submit" class="mobile-global-nav-link mobile-global-nav-button">
+                        <button type="submit" class="global-nav-link logout-link">
                             ログアウト
                         </button>
                     </form>

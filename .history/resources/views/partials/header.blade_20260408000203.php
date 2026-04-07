@@ -38,9 +38,9 @@
                     </a>
                 </li>
                 <li>
-                    <form method="post" action="{{ route('logout') }}" class="inline-form">
+                    <form method="post" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="global-nav-link logout-link">
+                        <button type="submit" class="global-nav-link">
                             ログアウト
                         </button>
                     </form>
@@ -198,9 +198,9 @@
                     </button>
                 </li>
                 <li>
-                    <form method="post" action="{{ route('logout') }}" class="mobile-inline-form">
+                    <form method="post" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="mobile-global-nav-link mobile-global-nav-button">
+                        <button type="submit" class="global-nav-link">
                             ログアウト
                         </button>
                     </form>

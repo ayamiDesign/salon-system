@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Categories extends Model
+class User extends Authenticatable
 {
     use SoftDeletes;
     protected $fillable = [
         'name',
-        'sort_order'
+        'email',
+        'password',
+        'role',
+        'is_active',
     ];
 }
