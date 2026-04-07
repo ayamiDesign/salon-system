@@ -31,6 +31,7 @@
                     </ul>
                 </div>
             @endif
+
             <section class="faq-card form-card account-form-card">
                 <div class="form-card-header">
                     <div>

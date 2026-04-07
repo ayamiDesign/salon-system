@@ -164,6 +164,7 @@ class CategoriesController extends Controller
         return redirect()->route('categories.complete');
     }
 
+
     public function destroy($id)
     {
         $category = Categories::findOrFail($id);

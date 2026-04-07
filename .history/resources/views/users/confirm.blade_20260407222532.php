@@ -139,7 +139,7 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('users.update', $id) }}" method="post" class="form-body">
+                    <form action="{{ route('users.update') }}" method="post" class="form-body">
                         @csrf
                         @method('PUT')
 
