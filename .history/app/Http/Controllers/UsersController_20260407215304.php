@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use App\Models\Users;
 
 class UsersController extends Controller
@@ -102,57 +101,35 @@ class UsersController extends Controller
     public function edit($id)
     {
         // データを取得する
-        $user = Users::findOrFail($id);
+        $users = Users::findOrFail($id);
 
         // セッションを保存
         $sessionInput = session('user_input');
 
-        return view('users.edit',compact('user','sessionInput'));
+        return view('users.edit',compact('users','sessionInput'));
     }
 
     public function confirmEdit(Request $request, $id)
     {
 
         // バリデーション
-       $userData = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('users', 'name')->ignore($id),
-            ],
-            'email' => [
-                'required',
-                'email',
-                'max:255',
-                Rule::unique('users', 'email')->ignore($id),
-            ],
-            'password' => [
-                'nullable',
-                'string',
-                'min:8',
-                'confirmed',
-            ],
-            'role' => [
-                'required',
-                'in:admin,manager,staff',
-            ],
-            'is_active' => [
-                'required',
-                'boolean',
-            ],
-        ], [
+        $userData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:admin,manager,staff',
+            'is_active' => 'required|boolean'
+        ],
+        [
             'name.required' => '名前を入力してください',
             'name.max' => '名前は255文字以内で入力してください',
-
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => '有効なメールアドレスを入力してください',
             'email.unique' => 'このメールアドレスはすでに使用されています',
             'email.max' => 'メールアドレスは255文字以内で入力してください',
-
+            'password.required' => 'パスワードを入力してください',
             'password.min' => 'パスワードは8文字以上で入力してください',
             'password.confirmed' => 'パスワードが一致しません',
-
             'role.required' => '権限を選択してください',
             'is_active.required' => '利用状態を選択してください',
         ]);
@@ -171,44 +148,21 @@ class UsersController extends Controller
     {
         // バリデーション
         $userData = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('users', 'name')->ignore($id),
-            ],
-            'email' => [
-                'required',
-                'email',
-                'max:255',
-                Rule::unique('users', 'email')->ignore($id),
-            ],
-            'password' => [
-                'nullable',
-                'string',
-                'min:8',
-                'confirmed',
-            ],
-            'role' => [
-                'required',
-                'in:admin,manager,staff',
-            ],
-            'is_active' => [
-                'required',
-                'boolean',
-            ],
-        ], [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8',
+            'role' => 'required|in:admin,manager,staff',
+            'is_active' => 'required|boolean'
+        ],
+        [
             'name.required' => '名前を入力してください',
             'name.max' => '名前は255文字以内で入力してください',
-
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => '有効なメールアドレスを入力してください',
             'email.unique' => 'このメールアドレスはすでに使用されています',
             'email.max' => 'メールアドレスは255文字以内で入力してください',
-
+            'password.required' => 'パスワードを入力してください',
             'password.min' => 'パスワードは8文字以上で入力してください',
-            'password.confirmed' => 'パスワードが一致しません',
-
             'role.required' => '権限を選択してください',
             'is_active.required' => '利用状態を選択してください',
         ]);
@@ -232,9 +186,9 @@ class UsersController extends Controller
 
     public function destroy($id)
     {
-        $user = Users::findOrFail($id);
-        $user->delete();
+        $category = Categories::findOrFail($id);
+        $category->delete();
 
-        return redirect()->route('users.index');
+        return redirect()->route('categories.index');
     }
 }

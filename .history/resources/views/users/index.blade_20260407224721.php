@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-<div
-    class="app"
-    data-sort-container
-    data-delete-base-url="{{ url('/users') }}"
->
+<div class="app">
     @include('partials.header')
 
     <main class="layout category-layout-single">

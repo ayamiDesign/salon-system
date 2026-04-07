@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-<div
-    class="app"
-    data-sort-container
-    data-delete-base-url="{{ url('/users') }}"
->
+<div class="app">
     @include('partials.header')
 
     <main class="layout category-layout-single">
@@ -83,7 +79,7 @@
 
                                             <button
                                                 type="button"
-                                                class="admin-index-button admin-index-button--delete js-delete-open"
+                                                class="admin-table-button admin-table-button--delete js-delete-open"
                                                 data-id="{{ $user->id }}"
                                                 data-name="{{ $user->name }}"
                                             >

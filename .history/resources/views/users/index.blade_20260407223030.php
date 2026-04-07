@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-<div
-    class="app"
-    data-sort-container
-    data-delete-base-url="{{ url('/users') }}"
->
+<div class="app">
     @include('partials.header')
 
     <main class="layout category-layout-single">
@@ -57,13 +53,15 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if($user->role === 'admin')
-                                            <span class="admin-role">管理者</span>
-                                        @elseif($user->role === 'manager')
-                                            <span class="admin-role">店長</span>
-                                        @elseif($user->role === 'staff')
-                                            <span class="admin-role">スタッフ</span>
-                                        @endif
+                                        <span class="admin-role">
+                                            @if($user->role === 'admin')
+                                            <span class="admin-status admin-status--active">管理者</span>
+                                            @elseif($user->role === 'manager')
+                                                <span class="admin-status admin-status--inactive">店長</span>
+                                            @elseif($user->role === 'staff')
+                                                <span class="admin-status admin-status--inactive">スタッフ</span>
+                                            @endif
+                                        </span>
                                     </td>
                                     <td>
                                         @if($user->is_active)
@@ -83,7 +81,7 @@
 
                                             <button
                                                 type="button"
-                                                class="admin-index-button admin-index-button--delete js-delete-open"
+                                                class="admin-table-button admin-table-button--delete js-delete-open"
                                                 data-id="{{ $user->id }}"
                                                 data-name="{{ $user->name }}"
                                             >

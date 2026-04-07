@@ -139,9 +139,8 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('users.update', $id) }}" method="post" class="form-body">
+                    <form action="{{ route('users.store') }}" method="post" class="form-body">
                         @csrf
-                        @method('PUT')
 
                         <input type="hidden" name="name" value="{{ $userData['name'] }}">
                         <input type="hidden" name="email" value="{{ $userData['email'] }}">
