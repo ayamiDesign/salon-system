@@ -432,25 +432,6 @@ button {
     cursor: pointer;
 }
 
-.mobile-inline-form {
-    margin: 0;
-}
-
-.mobile-inline-form button {
-    width: 100%;
-    text-align: left;
-    background: #fff;
-    border: 1px solid #e3e8f2;
-    border-radius: 14px;
-    padding: 12px 14px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #334155;
-}
-
-.mobile-inline-form button:hover {
-    background: #f8fbff;
-}
 
 /* ========================================
    06. ログイン専用

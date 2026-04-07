@@ -15,6 +15,11 @@ Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])
     ->name('logout');
 
+// ダッシュボード
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 // カテゴリー
 Route::post('/categories/confirm', [CategoriesController::class, 'confirm'])
     ->name('categories.confirm');

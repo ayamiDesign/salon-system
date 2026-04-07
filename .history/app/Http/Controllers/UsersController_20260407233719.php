@@ -169,6 +169,7 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
+        // バリデーション
         $userData = $request->validate([
             'name' => [
                 'required',
@@ -198,32 +199,32 @@ class UsersController extends Controller
         ], [
             'name.required' => '名前を入力してください',
             'name.max' => '名前は255文字以内で入力してください',
+
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => '有効なメールアドレスを入力してください',
             'email.unique' => 'このメールアドレスはすでに使用されています',
             'email.max' => 'メールアドレスは255文字以内で入力してください',
+
             'password.min' => 'パスワードは8文字以上で入力してください',
+
             'role.required' => '権限を選択してください',
             'is_active.required' => '利用状態を選択してください',
         ]);
 
         $user = User::findOrFail($id);
-
-        $updateData = [
+        
+        $user->update([
             'name' => $userData['name'],
             'email' => $userData['email'],
+            'password' => Hash::make($userData['password']),
             'role' => $userData['role'],
-            'is_active' => $userData['is_active'],
-        ];
+            'is_active' => $userData['is_active']
+        ]);
 
-        if (!empty($userData['password'])) {
-            $updateData['password'] = Hash::make($userData['password']);
-        }
-
-        $user->update($updateData);
-
+        // セッションを削除
         $request->session()->forget('user_input');
 
+        // 二重送信を防ぐためリダイレクト
         return redirect()->route('users.complete');
     }
 

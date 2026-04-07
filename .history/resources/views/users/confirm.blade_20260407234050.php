@@ -116,6 +116,17 @@
                             </a>
                             <button
                                 type="submit"
+                                name="back"
+                                value="1"
+                                formaction="{{ route('users.create') }}"
+                                formmethod="get"
+                                class="header-sub-button form-back-button"
+                            >
+                                入力画面へ戻る
+                            </button>
+
+                            <button
+                                type="submit"
                                 class="header-main-button form-submit-button"
                             >
                                 登録する
