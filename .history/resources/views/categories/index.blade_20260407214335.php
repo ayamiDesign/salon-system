@@ -26,6 +26,13 @@
                 </div>
             </div>
 
+            <div class="stats-bar">
+                <div class="stats-item">
+                    <span class="stats-label">総カテゴリ件数</span>
+                    <span class="stats-inline-value">{{ $categories->count() }}</span>
+                </div>
+            </div>
+
             <div id="sortGuide" class="sort-guide hidden">
                 ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
             </div>

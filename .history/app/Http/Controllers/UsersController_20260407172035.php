@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
 
 class UsersController extends Controller
@@ -13,9 +12,10 @@ class UsersController extends Controller
          // セッションを削除
         $request->session()->forget('user_input');
 
-        $users = Users::get();
+        // $users = Users::orderBy('sort_order')->get();
 
-        return view('users.index',compact('users'));
+        return view('users.index');
+        // return view('users.index',compact('users'));
     }
 
     public function create()
@@ -30,33 +30,25 @@ class UsersController extends Controller
     {
 
         // バリデーション
-        $userData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:admin,manager,staff',
-            'is_active' => 'required|boolean'
+        $requestData = $request->validate([
+            'name' => 'required|array',
+            'name.*' => 'required|string|max:255|distinct|unique:categories,name',
         ],
         [
-            'name.required' => '名前を入力してください',
-            'name.max' => '名前は255文字以内で入力してください',
-            'email.required' => 'メールアドレスを入力してください',
-            'email.email' => '有効なメールアドレスを入力してください',
-            'email.unique' => 'このメールアドレスはすでに使用されています',
-            'email.max' => 'メールアドレスは255文字以内で入力してください',
-            'password.required' => 'パスワードを入力してください',
-            'password.min' => 'パスワードは8文字以上で入力してください',
-            'password.confirmed' => 'パスワードが一致しません',
-            'role.required' => '権限を選択してください',
-            'is_active.required' => '利用状態を選択してください',
+            'name.*.required' => 'カテゴリ名を入力してください',
+            'name.*.distinct' => '同じカテゴリ名が入力されています',
+            'name.*.unique'   => 'すでに登録されているカテゴリ名です',
         ]);
 
-        // セッションに保存
-        session(['user_input' => $userData]);
+        // データを形成
+        $categoryNames = $requestData['name'];
 
-        return view('users.confirm', [
+        // セッションに保存
+        session(['account_input' => $requestData]);
+
+        return view('accounts.confirm', [
             'mode' => 'create',
-            'userData' => $userData,
+            'accountNames' => $categoryNames,
         ]);
     }
 
@@ -64,38 +56,20 @@ class UsersController extends Controller
     {
         // バリデーション
         $requestData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8',
-            'role' => 'required|in:admin,manager,staff',
-            'is_active' => 'required|boolean'
+            'name' => 'required|array',
+            'name.*' => 'required|string|max:255|distinct|unique:categories,name',
         ],
         [
-            'name.required' => '名前を入力してください',
-            'name.max' => '名前は255文字以内で入力してください',
-            'email.required' => 'メールアドレスを入力してください',
-            'email.email' => '有効なメールアドレスを入力してください',
-            'email.unique' => 'このメールアドレスはすでに使用されています',
-            'email.max' => 'メールアドレスは255文字以内で入力してください',
-            'password.required' => 'パスワードを入力してください',
-            'password.min' => 'パスワードは8文字以上で入力してください',
-            'role.required' => '権限を選択してください',
-            'is_active.required' => '利用状態を選択してください',
-        ]);
-
-         Users::create([
-            'name' => $requestData['name'],
-            'email' => $requestData['email'],
-            'password' => Hash::make($requestData['password']),
-            'role' => $requestData['role'],
-            'is_active' => $requestData['is_active'],
+            'name.*.required' => 'カテゴリ名を入力してください',
+            'name.*.distinct' => '同じカテゴリ名が入力されています',
+            'name.*.unique'   => 'すでに登録されているカテゴリ名です',
         ]);
 
         // セッションを削除
-        $request->session()->forget('user_input');
+        $request->session()->forget('account_input');
         
         // 二重送信を防ぐためリダイレクト
-        return redirect()->route('users.complete');
+        return redirect()->route('accounts.complete');
     }
 
     public function edit($id)

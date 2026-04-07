@@ -13,9 +13,10 @@ class UsersController extends Controller
          // セッションを削除
         $request->session()->forget('user_input');
 
-        $users = Users::get();
+        // $users = Users::orderBy('sort_order')->get();
 
-        return view('users.index',compact('users'));
+        return view('users.index');
+        // return view('users.index',compact('users'));
     }
 
     public function create()
@@ -82,6 +83,7 @@ class UsersController extends Controller
             'role.required' => '権限を選択してください',
             'is_active.required' => '利用状態を選択してください',
         ]);
+
 
          Users::create([
             'name' => $requestData['name'],

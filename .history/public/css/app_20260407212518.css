@@ -2107,286 +2107,138 @@ mark {
 }
 
 /* ========================================
-   管理一覧テーブル共通
+   アカウント / カテゴリ共通カード
 ======================================== */
-.admin-table-wrap {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 20px;
-    overflow: hidden;
+.admin-entity-list {
+    display: grid;
+    gap: 16px;
 }
 
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
+.admin-entity-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(229, 231, 235, 0.92);
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.admin-table thead th {
-    padding: 16px 18px;
-    border-bottom: 1px solid #e5e7eb;
-    background: #f8fafc;
-    color: #6b7280;
-    font-size: 13px;
-    font-weight: 700;
-    text-align: left;
-    white-space: nowrap;
+.admin-entity-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
+    border-color: #dbe4f0;
 }
 
-.admin-table tbody td {
-    padding: 18px;
-    border-bottom: 1px solid #eef2f7;
-    vertical-align: middle;
-    color: #1f2937;
-    font-size: 14px;
-    line-height: 1.6;
+.admin-entity-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 28px;
+}
+
+.admin-entity-main {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.admin-entity-title {
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.4;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 0.01em;
     word-break: break-word;
 }
 
-.admin-table tbody tr:last-child td {
-    border-bottom: 0;
-}
-
-.admin-table-title {
-    margin: 0;
+.admin-entity-sub {
+    margin-top: 10px;
     font-size: 16px;
-    font-weight: 700;
-    color: #111827;
+    line-height: 1.7;
+    color: #667085;
+    word-break: break-word;
 }
 
-.admin-table-sub {
-    margin-top: 4px;
-    font-size: 13px;
-    color: #6b7280;
+.admin-entity-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
 }
 
-.admin-role,
-.admin-status {
+.admin-entity-chip {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 30px;
-    padding: 0 10px;
+    min-height: 36px;
+    padding: 0 14px;
     border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.admin-role {
     background: #f3f4f6;
     color: #374151;
-}
-
-.admin-status--active {
-    background: #f0fdf4;
-    color: #15803d;
-}
-
-.admin-status--inactive {
-    background: #fff5f5;
-    color: #b91c1c;
-}
-
-.admin-table-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.admin-table-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 68px;
-    height: 36px;
-    padding: 0 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    background: #fff;
-    color: #1f2937;
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.admin-table-button--delete {
-    color: #dc2626;
-    border-color: #fecaca;
-    background: #fff;
-}
-
-.admin-table-empty {
-    padding: 40px 20px;
-    text-align: center;
-    color: #6b7280;
-    background: #fff;
-}
-
-.admin-index-table-wrap {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.admin-index-table-scroll {
-    width: 100%;
-    overflow-x: auto;
-}
-
-.admin-index-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    background: #fff;
-}
-
-.admin-index-table thead th {
-    padding: 16px 18px;
-    border-bottom: 1px solid #e5e7eb;
-    background: #f8fafc;
-    color: #667085;
-    font-size: 13px;
-    font-weight: 700;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.admin-index-table tbody td {
-    padding: 18px;
-    border-bottom: 1px solid #eef2f7;
-    vertical-align: middle;
-    color: #1f2937;
     font-size: 14px;
-    line-height: 1.6;
-}
-
-.admin-index-table tbody tr:last-child td {
-    border-bottom: 0;
-}
-
-.admin-index-title {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 700;
-    color: #111827;
-    word-break: break-word;
-}
-
-.admin-index-sub {
-    margin: 4px 0 0;
-    font-size: 13px;
-    color: #6b7280;
-    word-break: break-word;
-}
-
-.admin-index-muted {
-    color: #6b7280;
-    font-size: 13px;
-}
-
-.admin-index-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.admin-index-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 68px;
-    height: 36px;
-    padding: 0 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    background: #fff;
-    color: #1f2937;
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.admin-index-button--delete {
-    color: #dc2626;
-    border-color: #fecaca;
-}
-
-.admin-index-status {
-    display: inline-flex;
-    align-items: center;
-    min-height: 28px;
-    padding: 0 10px;
-    border-radius: 999px;
-    font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
 }
 
-.admin-index-status--active {
-    background: #f0fdf4;
-    color: #15803d;
-}
-
-.admin-index-status--inactive {
-    background: #fff5f5;
-    color: #b91c1c;
-}
-
-.admin-index-sort-cell {
-    width: 72px;
-    white-space: nowrap;
-}
-
-.admin-index-sort-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.admin-index-sort-order {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 28px;
-    height: 28px;
-    padding: 0 8px;
-    border-radius: 999px;
+.admin-entity-chip--accent {
     background: #eff6ff;
     color: #1d4ed8;
-    font-size: 12px;
-    font-weight: 800;
 }
 
-.admin-index-sort-handle {
+.admin-entity-chip--success {
+    background: #f0fdf4;
+    color: #15803d;
+}
+
+.admin-entity-chip--danger {
+    background: #fff5f5;
+    color: #b91c1c;
+}
+
+.admin-entity-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.admin-entity-action {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
-    border: 1px solid #dbe3ee;
-    border-radius: 10px;
+    min-width: 72px;
+    height: 50px;
+    padding: 0 18px;
+    border: 1px solid #d7dde7;
+    border-radius: 16px;
     background: #fff;
-    color: #6b7280;
-    font-size: 16px;
+    color: #1f2937;
+    font-size: 15px;
     font-weight: 700;
-    cursor: grab;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 
-.admin-index-sort-handle:active {
-    cursor: grabbing;
+.admin-entity-action:hover {
+    background: #f8fafc;
+    border-color: #cfd8e3;
 }
 
-.admin-index-empty {
-    padding: 40px 20px;
-    text-align: center;
-    color: #6b7280;
-    background: #fff;
+.admin-entity-action--delete {
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.admin-entity-action--delete:hover {
+    background: #fff5f5;
+    border-color: #fca5a5;
+}
+
+.admin-entity-note {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #8b95a7;
 }
 
 /* ========================================
@@ -2923,129 +2775,27 @@ mark {
         flex: 1 1 auto;
     }
 
-    /* ========================================
-   管理一覧テーブル共通
-    ======================================== */
-    .admin-table-wrap {
-        background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 20px;
-        overflow: hidden;
+    .admin-entity-body {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 18px;
     }
 
-    .admin-table {
+    .admin-entity-title {
+        font-size: 24px;
+    }
+
+    .admin-entity-sub {
+        font-size: 15px;
+    }
+
+    .admin-entity-actions {
         width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
-    }
-
-    .admin-table thead th {
-        padding: 16px 18px;
-        border-bottom: 1px solid #e5e7eb;
-        background: #f8fafc;
-        color: #6b7280;
-        font-size: 13px;
-        font-weight: 700;
-        text-align: left;
-        white-space: nowrap;
-    }
-
-    .admin-table tbody td {
-        padding: 18px;
-        border-bottom: 1px solid #eef2f7;
-        vertical-align: middle;
-        color: #1f2937;
-        font-size: 14px;
-        line-height: 1.6;
-        word-break: break-word;
-    }
-
-    .admin-table tbody tr:last-child td {
-        border-bottom: 0;
-    }
-
-    .admin-table-title {
-        margin: 0;
-        font-size: 16px;
-        font-weight: 700;
-        color: #111827;
-    }
-
-    .admin-table-sub {
-        margin-top: 4px;
-        font-size: 13px;
-        color: #6b7280;
-    }
-
-    .admin-role,
-    .admin-status {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 30px;
-        padding: 0 10px;
-        border-radius: 999px;
-        font-size: 12px;
-        font-weight: 700;
-        white-space: nowrap;
-    }
-
-    .admin-role {
-        background: #f3f4f6;
-        color: #374151;
-    }
-
-    .admin-status--active {
-        background: #f0fdf4;
-        color: #15803d;
-    }
-
-    .admin-status--inactive {
-        background: #fff5f5;
-        color: #b91c1c;
-    }
-
-    .admin-table-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
         flex-wrap: wrap;
     }
 
-    .admin-table-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 68px;
-        height: 36px;
-        padding: 0 12px;
-        border: 1px solid #d1d5db;
-        border-radius: 10px;
-        background: #fff;
-        color: #1f2937;
-        font-size: 13px;
-        font-weight: 700;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .admin-table-button--delete {
-        color: #dc2626;
-        border-color: #fecaca;
-        background: #fff;
-    }
-
-    .admin-table-empty {
-        padding: 40px 20px;
-        text-align: center;
-        color: #6b7280;
-        background: #fff;
-    }
-    .admin-table-wrap {
-        overflow-x: auto;
-    }
-
-    .admin-table {
-        min-width: 760px;
+    .admin-entity-action {
+        flex: 1 1 auto;
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
 
 class UsersController extends Controller
@@ -13,9 +12,10 @@ class UsersController extends Controller
          // セッションを削除
         $request->session()->forget('user_input');
 
-        $users = Users::get();
+        // $users = Users::orderBy('sort_order')->get();
 
-        return view('users.index',compact('users'));
+        return view('users.index');
+        // return view('users.index',compact('users'));
     }
 
     public function create()
@@ -81,14 +81,6 @@ class UsersController extends Controller
             'password.min' => 'パスワードは8文字以上で入力してください',
             'role.required' => '権限を選択してください',
             'is_active.required' => '利用状態を選択してください',
-        ]);
-
-         Users::create([
-            'name' => $requestData['name'],
-            'email' => $requestData['email'],
-            'password' => Hash::make($requestData['password']),
-            'role' => $requestData['role'],
-            'is_active' => $requestData['is_active'],
         ]);
 
         // セッションを削除
