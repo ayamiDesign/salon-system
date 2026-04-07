@@ -184,22 +184,22 @@
                 </li>
                 @if(auth()->user()->role === 'admin')
                      <li>
-                        <a
-                            href="{{ route('categories.index') }}"
-                            class="mobile-global-nav-link {{ request()->routeIs('categories.*') ? 'is-active' : '' }}"
-                        >
-                            カテゴリ管理
-                        </a>
-                    </li>
-                    <li>
-                        <button
-                            type="button"
-                            id="mobileSortModeButton"
-                            class="mobile-global-nav-link mobile-global-nav-button"
-                        >
-                            アカウント管理
-                        </button>
-                    </li>
+                    <a
+                        href="{{ route('categories.index') }}"
+                        class="mobile-global-nav-link {{ request()->routeIs('categories.*') ? 'is-active' : '' }}"
+                    >
+                        カテゴリ管理
+                    </a>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        id="mobileSortModeButton"
+                        class="mobile-global-nav-link mobile-global-nav-button"
+                    >
+                        アカウント管理
+                    </button>
+                </li>
                 @endif
                 <li>
                     <form method="post" action="{{ route('logout') }}" class="mobile-inline-form">

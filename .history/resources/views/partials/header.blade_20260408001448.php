@@ -21,24 +21,22 @@
                         FAQ一覧
                     </a>
                 </li>
-                @if(auth()->user()->role === 'admin')
-                    <li>
-                        <a
-                            href="{{ route('categories.index') }}"
-                            class="global-nav-link {{ request()->routeIs('categories.*') ? 'is-active' : '' }}"
-                        >
-                            カテゴリ管理
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="{{ route('users.index') }}"
-                            class="global-nav-link {{ request()->routeIs('users.*') ? 'is-active' : '' }}"
-                        >
-                            アカウント管理
-                        </a>
-                    </li>
-                @endif
+                <li>
+                    <a
+                        href="{{ route('categories.index') }}"
+                        class="global-nav-link {{ request()->routeIs('categories.*') ? 'is-active' : '' }}"
+                    >
+                        カテゴリ管理
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="{{ route('users.index') }}"
+                        class="global-nav-link {{ request()->routeIs('users.*') ? 'is-active' : '' }}"
+                    >
+                        アカウント管理
+                    </a>
+                </li>
                 <li>
                     <form method="post" action="{{ route('logout') }}" class="inline-form">
                         @csrf
@@ -50,7 +48,7 @@
             </ul>
         </nav>
 
-        @if(request()->routeIs('faqs.index')&& auth()->user()->role === 'admin')
+        @if(request()->routeIs('faqs.index'))
             <div class="topbar-actions">
                 <button
                     type="button"
@@ -97,7 +95,7 @@
                     <span></span>
                 </button>
             </div>
-        @elseif(request()->routeIs('categories.index')&& auth()->user()->role === 'admin')
+        @elseif(request()->routeIs('categories.index'))
          <div class="topbar-actions">
                 <button
                     type="button"
@@ -184,22 +182,22 @@
                 </li>
                 @if(auth()->user()->role === 'admin')
                      <li>
-                        <a
-                            href="{{ route('categories.index') }}"
-                            class="mobile-global-nav-link {{ request()->routeIs('categories.*') ? 'is-active' : '' }}"
-                        >
-                            カテゴリ管理
-                        </a>
-                    </li>
-                    <li>
-                        <button
-                            type="button"
-                            id="mobileSortModeButton"
-                            class="mobile-global-nav-link mobile-global-nav-button"
-                        >
-                            アカウント管理
-                        </button>
-                    </li>
+                    <a
+                        href="{{ route('categories.index') }}"
+                        class="mobile-global-nav-link {{ request()->routeIs('categories.*') ? 'is-active' : '' }}"
+                    >
+                        カテゴリ管理
+                    </a>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        id="mobileSortModeButton"
+                        class="mobile-global-nav-link mobile-global-nav-button"
+                    >
+                        アカウント管理
+                    </button>
+                </li>
                 @endif
                 <li>
                     <form method="post" action="{{ route('logout') }}" class="mobile-inline-form">
