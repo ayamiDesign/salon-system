@@ -37,7 +37,7 @@
                     </p>
 
                     <div class="complete-cta">
-                        <a href="{{ route('users.index') }}"
+                        <a href="{{ route('accounts.index') }}"
                         class="form-primary-button">
                             アカウント一覧へ
                         </a>

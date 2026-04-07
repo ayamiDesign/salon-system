@@ -35,6 +35,7 @@
                     <input type="hidden" name="name" value="{{ $userData['name'] }}">
                     <input type="hidden" name="email" value="{{ $userData['email'] }}">
                     <input type="hidden" name="password" value="{{ $userData['password'] }}">
+                    <input type="hidden" name="password_confirmation" value="{{ $userData['password_confirmation'] }}">
                     <input type="hidden" name="role" value="{{ $userData['role'] }}">
                     <input type="hidden" name="is_active" value="{{ $userData['is_active'] }}">
 
