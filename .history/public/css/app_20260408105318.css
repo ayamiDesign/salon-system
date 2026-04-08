@@ -343,38 +343,14 @@ button {
 }
 
 .header-import-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 48px;
-    padding: 0 18px;
-    border: 1px solid #d7e4fb;
-    border-radius: 18px;
-    background: #f8fbff;
-    color: var(--accent);
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1;
-    white-space: nowrap;
-    text-decoration: none;
-    transition: 0.2s ease;
-    cursor: pointer;
+    background: #fff;
+    color: #2f6df6;
+    border: 1px solid #2f6df6;
 }
 
 .header-import-button:hover {
-    background: #edf4ff;
-    border-color: #c9daf8;
-    color: var(--accent-deep);
-}
-
-.header-import-button:focus-visible {
-    outline: 2px solid rgba(47, 109, 246, 0.18);
-    outline-offset: 2px;
-}
-
-.header-import-button:active {
-    background: #e7f0ff;
-    border-color: #c9daf8;
+    background: #2f6df6;
+    color: #fff;
 }
 
 .action-button {

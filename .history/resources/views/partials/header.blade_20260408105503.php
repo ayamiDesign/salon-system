@@ -76,31 +76,12 @@
                     並び替え
                 </button>
 
-                <form
-                    id="csvImportForm"
-                    action="{{ route('faqs.import.store') }}"
-                    method="POST"
-                    enctype="multipart/form-data"
-                    style="display: inline;"
+                <a
+                    href="{{ route('faqs.create') }}"
+                    class="header-import-button"
                 >
-                    @csrf
-
-                    <input
-                        type="file"
-                        name="csv_file"
-                        id="csv_file"
-                        accept=".csv"
-                        style="display: none;"
-                    >
-
-                    <button
-                        type="button"
-                        class="header-import-button"
-                        id="csvImportButton"
-                    >
-                        CSVインポート
-                    </button>
-                </form>
+                    CSVインポート
+                </a>
 
                 <a
                     href="{{ route('faqs.create') }}"

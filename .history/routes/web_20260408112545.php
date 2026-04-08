@@ -19,53 +19,53 @@ Route::post('/logout', [LoginController::class, 'destroy'])
 
 // カテゴリー
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::post('/categories/confirm', [CategoryController::class, 'confirm'])
+    Route::post('/categories/confirm', [CategoriesController::class, 'confirm'])
         ->name('categories.confirm');
-    Route::post('/categories/{id}/confirm', [CategoryController::class, 'confirmEdit'])
+    Route::post('/categories/{id}/confirm', [CategoriesController::class, 'confirmEdit'])
         ->name('categories.confirmEdit');
     Route::get('/categories/complete', function () {
         return view('categories.complete');
     })->name('categories.complete');
-    Route::post('/categories/order', [CategoryController::class, 'updateOrder'])
+    Route::post('/categories/order', [CategoriesController::class, 'updateOrder'])
         ->name('categories.updateOrder');
-    Route::resource('categories', CategoryController::class);
+    Route::resource('categories', CategoriesController::class);
 });
 
 // FAQ
-Route::middleware('auth')->get('/faqs', [FaqController::class, 'index'])
+Route::middleware('auth')->get('/faqs', [FaqsController::class, 'index'])
     ->name('faqs.index');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::post('/faqs/confirm', [FaqController::class, 'confirm'])
+    Route::post('/faqs/confirm', [FaqsController::class, 'confirm'])
         ->name('faqs.confirm');
-    Route::post('/faqs/{id}/confirm', [FaqController::class, 'confirmEdit'])
+    Route::post('/faqs/{id}/confirm', [FaqsController::class, 'confirmEdit'])
         ->name('faqs.confirmEdit');
     Route::get('/faqs/complete', function () {
         return view('faqs.complete');
     })->name('faqs.complete');
-    Route::post('/faqs/order', [FaqController::class, 'updateOrder'])
+    Route::post('/faqs/order', [FaqsController::class, 'updateOrder'])
         ->name('faqs.updateOrder');
-    Route::resource('faqs', FaqController::class)->except(['index']);
-    Route::post('/faqs/import', [FaqImportController::class, 'store'])->name('faqs.import.store');
+    Route::resource('faqs', FaqsController::class)->except(['index']);
+    Route::post('/faqs/import', [FaqsImportController::class, 'store'])->name('faqs.import.store');
 });
 
 
 // FAQ履歴
-Route::middleware('auth')->get('/faqs/{id}/histories', [FaqHistoryController::class, 'histories'])
+Route::middleware('auth')->get('/faqs/{id}/histories', [FaqHistoriesController::class, 'histories'])
     ->name('faqs.histories.index');
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::delete('/faq-histories/{id}', [FaqHistoryController::class, 'destroyHistory'])
+    Route::delete('/faq-histories/{id}', [FaqHistoriesController::class, 'destroyHistory'])
         ->name('faq-histories.destroy');
 });
 
 // アカウント
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::post('/users/confirm', [UserController::class, 'confirm'])
+    Route::post('/users/confirm', [UsersController::class, 'confirm'])
     ->name('users.confirm');
-    Route::post('/users/{id}/confirm', [UserController::class, 'confirmEdit'])
+    Route::post('/users/{id}/confirm', [UsersController::class, 'confirmEdit'])
         ->name('users.confirmEdit');
     Route::get('/users/complete', function () {
         return view('users.complete');
     })->name('users.complete');
-    Route::resource('users', UserController::class);
+    Route::resource('users', UsersController::class);
 });

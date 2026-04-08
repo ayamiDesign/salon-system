@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Faq;
 use App\Models\FaqHistory;
 
-class FaqHistoriesController extends Controller
+class FaqHistoryController extends Controller
 {
     public function histories($id)
     {
