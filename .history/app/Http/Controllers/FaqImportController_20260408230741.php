@@ -155,12 +155,18 @@ class FaqImportController extends Controller
                     ]);
 
                     if ($validator->fails()) {
-                        return back()
-                            ->withErrors($validator)
-                            ->withInput();
+                        throw new \RuntimeException($validator->errors()->first());
                     }
 
-                    Faq::create($faq);
+                    Faq::create([
+                        'category1_id' => $category1Id,
+                        'category2_id' => $category2Id,
+                        'question' => $question,
+                        'answer' => $answer,
+                        'note' => $note,
+                        'url' => $URL,
+                        'sort_order' => $maxSortOrder,
+                    ]);
 
                     $importCount++;
                 }

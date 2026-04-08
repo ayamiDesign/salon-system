@@ -155,9 +155,7 @@ class FaqImportController extends Controller
                     ]);
 
                     if ($validator->fails()) {
-                        return back()
-                            ->withErrors($validator)
-                            ->withInput();
+                        throw new \RuntimeException($validator->errors()->first());
                     }
 
                     Faq::create($faq);

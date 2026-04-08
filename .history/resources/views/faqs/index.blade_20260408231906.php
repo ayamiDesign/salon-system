@@ -43,16 +43,6 @@
         </aside>
 
         <section class="content">
-             @if ($errors->any())
-                <div class="form-alert">
-                    <p class="form-alert-title">CSVデータの内容を確認してください</p>
-                    <ul class="form-alert-list">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="search-panel">
                 <div class="search-copy">
                     <h1 class="search-heading">知りたいことをすぐ検索</h1>

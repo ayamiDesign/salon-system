@@ -45,7 +45,7 @@
         <section class="content">
              @if ($errors->any())
                 <div class="form-alert">
-                    <p class="form-alert-title">CSVデータの内容を確認してください</p>
+                    <p class="form-alert-title">CSV内容をデータの内容を確認してください</p>
                     <ul class="form-alert-list">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
