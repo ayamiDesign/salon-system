@@ -10,7 +10,7 @@ use App\Models\Category;
 use App\Models\Faq;
 use App\Models\FaqHistory;
 
-class FaqsController extends Controller
+class FaqController extends Controller
 {
 
     public function index(Request $request)

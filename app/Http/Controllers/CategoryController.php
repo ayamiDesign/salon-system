@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 use App\Models\Category;
 use App\Models\Faq;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     public function index(Request $request)
     {
