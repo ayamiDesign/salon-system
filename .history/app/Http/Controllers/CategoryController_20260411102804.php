@@ -54,6 +54,9 @@ class CategoryController extends Controller
         // データを形成
         $categoryNames = $requestData['name'];
 
+        // セッションに保存
+        session(['category_input' => $requestData]);
+
         return view('categories.confirm', [
             'mode' => 'create',
             'categoryNames' => $categoryNames,
@@ -88,16 +91,16 @@ class CategoryController extends Controller
         }
 
         // セッションを削除
-        $request->session()->forget(['_old_input',]);
+        $request->session()->forget('category_input');
         
         // 二重送信を防ぐためリダイレクト
         return redirect()->route('categories.complete');
     }
 
-    public function editBack(Request $request, $id)
+    public function editBack(Request $request)
     {
         return redirect()
-            ->route('categories.edit', $id)
+            ->route('categories.edit', ['id' => $request->id])
             ->withInput();
     }
 
@@ -161,7 +164,7 @@ class CategoryController extends Controller
         ]);
 
         // セッションを削除
-        $request->session()->forget(['_old_input',]);
+        $request->session()->forget('category_input');
 
         // 二重送信を防ぐためリダイレクト
         return redirect()->route('categories.complete');

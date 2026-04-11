@@ -139,6 +139,7 @@
                                         <div class="input-cell input-cell-name">
                                             <div class="mobile-label">カテゴリ名</div>
                                             <div class="confirm-value-box">{{ $requestData['name'] }}</div>
+                                            <input type="hidden" name="name" value="{{ $requestData['name'] }}">
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +156,7 @@
                         </div>
 
                         <div class="form-actions">
-                            <form action="{{ route('categories.edit.back', $id) }}" method="post" class="form-action-form">
+                            <form action="{{ route('categories.edit.back', $id) }}" method="post">
                                 @csrf
                                 <input type="hidden" name="name" value="{{ $requestData['name'] }}">
                                 <button

@@ -19,10 +19,6 @@ Route::post('/logout', [LoginController::class, 'destroy'])
 
 // カテゴリー
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::post('/categories/back', [CategoryController::class, 'back'])
-        ->name('categories.create.back');
-    Route::post('/categories/{id}/editBack', [CategoryController::class, 'editBack'])
-        ->name('categories.edit.back');
     Route::post('/categories/confirm', [CategoryController::class, 'confirm'])
         ->name('categories.confirm');
     Route::post('/categories/{id}/confirm', [CategoryController::class, 'confirmEdit'])

@@ -97,7 +97,7 @@ class CategoryController extends Controller
     public function editBack(Request $request, $id)
     {
         return redirect()
-            ->route('categories.edit', $id)
+            ->route('categories.edit', ['id' => $id])
             ->withInput();
     }
 

@@ -297,8 +297,17 @@ button {
 /* ========================================
    05. ボタン共通
 ======================================== */
-button.header-main-button,
+.form-action-form {
+    margin: 0;
+    display: inline-flex;
+}
+
 button.header-sub-button,
+button.header-main-button {
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+}
 .header-main-button,
 .header-sub-button,
 .action-button,
@@ -318,7 +327,6 @@ button.header-sub-button,
     text-decoration: none;
 }
 
-button.header-main-button,
 .header-main-button {
     flex: 1 1 0;
     border: 1px solid var(--accent);
@@ -327,13 +335,11 @@ button.header-main-button,
     padding: 0 18px;
 }
 
-button.header-main-button:hover,
 .header-main-button:hover {
     background: var(--accent-deep);
     border-color: var(--accent-deep);
 }
 
-button.header-sub-button,
 .header-sub-button {
     flex: 1 1 0;
     border: 1px solid var(--line);
@@ -342,7 +348,6 @@ button.header-sub-button,
     padding: 0 18px;
 }
 
-button.header-sub-button:hover,
 .header-sub-button:hover {
     background: #f8fafc;
     border-color: #d8e0eb;
@@ -1398,12 +1403,6 @@ mark {
     border-top: 1px solid var(--line-soft);
 }
 
-.form-action-form{
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 12px;
-}
-
 .form-back-button,
 .form-submit-button {
     width: 100%;
@@ -1909,18 +1908,6 @@ mark {
 ======================================== */
 .form-actions > .form-back-button,
 .form-actions > .form-submit-button {
-    flex: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 48px;
-    padding: 0 18px;
-    line-height: 1;
-}
-
-.form-action-form > .form-back-button,
-.form-action-form > .form-submit-button {
     flex: none;
     display: inline-flex;
     align-items: center;
@@ -2512,8 +2499,6 @@ mark {
         width: auto;
     }
 
-    button.header-main-button,
-    button.header-sub-button,
     .header-main-button,
     .header-sub-button {
         flex: 0 0 auto;
@@ -2696,10 +2681,6 @@ mark {
         flex-direction: row;
         justify-content: flex-end;
     }
-    .form-action-form {
-        flex-direction: row;
-        justify-content: flex-end;
-    }
 
     .form-back-button,
     .form-submit-button {
@@ -2788,13 +2769,6 @@ mark {
      /* フォーム下部ボタンのつぶれ防止 */
     .form-actions > .form-back-button,
     .form-actions > .form-submit-button {
-        width: auto;
-        min-width: 160px;
-    }
-
-     /* フォーム下部ボタンのつぶれ防止 */
-    .form-action-form > .form-back-button,
-    .form-action-form > .form-submit-button {
         width: auto;
         min-width: 160px;
     }
@@ -2937,8 +2911,6 @@ mark {
         flex: 0 0 auto;
     }
 
-    button.header-main-button,
-    button.header-sub-button,
     .header-main-button,
     .header-sub-button {
         flex: 0 0 auto;

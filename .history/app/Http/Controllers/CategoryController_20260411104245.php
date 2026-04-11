@@ -33,8 +33,9 @@ class CategoryController extends Controller
 
     public function create()
     {
-
-        return view('categories.create');
+         return view('categories.create', [
+            'categoryNames' => old('name', [''])
+        ]);
     }
 
     public function confirm(Request $request)
