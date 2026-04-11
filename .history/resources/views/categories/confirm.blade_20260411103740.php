@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             @endif
-            
+
             @if($mode === 'create')
                 <section class="faq-card form-card">
                     <div class="form-card-header">
@@ -43,7 +43,9 @@
                         <span class="confirm-status-badge">確認画面</span>
                     </div>
 
-                    <div class="form-body">
+                    <form action="{{ route('categories.store') }}" method="post" class="form-body">
+                        @csrf
+
                         <div class="input-list-card">
                             <div class="input-list-head input-list-head-confirm">
                                 <div class="input-list-col-no">No.</div>
@@ -62,6 +64,7 @@
                                             <div class="input-cell input-cell-name">
                                                 <div class="mobile-label">カテゴリ名</div>
                                                 <div class="confirm-value-box">{{ $categoryName }}</div>
+                                                <input type="hidden" name="name[]" value="{{ $categoryName }}">
                                             </div>
                                         </div>
                                     </div>
@@ -79,35 +82,19 @@
                         </div>
 
                         <div class="form-actions">
-                            <form action="{{ route('categories.create.back') }}" method="post" class="form-action-form">
+                            <form action="{{ route('categories.back') }}" method="post">
                                 @csrf
-                                @foreach ($categoryNames as $categoryName)
-                                    <input type="hidden" name="name[]" value="{{ $categoryName }}">
-                                @endforeach
-
-                                <button
-                                    type="submit"
-                                    class="header-sub-button form-back-button"
-                                >
-                                    入力画面へ戻る
-                                </button>
+                                <button type="submit">入力画面へ戻る</button>
                             </form>
 
-                            <form action="{{ route('categories.store') }}" method="post" class="form-action-form">
-                                @csrf
-                                @foreach ($categoryNames as $categoryName)
-                                    <input type="hidden" name="name[]" value="{{ $categoryName }}">
-                                @endforeach
-
-                                <button
-                                    type="submit"
-                                    class="header-main-button form-submit-button"
-                                >
-                                    登録する
-                                </button>
-                            </form>
+                            <button
+                                type="submit"
+                                class="header-main-button form-submit-button"
+                            >
+                                登録する
+                            </button>
                         </div>
-                    </div>
+                    </form>
                 </section>
             @endif
 
@@ -121,7 +108,11 @@
 
                         <span class="confirm-status-badge">確認画面</span>
                     </div>
-                    <div class="form-body">
+
+                    <form action="{{ route('categories.update', $id) }}" method="post" class="form-body">
+                        @csrf
+                        @method('PUT')
+
                         <div class="input-list-card">
                             <div class="input-list-head input-list-head-confirm">
                                 <div class="input-list-col-no">No.</div>
@@ -139,6 +130,7 @@
                                         <div class="input-cell input-cell-name">
                                             <div class="mobile-label">カテゴリ名</div>
                                             <div class="confirm-value-box">{{ $requestData['name'] }}</div>
+                                            <input type="hidden" name="name" value="{{ $requestData['name'] }}">
                                         </div>
                                     </div>
                                 </div>
@@ -155,33 +147,22 @@
                         </div>
 
                         <div class="form-actions">
-                            <form action="{{ route('categories.edit.back', $id) }}" method="post" class="form-action-form">
+                            <form action="{{ route('categories.editBack', $id) }}" method="post">
                                 @csrf
-                                <input type="hidden" name="name" value="{{ $requestData['name'] }}">
-                                <button
-                                    type="submit"
-                                    class="header-sub-button form-back-button"
-                                >
-                                    入力画面へ戻る
-                                </button>
+                                <button type="submit">入力画面へ戻る</button>
                             </form>
 
-                            <form action="{{ route('categories.update', $id) }}" method="post" class="form-action-form">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="name" value="{{ $requestData['name'] }}">
-
-                                <button
-                                    type="submit"
-                                    class="header-main-button form-submit-button"
-                                >
-                                    登録する
-                                </button>
-                            </form>
+                            <button
+                                type="submit"
+                                class="header-main-button form-submit-button"
+                            >
+                                登録する
+                            </button>
                         </div>
-                    </div>
+                    </form>
                 </section>
             @endif
+
         </section>
     </main>
 </div>

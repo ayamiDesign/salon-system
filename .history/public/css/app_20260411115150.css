@@ -1389,6 +1389,7 @@ mark {
     line-height: 1.8;
 }
 
+.form-action-form,
 .form-actions {
     display: flex;
     flex-direction: column-reverse;
@@ -1396,12 +1397,6 @@ mark {
     margin-top: 22px;
     padding-top: 18px;
     border-top: 1px solid var(--line-soft);
-}
-
-.form-action-form{
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 12px;
 }
 
 .form-back-button,
@@ -1909,18 +1904,6 @@ mark {
 ======================================== */
 .form-actions > .form-back-button,
 .form-actions > .form-submit-button {
-    flex: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 48px;
-    padding: 0 18px;
-    line-height: 1;
-}
-
-.form-action-form > .form-back-button,
-.form-action-form > .form-submit-button {
     flex: none;
     display: inline-flex;
     align-items: center;
@@ -2696,10 +2679,6 @@ mark {
         flex-direction: row;
         justify-content: flex-end;
     }
-    .form-action-form {
-        flex-direction: row;
-        justify-content: flex-end;
-    }
 
     .form-back-button,
     .form-submit-button {
@@ -2788,13 +2767,6 @@ mark {
      /* フォーム下部ボタンのつぶれ防止 */
     .form-actions > .form-back-button,
     .form-actions > .form-submit-button {
-        width: auto;
-        min-width: 160px;
-    }
-
-     /* フォーム下部ボタンのつぶれ防止 */
-    .form-action-form > .form-back-button,
-    .form-action-form > .form-submit-button {
         width: auto;
         min-width: 160px;
     }

@@ -59,7 +59,7 @@
                         </div>
 
                         <div id="category-list" class="input-list-body">
-                            @foreach(old('name', ['']) as $index => $categoryName)
+                            @foreach($categoryNames as $index => $categoryName)
                                 <div class="category-row input-row">
                                     <div class="input-row-grid">
 
@@ -75,7 +75,7 @@
                                             <input
                                                 type="text"
                                                 name="name[]"
-                                                value="{{ $categoryName}}"
+                                                value="{{ old("name.{$index}"}}"
                                                 placeholder="例：予約・受付"
                                                 class="text-input"
                                                 required

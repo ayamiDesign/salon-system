@@ -2696,10 +2696,6 @@ mark {
         flex-direction: row;
         justify-content: flex-end;
     }
-    .form-action-form {
-        flex-direction: row;
-        justify-content: flex-end;
-    }
 
     .form-back-button,
     .form-submit-button {
@@ -2788,13 +2784,6 @@ mark {
      /* フォーム下部ボタンのつぶれ防止 */
     .form-actions > .form-back-button,
     .form-actions > .form-submit-button {
-        width: auto;
-        min-width: 160px;
-    }
-
-     /* フォーム下部ボタンのつぶれ防止 */
-    .form-action-form > .form-back-button,
-    .form-action-form > .form-submit-button {
         width: auto;
         min-width: 160px;
     }

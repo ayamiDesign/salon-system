@@ -54,6 +54,9 @@ class CategoryController extends Controller
         // データを形成
         $categoryNames = $requestData['name'];
 
+        // セッションに保存
+        session(['category_input' => $requestData]);
+
         return view('categories.confirm', [
             'mode' => 'create',
             'categoryNames' => $categoryNames,
@@ -88,16 +91,16 @@ class CategoryController extends Controller
         }
 
         // セッションを削除
-        $request->session()->forget(['_old_input',]);
+        $request->session()->forget('category_input');
         
         // 二重送信を防ぐためリダイレクト
         return redirect()->route('categories.complete');
     }
 
-    public function editBack(Request $request, $id)
+    public function editBack(Request $request)
     {
         return redirect()
-            ->route('categories.edit', $id)
+            ->route('categories.edit', ['id' => $request->id])
             ->withInput();
     }
 
@@ -106,7 +109,10 @@ class CategoryController extends Controller
         // データを取得する
         $category = Category::findOrFail($id);
 
-        return view('categories.edit',compact('category'));
+        // セッションを保存
+        $sessionInput = session('category_input');
+
+        return view('categories.edit',compact('category','sessionInput'));
     }
 
     public function confirmEdit(Request $request, $id)
@@ -128,6 +134,9 @@ class CategoryController extends Controller
                 'name.unique' => 'このカテゴリ名はすでに存在しています',
             ]
         );
+
+        // セッションに保存
+        session(['category_input' => $requestData]);
 
         return view('categories.confirm', [
             'mode' => 'edit',
@@ -161,7 +170,7 @@ class CategoryController extends Controller
         ]);
 
         // セッションを削除
-        $request->session()->forget(['_old_input',]);
+        $request->session()->forget('category_input');
 
         // 二重送信を防ぐためリダイレクト
         return redirect()->route('categories.complete');

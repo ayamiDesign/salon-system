@@ -155,7 +155,7 @@
                         </div>
 
                         <div class="form-actions">
-                            <form action="{{ route('categories.edit.back', $id) }}" method="post" class="form-action-form">
+                            <form action="{{ route('categories.edit.back', $id) }}" method="post">
                                 @csrf
                                 <input type="hidden" name="name" value="{{ $requestData['name'] }}">
                                 <button
