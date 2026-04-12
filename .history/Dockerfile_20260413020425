@@ -12,6 +12,7 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
+# 👇 ここが超重要
 RUN touch database/database.sqlite
 RUN php artisan optimize:clear || true
 RUN chmod -R 777 storage bootstrap/cache database
