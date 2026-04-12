@@ -68,9 +68,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 // アカウント
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::post('/users/back', [UserController::class, 'back'])
+    Route::post('/users/back', [FaqController::class, 'back'])
         ->name('users.create.back');
-    Route::post('/users/{id}/editBack', [UserController::class, 'editBack'])
+    Route::post('/users/{id}/editBack', [FaqController::class, 'editBack'])
         ->name('users.edit.back');
     Route::post('/users/confirm', [UserController::class, 'confirm'])
     ->name('users.confirm');
