@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Models\Category;
 use App\Models\Faq;
 use App\Models\FaqHistory;
+use App\Models\User;
 
 class FaqController extends Controller
 {
@@ -21,39 +21,28 @@ class FaqController extends Controller
         $request->session()->forget(['_old_input',]);
 
         // ユーザーロールを取得
-        $user = Auth::user();
+        $user = auth()->user();
+        $role = $user->role;
+
+        // FAQ全件取得
+        $faqCount = Faq::count();
 
         // カテゴリを取得
         $categoriesList = Category::orderBy('sort_order')->get();
 
+        // カテゴリごとのFAQ件数を取得
+        foreach ($categoriesList as $index => $category) {
+            $count = Faq::categoryMatch($category->id)->count();
+            $category['count'] = $count;
+        }
+
+        // 検索を実行
         $searchCategory = $request->input('category', '0');
         $searchKeyword = $request->input('keyword', '');
 
-        if ($user->role !== 'admin') {
-            $faqCount = Faq::where('is_visible', 1)->count();
-
-            $faqs = Faq::search($searchCategory, $searchKeyword)
-                ->where('is_visible', 1)
-                ->paginate(20)
-                ->appends($request->query());
-        } else {
-            $faqCount = Faq::count();
-
-            $faqs = Faq::search($searchCategory, $searchKeyword)
-                ->paginate(20)
-                ->appends($request->query());
-        }
-      
-        // カテゴリごとのFAQ件数を取得
-        foreach ($categoriesList as $index => $category) {
-            if ($user->role !== 'admin') {
-                $count = Faq::categoryMatch($category->id)->where('is_visible', 1)->count();
-                $category['count'] = $count;
-            } else {
-                $count = Faq::categoryMatch($category->id)->count();
-                $category['count'] = $count;
-            }
-        }
+        $faqs = Faq::search($searchCategory, $searchKeyword)
+            ->paginate(20)
+            ->appends($request->query());
 
         // 表示用のカテゴリ名を形成
         $categories = $categoriesList->pluck('name', 'id');
