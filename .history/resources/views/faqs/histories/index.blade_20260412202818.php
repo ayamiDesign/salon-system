@@ -75,8 +75,8 @@
                                                     {{ $history->change_summary ?: '変更内容なし' }}
                                                 </p>
                                             </div>
-                                            <div class="history-summary-side">
-                                                @if(auth()->user()->role === 'admin')
+                                            @if(auth()->user()->role === 'admin')
+                                                <div class="history-summary-side">
                                                     <button
                                                         type="button"
                                                         class="row-action-button delete js-delete-open"
@@ -86,9 +86,9 @@
                                                     >
                                                         履歴削除
                                                     </button>
-                                                @endif
-                                                <span class="history-toggle" aria-hidden="true"></span>
-                                            </div>
+                                                    <span class="history-toggle" aria-hidden="true"></span>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </summary>

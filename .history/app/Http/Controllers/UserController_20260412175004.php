@@ -258,6 +258,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        // メールアドレス再登録対策
         $user->email = 'deleted_' . $user->id . '_' . $user->email;
         $user->save();
 

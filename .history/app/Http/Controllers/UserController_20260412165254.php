@@ -36,36 +36,26 @@ class UserController extends Controller
     {
 
         // バリデーション
-        $userData = $request->validate(
-            [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => [
-                    'required',
-                    'email',
-                    'max:255',
-                    Rule::unique('users', 'email')->whereNull('deleted_at')
-                ],
-                'password' => ['required', 'string', 'min:8'],
-                'role' => ['required', 'in:admin,manager,staff'],
-                'is_active' => ['required', 'boolean'],
-            ],
-            [
-                'name.required' => '名前を入力してください',
-                'name.max' => '名前は255文字以内で入力してください',
-
-                'email.required' => 'メールアドレスを入力してください',
-                'email.email' => '有効なメールアドレスを入力してください',
-                'email.unique' => 'このメールアドレスはすでに使用されています',
-                'email.max' => 'メールアドレスは255文字以内で入力してください',
-
-                'password.required' => 'パスワードを入力してください',
-                'password.min' => 'パスワードは8文字以上で入力してください',
-
-                'role.required' => '権限を選択してください',
-
-                'is_active.required' => '利用状態を選択してください',
-            ]
-        );
+        $userData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:admin,manager,staff',
+            'is_active' => 'required|boolean'
+        ],
+        [
+            'name.required' => '名前を入力してください',
+            'name.max' => '名前は255文字以内で入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.email' => '有効なメールアドレスを入力してください',
+            'email.unique' => 'このメールアドレスはすでに使用されています',
+            'email.max' => 'メールアドレスは255文字以内で入力してください',
+            'password.required' => 'パスワードを入力してください',
+            'password.min' => 'パスワードは8文字以上で入力してください',
+            'password.confirmed' => 'パスワードが一致しません',
+            'role.required' => '権限を選択してください',
+            'is_active.required' => '利用状態を選択してください',
+        ]);
 
         return view('users.confirm', [
             'mode' => 'create',
@@ -257,10 +247,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-
-        $user->email = 'deleted_' . $user->id . '_' . $user->email;
-        $user->save();
-
         $user->delete();
 
         return redirect()->route('users.index');

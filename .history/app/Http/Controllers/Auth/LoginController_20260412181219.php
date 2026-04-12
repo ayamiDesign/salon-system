@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -27,17 +26,10 @@ class LoginController extends Controller
             'password.required' => 'パスワードを入力してください。',
         ]);
 
-        $user = User::where('email', $credentials['email'])->first();
-
-        if ($user && (int) $user->is_active !== 1) {
-            return back()->withErrors([
-                'email' => 'このアカウントは現在利用できません。',
-            ])->onlyInput('email');
-        }
-
         if (Auth::attempt([
             'email' => $credentials['email'],
             'password' => $credentials['password'],
+            'is_active' => 1,
         ])) {
             $request->session()->regenerate();
 
@@ -46,6 +38,7 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'email' => 'メールアドレスまたはパスワードが正しくありません。',
+            'is_active' => 'アカウントが有効ではありません',
         ])->onlyInput('email');
     }
 

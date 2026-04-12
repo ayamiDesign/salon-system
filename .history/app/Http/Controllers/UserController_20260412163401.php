@@ -11,61 +11,49 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        // セッションを削除
-        $request->session()->forget(['_old_input',]);
+         // セッションを削除
+        $request->session()->forget('user_input');
 
         $users = User::get();
 
         return view('users.index',compact('users'));
     }
 
-    public function back(Request $request)
-    {
-        return redirect()
-            ->route('users.create')
-            ->withInput();
-    }
-
     public function create()
     {
+        // セッションを保存
+        $sessionInput = session('user_input');
 
-        return view('users.create');
+        return view('users.create',compact('sessionInput'));
     }
 
     public function confirm(Request $request)
     {
 
         // バリデーション
-        $userData = $request->validate(
-            [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => [
-                    'required',
-                    'email',
-                    'max:255',
-                    Rule::unique('users', 'email')->whereNull('deleted_at')
-                ],
-                'password' => ['required', 'string', 'min:8'],
-                'role' => ['required', 'in:admin,manager,staff'],
-                'is_active' => ['required', 'boolean'],
-            ],
-            [
-                'name.required' => '名前を入力してください',
-                'name.max' => '名前は255文字以内で入力してください',
+        $userData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:admin,manager,staff',
+            'is_active' => 'required|boolean'
+        ],
+        [
+            'name.required' => '名前を入力してください',
+            'name.max' => '名前は255文字以内で入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.email' => '有効なメールアドレスを入力してください',
+            'email.unique' => 'このメールアドレスはすでに使用されています',
+            'email.max' => 'メールアドレスは255文字以内で入力してください',
+            'password.required' => 'パスワードを入力してください',
+            'password.min' => 'パスワードは8文字以上で入力してください',
+            'password.confirmed' => 'パスワードが一致しません',
+            'role.required' => '権限を選択してください',
+            'is_active.required' => '利用状態を選択してください',
+        ]);
 
-                'email.required' => 'メールアドレスを入力してください',
-                'email.email' => '有効なメールアドレスを入力してください',
-                'email.unique' => 'このメールアドレスはすでに使用されています',
-                'email.max' => 'メールアドレスは255文字以内で入力してください',
-
-                'password.required' => 'パスワードを入力してください',
-                'password.min' => 'パスワードは8文字以上で入力してください',
-
-                'role.required' => '権限を選択してください',
-
-                'is_active.required' => '利用状態を選択してください',
-            ]
-        );
+        // セッションに保存
+        session(['user_input' => $userData]);
 
         return view('users.confirm', [
             'mode' => 'create',
@@ -116,17 +104,10 @@ class UserController extends Controller
         ]);
 
         // セッションを削除
-        $request->session()->forget(['_old_input',]);
+        $request->session()->forget('user_input');
         
         // 二重送信を防ぐためリダイレクト
         return redirect()->route('users.complete');
-    }
-
-    public function editBack(Request $request, $id)
-    {
-        return redirect()
-            ->route('users.edit', $id)
-            ->withInput();
     }
 
     public function edit($id)
@@ -134,7 +115,10 @@ class UserController extends Controller
         // データを取得する
         $user = User::findOrFail($id);
 
-        return view('users.edit',compact('user'));
+        // セッションを保存
+        $sessionInput = session('user_input');
+
+        return view('users.edit',compact('user','sessionInput'));
     }
 
     public function confirmEdit(Request $request, $id)
@@ -185,6 +169,9 @@ class UserController extends Controller
             'role.required' => '権限を選択してください',
             'is_active.required' => '利用状態を選択してください',
         ]);
+
+        // セッションに保存
+        session(['user_input' => $userData]);
 
         return view('users.confirm', [
             'mode' => 'edit',
@@ -248,8 +235,7 @@ class UserController extends Controller
 
         $user->update($updateData);
 
-        // セッションを削除
-        $request->session()->forget(['_old_input',]);
+        $request->session()->forget('user_input');
 
         return redirect()->route('users.complete');
     }
@@ -257,10 +243,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-
-        $user->email = 'deleted_' . $user->id . '_' . $user->email;
-        $user->save();
-
         $user->delete();
 
         return redirect()->route('users.index');
