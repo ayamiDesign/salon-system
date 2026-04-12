@@ -63,7 +63,7 @@
                                                 FAQ <span class="faq-number-text">{{ $index + 1 }}</span>
                                             </p>
                                             <p class="faq-form-block-sub">
-                                                実際の運用に沿った質問と回答を入力してください。
+                                                質問・回答・参考資料を入力してください。
                                             </p>
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
                                                 <textarea
                                                     name="faqs[{{ $index }}][question]"
                                                     rows="3"
-                                                    placeholder="例：予約時間に遅れる連絡があった場合の対応"
+                                                    placeholder="例：施術に入る順番はどうやって決める？"
                                                     class="text-textarea"
                                                     required
                                                 >{{ $faq['question'] ?? '' }}</textarea>
@@ -143,7 +143,7 @@
                                                 <textarea
                                                     name="faqs[{{ $index }}][answer]"
                                                     rows="6"
-                                                    placeholder="例：①到着予定時刻を確認 ②施術時間の調整可否を判断 ③受付へ共有"
+                                                    placeholder="例：① 施術が先に終わった人が優先&#10;② 直前の予約状況が同じ場合は出勤順"
                                                     class="text-textarea"
                                                     required
                                                 >{{ $faq['answer'] ?? '' }}</textarea>
@@ -156,7 +156,7 @@
                                                 <textarea
                                                     name="faqs[{{ $index }}][note]"
                                                     rows="4"
-                                                    placeholder="例：混雑時は管理者へ判断を確認してください"
+                                                    placeholder="例：予約表で押さえられている時間を基準に判断してください。"
                                                     class="text-textarea"
                                                 >{{ $faq['note'] ?? '' }}</textarea>
                                             </div>
@@ -167,6 +167,7 @@
                                         <h3 class="faq-form-section-title">参考資料</h3>
 
                                         <div class="faq-form-grid">
+                                        {{-- <div class="faq-form-grid faq-form-grid-2"> --}}
                                             <div>
                                                 <label class="faq-label">参考URL</label>
                                                 <input
@@ -177,6 +178,17 @@
                                                     class="text-input"
                                                 >
                                             </div>
+
+                                            {{-- <div>
+                                                <label class="faq-label">PDFファイル</label>
+                                                <input
+                                                    type="file"
+                                                    name="faqs[{{ $index }}][pdf]"
+                                                    accept="application/pdf"
+                                                    class="file-input"
+                                                >
+                                                <p class="faq-help-text">PDFのみアップロードできます。</p>
+                                            </div> --}}
                                         </div>
                                     </div>
 
@@ -203,9 +215,8 @@
                     <div class="sort-guide form-guide">
                         <p class="form-guide-title">入力ルール</p>
                         <ul class="form-guide-list">
-                            <li>カテゴリは内容に応じてメイン1つ、必要に応じてサブ1つまで設定してください</li>
-                            <li>表示順は登録後に一覧画面から調整してください</li>
-                            <li>曖昧な表現ではなく、実際の対応手順が分かる内容で登録してください</li>
+                            <li>カテゴリはメイン1つ、必要に応じてサブ1つまで設定してください</li>
+                            <li>表示順は登録後の一覧画面で調整してください</li>
                         </ul>
                     </div>
                     <div class="form-actions">
@@ -256,7 +267,7 @@
                             FAQ <span class="faq-number-text">${index + 1}</span>
                         </p>
                         <p class="faq-form-block-sub">
-                            実際の運用に沿った質問と回答を入力してください。
+                            質問・回答・参考資料を入力してください。
                         </p>
                     </div>
                 </div>
@@ -313,7 +324,7 @@
                             <textarea
                                 name="faqs[${index}][question]"
                                 rows="3"
-                                placeholder="例：施術前カウンセリングで確認する項目"
+                                placeholder="例：施術に入る順番はどうやって決める？"
                                 class="text-textarea"
                                 required
                             ></textarea>
@@ -326,7 +337,7 @@
                             <textarea
                                 name="faqs[${index}][answer]"
                                 rows="6"
-                                placeholder="例：①体調や既往歴の確認 ②重点的に施術したい部位の確認 ③触れられたくない箇所の有無を確認"
+                                placeholder="例：① 施術が先に終わった人が優先&#10;② 直前の予約状況が同じ場合は出勤順"
                                 class="text-textarea"
                                 required
                             ></textarea>
@@ -339,7 +350,7 @@
                             <textarea
                                 name="faqs[${index}][note]"
                                 rows="4"
-                                placeholder="例：アレルギーや体調に不安がある場合は施術内容を調整してください"
+                                placeholder="例：予約表で押さえられている時間を基準に判断してください。"
                                 class="text-textarea"
                             ></textarea>
                         </div>

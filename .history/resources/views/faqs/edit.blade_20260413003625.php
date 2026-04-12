@@ -36,7 +36,7 @@
                 <div class="form-card-header">
                     <div>
                         <h2 class="form-card-title">編集フォーム</h2>
-                        <p class="form-card-sub">変更があった内容や運用に合わせて、FAQを修正してください。</p>
+                        <p class="form-card-sub">FAQの質問・回答・参考資料を修正できます。</p>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                                     <div>
                                         <p class="faq-form-block-title">FAQ編集</p>
                                         <p class="faq-form-block-sub">
-                                            実際の運用に沿った内容になるよう修正してください。
+                                            質問・回答・参考資料を編集してください。
                                         </p>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                             <textarea
                                                 name="question"
                                                 rows="3"
-                                                placeholder="例：予約時間に遅れる連絡があった場合の対応"
+                                                placeholder="例：施術に入る順番はどうやって決める？"
                                                 class="text-textarea"
                                                 required
                                             >{{ old('question',$faq->question ?? '') }}</textarea>
@@ -137,7 +137,7 @@
                                             <textarea
                                                 name="answer"
                                                 rows="6"
-                                                placeholder="例：①到着予定時刻を確認 ②施術時間の調整可否を判断 ③受付へ共有"
+                                                placeholder="例：① 施術が先に終わった人が優先&#10;② 直前の予約状況が同じ場合は出勤順"
                                                 class="text-textarea"
                                                 required
                                             >{{ old('answer',$faq->answer ?? '') }}</textarea>
@@ -150,7 +150,7 @@
                                             <textarea
                                                 name="note"
                                                 rows="4"
-                                                placeholder="例：混雑時は管理者へ判断を確認してください"
+                                                placeholder="例：予約表で押さえられている時間を基準に判断してください。"
                                                 class="text-textarea"
                                             >{{ old('note', $faq->note ?? '') }}</textarea>
                                         </div>
@@ -162,6 +162,7 @@
                                     <h3 class="faq-form-section-title">参考資料</h3>
 
                                     <div class="faq-form-grid">
+                                    {{-- <div class="faq-form-grid faq-form-grid-2"> --}}
                                         <div>
                                             <label class="faq-label">参考URL</label>
                                             <input
@@ -172,6 +173,57 @@
                                                 class="text-input"
                                             >
                                         </div>
+
+                                        {{-- <div>
+                                            <label class="faq-label">PDFファイル</label>
+
+                                            <input
+                                                type="file"
+                                                name="pdf"
+                                                accept="application/pdf"
+                                                class="file-input"
+                                            >
+
+                                            <input
+                                                type="hidden"
+                                                name="current_pdf_original_name"
+                                                value="{{ old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '') }}"
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="current_pdf_path"
+                                                value="{{ old('current_pdf_path', $session['current_pdf_path'] ?? $faq->current_pdf_path ?? '') }}"
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="delete_pdf"
+                                                value="0"
+                                            >
+
+                                            @if (!empty(old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '')))
+                                                <div class="pdf-current-row">
+                                                    <div class="pdf-current-info">
+                                                        <span class="pdf-current-label">現在のファイル</span>
+                                                        <span class="file-badge">
+                                                            {{ old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '') }}
+                                                        </span>
+                                                    </div>
+
+                                                    <label class="pdf-delete-check">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="delete_pdf"
+                                                            value="1"
+                                                            class="toggle-input"
+                                                            {{ old('delete_pdf', $session['delete_pdf'] ?? 0) == 1 ? 'checked' : '' }}
+                                                        >
+                                                        <span>削除する</span>
+                                                    </label>
+                                                </div>
+                                            @else
+                                                <p class="faq-help-text">PDFのみアップロードできます。</p>
+                                            @endif
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -220,7 +272,7 @@
                                             >{{ old('change_summary', $faq->change_summary ?? '') }}</textarea>
 
                                             <p class="faq-help-text">
-                                                どのような変更を行ったかを記録しておくことで、後から内容を確認しやすくなります。
+                                                変更内容の要約を入力しておくと、履歴管理がしやすくなります。
                                             </p>
                                         </div>
                                     </div>
@@ -232,9 +284,9 @@
                     <div class="sort-guide form-guide">
                         <p class="form-guide-title">入力ルール</p>
                         <ul class="form-guide-list">
-                            <li>カテゴリは内容に応じてメイン1つ、必要に応じてサブ1つまで設定してください</li>
+                            <li>カテゴリはメイン1つ、必要に応じてサブ1つまで設定してください</li>
                             <li>表示順は一覧画面で調整してください</li>
-                            <li>変更内容は実際の運用に沿った内容になるよう修正してください</li>
+                            {{-- <li>PDFを差し替える場合は再アップロードしてください</li> --}}
                         </ul>
                     </div>
 

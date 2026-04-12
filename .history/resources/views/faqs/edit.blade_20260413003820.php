@@ -162,6 +162,7 @@
                                     <h3 class="faq-form-section-title">参考資料</h3>
 
                                     <div class="faq-form-grid">
+                                    {{-- <div class="faq-form-grid faq-form-grid-2"> --}}
                                         <div>
                                             <label class="faq-label">参考URL</label>
                                             <input
@@ -172,6 +173,57 @@
                                                 class="text-input"
                                             >
                                         </div>
+
+                                        {{-- <div>
+                                            <label class="faq-label">PDFファイル</label>
+
+                                            <input
+                                                type="file"
+                                                name="pdf"
+                                                accept="application/pdf"
+                                                class="file-input"
+                                            >
+
+                                            <input
+                                                type="hidden"
+                                                name="current_pdf_original_name"
+                                                value="{{ old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '') }}"
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="current_pdf_path"
+                                                value="{{ old('current_pdf_path', $session['current_pdf_path'] ?? $faq->current_pdf_path ?? '') }}"
+                                            >
+                                            <input
+                                                type="hidden"
+                                                name="delete_pdf"
+                                                value="0"
+                                            >
+
+                                            @if (!empty(old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '')))
+                                                <div class="pdf-current-row">
+                                                    <div class="pdf-current-info">
+                                                        <span class="pdf-current-label">現在のファイル</span>
+                                                        <span class="file-badge">
+                                                            {{ old('current_pdf_original_name', $session['current_pdf_original_name'] ?? $faq->current_pdf_original_name ?? '') }}
+                                                        </span>
+                                                    </div>
+
+                                                    <label class="pdf-delete-check">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="delete_pdf"
+                                                            value="1"
+                                                            class="toggle-input"
+                                                            {{ old('delete_pdf', $session['delete_pdf'] ?? 0) == 1 ? 'checked' : '' }}
+                                                        >
+                                                        <span>削除する</span>
+                                                    </label>
+                                                </div>
+                                            @else
+                                                <p class="faq-help-text">PDFのみアップロードできます。</p>
+                                            @endif
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -235,6 +287,7 @@
                             <li>カテゴリは内容に応じてメイン1つ、必要に応じてサブ1つまで設定してください</li>
                             <li>表示順は一覧画面で調整してください</li>
                             <li>変更内容は実際の運用に沿った内容になるよう修正してください</li>
+                            {{-- <li>PDFを差し替える場合は再アップロードしてください</li> --}}
                         </ul>
                     </div>
 
