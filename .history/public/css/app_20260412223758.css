@@ -2980,10 +2980,6 @@ mark {
         display: inline-flex;
     }
 
-    #csvImportForm {
-        display: none !important;
-    }
-
     .menu-toggle {
         display: inline-flex;
         flex-direction: column;
@@ -3221,8 +3217,8 @@ mark {
     .admin-table tbody td {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        gap: 16px;
+        justify-content: space-between;
+        gap: 12px;
         padding: 12px 14px;
         border-bottom: 1px solid #f3f4f6;
     }
@@ -3233,13 +3229,14 @@ mark {
 
     .admin-table td::before {
         content: attr(data-label);
-        flex: 0 0 80px;
+        flex: 0 0 72px;
         color: #9ca3af;
         font-size: 11px;
         font-weight: 700;
         line-height: 1.4;
     }
 
+    /* 値側 */
     .admin-table-title {
         margin: 0;
         font-size: 15px;
@@ -3257,6 +3254,7 @@ mark {
         text-align: left;
     }
 
+    /* メール列だけ少し縦積み */
     .admin-table td[data-label="メールアドレス"] {
         align-items: flex-start;
     }
@@ -3266,6 +3264,7 @@ mark {
         width: 100%;
     }
 
+    /* チップ */
     .admin-role,
     .admin-status {
         display: inline-flex;
@@ -3279,6 +3278,7 @@ mark {
         white-space: nowrap;
     }
 
+    /* 操作エリア */
     .admin-table td[data-label="操作"] {
         align-items: center;
     }
@@ -3286,7 +3286,7 @@ mark {
     .admin-table-actions {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: flex-end;
         gap: 8px;
         flex-wrap: wrap;
         width: auto;

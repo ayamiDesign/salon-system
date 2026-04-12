@@ -2980,10 +2980,6 @@ mark {
         display: inline-flex;
     }
 
-    #csvImportForm {
-        display: none !important;
-    }
-
     .menu-toggle {
         display: inline-flex;
         flex-direction: column;
@@ -3191,11 +3187,10 @@ mark {
     }
 
     .admin-table {
-        width: 100%;
         min-width: 100%;
+        width: 100%;
         border-collapse: separate;
         border-spacing: 0;
-        table-layout: auto;
     }
 
     .admin-table thead {
@@ -3210,125 +3205,36 @@ mark {
     }
 
     .admin-table tbody tr {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         border: 1px solid #e5e7eb;
-        border-radius: 18px;
+        border-radius: 16px;
         background: #fff;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
     }
 
     .admin-table tbody td {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 16px;
-        padding: 12px 14px;
-        border-bottom: 1px solid #f3f4f6;
+        padding: 10px 14px;
+        border-bottom: 1px solid #f1f5f9;
     }
 
     .admin-table tbody td:last-child {
         border-bottom: 0;
     }
+    .admin-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+    }
 
     .admin-table td::before {
         content: attr(data-label);
         flex: 0 0 80px;
-        color: #9ca3af;
-        font-size: 11px;
-        font-weight: 700;
-        line-height: 1.4;
-    }
-
-    .admin-table-title {
-        margin: 0;
-        font-size: 15px;
-        font-weight: 700;
-        color: #111827;
-        text-align: left;
-        word-break: break-word;
-    }
-
-    .admin-table-sub {
-        margin-top: 4px;
-        font-size: 11px;
-        line-height: 1.5;
         color: #6b7280;
-        text-align: left;
-    }
-
-    .admin-table td[data-label="メールアドレス"] {
-        align-items: flex-start;
-    }
-
-    .admin-table td[data-label="メールアドレス"] .admin-table-title,
-    .admin-table td[data-label="メールアドレス"] .admin-table-sub {
-        width: 100%;
-    }
-
-    .admin-role,
-    .admin-status {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 26px;
-        padding: 0 10px;
-        border-radius: 999px;
         font-size: 11px;
-        font-weight: 700;
-        white-space: nowrap;
+        font-weight: 600;
     }
-
-    .admin-table td[data-label="操作"] {
-        align-items: center;
-    }
-
     .admin-table-actions {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 8px;
-        flex-wrap: wrap;
-        width: auto;
-    }
-
-    .admin-table-button,
-    .admin-index-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 56px;
-        height: 32px;
-        padding: 0 12px;
-        border-radius: 10px;
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 1;
-        text-decoration: none;
-        cursor: pointer;
-        white-space: nowrap;
-        box-sizing: border-box;
-    }
-
-    .admin-table-button {
-        border: 1px solid #d1d5db;
-        background: #fff;
-        color: #1f2937;
-    }
-
-    .admin-table-button--delete,
-    .admin-index-button--delete {
-        border: 1px solid #fecaca;
-        background: #fff;
-        color: #dc2626;
-    }
-
-    .admin-table-empty {
-        padding: 40px 20px;
-        text-align: center;
-        color: #6b7280;
-        background: #fff;
-        border-radius: 18px;
-        border: 1px solid #e5e7eb;
+        justify-content: flex-end;
     }
 }

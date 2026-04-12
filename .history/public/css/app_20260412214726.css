@@ -2921,30 +2921,26 @@ mark {
 
 @media (max-width: 960px) {
     .topbar-inner {
-        gap: 10px;
-        padding: 12px 16px;
+        gap: 16px;
+    }
+
+    .global-nav {
+        width: 100%;
     }
 
     .global-nav-list {
         justify-content: flex-start;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
     }
 
     .topbar-actions,
     .topbar-actions-sort {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
         justify-content: flex-start;
         width: 100%;
-    }
-
-    .topbar-actions .header-sub-button,
-    .topbar-actions .header-import-button,
-    .topbar-actions .header-main-button {
-        flex: 0 0 auto;
-        width: auto;
     }
 
     .header-main-button,
@@ -2954,8 +2950,6 @@ mark {
     .action-button-sub,
     .action-button-primary {
         flex: 0 0 auto;
-        width: auto;
-        min-width: 0;
     }
 
     .header-main-button,
@@ -2978,10 +2972,6 @@ mark {
 
     .sp-only {
         display: inline-flex;
-    }
-
-    #csvImportForm {
-        display: none !important;
     }
 
     .menu-toggle {
@@ -3022,25 +3012,17 @@ mark {
         height: 50px;
         border-radius: 14px;
     }
-    .topbar-inner {
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 10px;
-        padding: 12px;
+     .topbar-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
     }
 
     .brand {
-        width: 100%;
+        flex: 1 1 auto;
         min-width: 0;
         align-items: center;
-    }
-
-    .brand-link {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        min-width: 0;
     }
 
     .brand-badge {
@@ -3048,17 +3030,11 @@ mark {
         height: 44px;
         border-radius: 14px;
         font-size: 15px;
-        flex-shrink: 0;
-    }
-
-    .brand-text {
-        min-width: 0;
     }
 
     .brand-title {
         font-size: 14px;
         line-height: 1.4;
-        word-break: keep-all;
     }
 
     .brand-sub {
@@ -3068,22 +3044,19 @@ mark {
 
     .topbar-actions,
     .topbar-actions-sort {
-        width: 100%;
-        margin-left: 0;
+        margin-left: auto;
         display: flex;
         align-items: center;
         justify-content: flex-end;
         gap: 8px;
-        flex-wrap: wrap;
+        flex: 0 0 auto;
     }
 
     button.header-main-button,
     button.header-sub-button,
     .header-main-button,
-    .header-sub-button,
-    .header-import-button {
+    .header-sub-button {
         flex: 0 0 auto;
-        width: auto;
         height: 40px;
         padding: 0 12px;
         border-radius: 14px;
@@ -3097,7 +3070,7 @@ mark {
         flex: 0 0 40px;
         width: 40px;
         height: 40px;
-        margin-left: 0;
+        margin-left: 2px;
         border-radius: 14px;
     }
 
@@ -3181,89 +3154,58 @@ mark {
         flex: 1 1 auto;
     }
 
-   /* ========================================
-        管理一覧テーブル共通
+    /* ========================================
+   管理一覧テーブル共通
     ======================================== */
     .admin-table-wrap {
-        overflow: visible;
-        border: 0;
-        background: transparent;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 20px;
+        overflow: hidden;
     }
 
     .admin-table {
         width: 100%;
-        min-width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        table-layout: auto;
+        border-collapse: collapse;
+        table-layout: fixed;
     }
 
-    .admin-table thead {
-        display: none;
-    }
-
-    .admin-table tbody,
-    .admin-table tr,
-    .admin-table td {
-        display: block;
-        width: 100%;
-    }
-
-    .admin-table tbody tr {
-        margin-bottom: 12px;
-        border: 1px solid #e5e7eb;
-        border-radius: 18px;
-        background: #fff;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    .admin-table thead th {
+        padding: 16px 18px;
+        border-bottom: 1px solid #e5e7eb;
+        background: #f8fafc;
+        color: #6b7280;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: left;
+        white-space: nowrap;
     }
 
     .admin-table tbody td {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 16px;
-        padding: 12px 14px;
-        border-bottom: 1px solid #f3f4f6;
+        padding: 18px;
+        border-bottom: 1px solid #eef2f7;
+        vertical-align: middle;
+        color: #1f2937;
+        font-size: 14px;
+        line-height: 1.6;
+        word-break: break-word;
     }
 
-    .admin-table tbody td:last-child {
+    .admin-table tbody tr:last-child td {
         border-bottom: 0;
-    }
-
-    .admin-table td::before {
-        content: attr(data-label);
-        flex: 0 0 80px;
-        color: #9ca3af;
-        font-size: 11px;
-        font-weight: 700;
-        line-height: 1.4;
     }
 
     .admin-table-title {
         margin: 0;
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 700;
         color: #111827;
-        text-align: left;
-        word-break: break-word;
     }
 
     .admin-table-sub {
         margin-top: 4px;
-        font-size: 11px;
-        line-height: 1.5;
+        font-size: 13px;
         color: #6b7280;
-        text-align: left;
-    }
-
-    .admin-table td[data-label="メールアドレス"] {
-        align-items: flex-start;
-    }
-
-    .admin-table td[data-label="メールアドレス"] .admin-table-title,
-    .admin-table td[data-label="メールアドレス"] .admin-table-sub {
-        width: 100%;
     }
 
     .admin-role,
@@ -3271,56 +3213,57 @@ mark {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 26px;
+        min-height: 30px;
         padding: 0 10px;
         border-radius: 999px;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
         white-space: nowrap;
     }
 
-    .admin-table td[data-label="操作"] {
-        align-items: center;
+    .admin-role {
+        background: #f3f4f6;
+        color: #374151;
+    }
+
+    .admin-status--active {
+        background: #f0fdf4;
+        color: #15803d;
+    }
+
+    .admin-status--inactive {
+        background: #fff5f5;
+        color: #b91c1c;
     }
 
     .admin-table-actions {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
         gap: 8px;
         flex-wrap: wrap;
-        width: auto;
-    }
-
-    .admin-table-button,
-    .admin-index-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 56px;
-        height: 32px;
-        padding: 0 12px;
-        border-radius: 10px;
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 1;
-        text-decoration: none;
-        cursor: pointer;
-        white-space: nowrap;
-        box-sizing: border-box;
     }
 
     .admin-table-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 68px;
+        height: 36px;
+        padding: 0 12px;
         border: 1px solid #d1d5db;
+        border-radius: 10px;
         background: #fff;
         color: #1f2937;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
     }
 
-    .admin-table-button--delete,
-    .admin-index-button--delete {
-        border: 1px solid #fecaca;
-        background: #fff;
+    .admin-table-button--delete {
         color: #dc2626;
+        border-color: #fecaca;
+        background: #fff;
     }
 
     .admin-table-empty {
@@ -3328,7 +3271,12 @@ mark {
         text-align: center;
         color: #6b7280;
         background: #fff;
-        border-radius: 18px;
-        border: 1px solid #e5e7eb;
+    }
+    .admin-table-wrap {
+        overflow-x: auto;
+    }
+
+    .admin-table {
+        min-width: 760px;
     }
 }

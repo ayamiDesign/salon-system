@@ -2980,10 +2980,6 @@ mark {
         display: inline-flex;
     }
 
-    #csvImportForm {
-        display: none !important;
-    }
-
     .menu-toggle {
         display: inline-flex;
         flex-direction: column;
@@ -3233,7 +3229,7 @@ mark {
 
     .admin-table td::before {
         content: attr(data-label);
-        flex: 0 0 80px;
+        flex: 0 0 60px;
         color: #9ca3af;
         font-size: 11px;
         font-weight: 700;
