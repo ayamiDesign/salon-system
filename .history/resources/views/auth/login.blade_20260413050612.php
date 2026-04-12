@@ -70,6 +70,7 @@
             </form>
             <div class="demo-account-box">
                 <h3 class="demo-title">テスト用アカウント</h3>
+                <p>※自由にログインして操作できます</p>
 
                 <div class="demo-account">
                     <p><strong>管理者</strong></p>

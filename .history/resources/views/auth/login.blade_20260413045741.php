@@ -78,14 +78,8 @@
                 </div>
 
                 <div class="demo-account">
-                    <p><strong>店長</strong></p>
-                    <p>Email: manager@example.com</p>
-                    <p>Password: password</p>
-                </div>
-
-                <div class="demo-account">
-                    <p><strong>スタッフ</strong></p>
-                    <p>Email: staff@example.com</p>
+                    <p><strong>一般ユーザー</strong></p>
+                    <p>Email: user@example.com</p>
                     <p>Password: password</p>
                 </div>
             </div>
