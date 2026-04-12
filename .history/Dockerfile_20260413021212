@@ -12,11 +12,13 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN touch database/database.sqlite
 RUN php artisan config:clear || true
 RUN php artisan cache:clear || true
 RUN php artisan route:clear || true
 RUN php artisan view:clear || true
+RUN php artisan optimize:clear || true
+
+RUN touch database/database.sqlite
 RUN php artisan optimize:clear || true
 RUN chmod -R 777 storage bootstrap/cache database
 
