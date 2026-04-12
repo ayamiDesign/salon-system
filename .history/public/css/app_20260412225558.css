@@ -2981,7 +2981,7 @@ mark {
     }
 
     #csvImportForm {
-        display: none !important;
+        display: none;
     }
 
     .menu-toggle {
