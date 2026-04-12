@@ -37,7 +37,7 @@
                     <div class="form-card-header">
                         <div>
                             <h2 class="form-card-title">確認一覧</h2>
-                            <p class="form-card-sub">登録前にカテゴリ名を確認してください。</p>
+                            <p class="form-card-sub">以下の内容でカテゴリを登録します。</p>
                         </div>
 
                         <span class="confirm-status-badge">確認画面</span>
@@ -116,7 +116,7 @@
                     <div class="form-card-header">
                         <div>
                             <h2 class="form-card-title">確認内容</h2>
-                            <p class="form-card-sub">更新内容を確認し、問題がなければ反映してください。</p>
+                            <p class="form-card-sub">以下の内容でカテゴリを更新します。</p>
                         </div>
 
                         <span class="confirm-status-badge">確認画面</span>
@@ -175,7 +175,7 @@
                                     type="submit"
                                     class="header-main-button form-submit-button"
                                 >
-                                    更新する
+                                    登録する
                                 </button>
                             </form>
                         </div>

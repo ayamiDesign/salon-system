@@ -65,7 +65,7 @@
                             type="text"
                             name="keyword"
                             value="{{ $searchKeyword ?? '' }}"
-                            placeholder="例：予約時間 / カウンセリング / レジ締め / クレーム"
+                            placeholder="例：施術順 / 予約 / ブロック / サロンボード"
                         >
                         <span class="search-icon">⌕</span>
                     </div>
@@ -84,44 +84,44 @@
                 </form>
 
                 <div class="chips-label">よく使うキーワード</div>
-                    <div class="chips">
-                        <a
-                            href="{{ route('faqs.index', ['keyword' => '予約時間', 'category' => request('category', 0)]) }}"
-                            class="chip {{ $searchKeyword === '予約時間' ? 'is-active' : '' }}"
-                        >
-                            予約時間
-                        </a>
+                <div class="chips">
+                    <a
+                        href="{{ route('faqs.index', ['keyword' => '施術順', 'category' => request('category', 0)]) }}"
+                        class="chip {{ $searchKeyword === '施術順' ? 'is-active' : '' }}"
+                    >
+                        施術順
+                    </a>
 
-                        <a
-                            href="{{ route('faqs.index', ['keyword' => 'カウンセリング', 'category' => request('category', 0)]) }}"
-                            class="chip {{ $searchKeyword === 'カウンセリング' ? 'is-active' : '' }}"
-                        >
-                            カウンセリング
-                        </a>
+                    <a
+                        href="{{ route('faqs.index', ['keyword' => '予約', 'category' => request('category', 0)]) }}"
+                        class="chip {{ $searchKeyword === '予約' ? 'is-active' : '' }}"
+                    >
+                        予約
+                    </a>
 
-                        <a
-                            href="{{ route('faqs.index', ['keyword' => 'レジ締め', 'category' => request('category', 0)]) }}"
-                            class="chip {{ $searchKeyword === 'レジ締め' ? 'is-active' : '' }}"
-                        >
-                            レジ締め
-                        </a>
+                    <a
+                        href="{{ route('faqs.index', ['keyword' => 'ブロック', 'category' => request('category', 0)]) }}"
+                        class="chip {{ $searchKeyword === 'ブロック' ? 'is-active' : '' }}"
+                    >
+                        ブロック
+                    </a>
 
-                        <a
-                            href="{{ route('faqs.index', ['keyword' => 'クレーム', 'category' => request('category', 0)]) }}"
-                            class="chip {{ $searchKeyword === 'クレーム' ? 'is-active' : '' }}"
-                        >
-                            クレーム
-                        </a>
-                    </div>
-
-                    <div class="hero-actions">
-                        <a href="{{ route('faqs.index') }}" class="clear-button">条件をクリア</a>
-                    </div>
+                    <a
+                        href="{{ route('faqs.index', ['keyword' => 'サロンボード', 'category' => request('category', 0)]) }}"
+                        class="chip {{ $searchKeyword === 'サロンボード' ? 'is-active' : '' }}"
+                    >
+                        サロンボード
+                    </a>
                 </div>
 
-                <div id="sortGuide" class="sort-guide hidden">
-                    ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
+                <div class="hero-actions">
+                    <a href="{{ route('faqs.index') }}" class="clear-button">条件をクリア</a>
                 </div>
+            </div>
+
+            <div id="sortGuide" class="sort-guide hidden">
+                ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
+            </div>
 
             @if(count($faqs) > 0)
                 {{-- PC / 共通DOM --}}

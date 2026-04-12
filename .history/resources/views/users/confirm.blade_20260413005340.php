@@ -16,7 +16,7 @@
                 <div class="search-copy">
                     <h1 class="search-heading">アカウントを登録</h1>
                     <p class="search-sub">
-                        入力内容を確認し、問題がなければそのまま反映してください。
+                        入力内容を確認し、問題がなければ登録を完了してください。
                     </p>
                 </div>
             </div>

@@ -68,7 +68,7 @@
                                 name="email"
                                 value="{{ old('email', $user->email) }}"
                                 class="text-input"
-                                placeholder="例：hanako.yamada@example.com"
+                                placeholder="例：sample@example.com"
                                 required
                             >
                         </div>

@@ -120,6 +120,13 @@
                                                         {{ filled($faq['url']) ? $faq['url'] : '未入力' }}
                                                     </div>
                                                 </div>
+
+                                                {{-- <div>
+                                                    <p class="faq-label">PDFファイル</p>
+                                                    <div class="confirm-value-box {{ filled($faq['pdf_original_name']) ? '' : 'is-empty' }}">
+                                                        {{ filled($faq['pdf_original_name']) ? $faq['pdf_original_name'] : '未選択' }}
+                                                    </div>
+                                                </div> --}}
                                             </div>
                                         </div>
 
@@ -141,6 +148,8 @@
                             <ul class="form-guide-list">
                                 <li>登録後の表示順は一覧画面から調整してください</li>
                                 <li>登録内容はスタッフ全員に共有されるため、表現や内容に誤りがないか確認してください</li>
+                                {{-- <li>PDFは確認画面表示時点で一時保存されています</li>
+                                <li>入力画面に戻る場合、ブラウザの仕様によりPDF再選択が必要になることがあります</li> --}}
                             </ul>
                         </div>
 
@@ -154,6 +163,8 @@
                                     <input type="hidden" name="faqs[{{ $index }}][answer]" value="{{ $faq['answer'] }}">
                                     <input type="hidden" name="faqs[{{ $index }}][note]" value="{{ $faq['note'] ?? '' }}">
                                     <input type="hidden" name="faqs[{{ $index }}][url]" value="{{ $faq['url'] ?? '' }}">
+                                    {{-- <input type="hidden" name="faqs[{{ $index }}][pdf_temp_path]" value="{{ $faq['pdf_temp_path'] ?? '' }}">
+                                    <input type="hidden" name="faqs[{{ $index }}][pdf_original_name]" value="{{ $faq['pdf_original_name'] ?? '' }}"> --}}
                                     <input type="hidden" name="faqs[{{ $index }}][is_visible]" value="{{ !empty($faq['is_visible']) ? 1 : 0 }}">
                                 @endforeach
 
@@ -174,6 +185,8 @@
                                     <input type="hidden" name="faqs[{{ $index }}][answer]" value="{{ $faq['answer'] }}">
                                     <input type="hidden" name="faqs[{{ $index }}][note]" value="{{ $faq['note'] ?? '' }}">
                                     <input type="hidden" name="faqs[{{ $index }}][url]" value="{{ $faq['url'] ?? '' }}">
+                                    {{-- <input type="hidden" name="faqs[{{ $index }}][pdf_temp_path]" value="{{ $faq['pdf_temp_path'] ?? '' }}">
+                                    <input type="hidden" name="faqs[{{ $index }}][pdf_original_name]" value="{{ $faq['pdf_original_name'] ?? '' }}"> --}}
                                     <input type="hidden" name="faqs[{{ $index }}][is_visible]" value="{{ !empty($faq['is_visible']) ? 1 : 0 }}">
                                 @endforeach
 
@@ -269,12 +282,20 @@
                                         <h3 class="faq-form-section-title">参考資料</h3>
 
                                         <div class="faq-form-grid">
+                                        {{-- <div class="faq-form-grid faq-form-grid-2"> --}}
                                             <div>
                                                 <p class="faq-label">参考URL</p>
                                                 <div class="confirm-value-box confirm-value-box-multiline {{ filled($requestData['url']) ? '' : 'is-empty' }}">
                                                     {{ filled($requestData['url']) ? $requestData['url'] : '未入力' }}
                                                 </div>
                                             </div>
+
+                                            {{-- <div>
+                                                <p class="faq-label">PDFファイル</p>
+                                                <div class="confirm-value-box {{ filled($requestData['pdf_original_name'] ?? null) ? '' : 'is-empty' }}">
+                                                    {{ filled($requestData['pdf_original_name'] ?? null) ? $requestData['pdf_original_name'] : '未選択' }}
+                                                </div>
+                                            </div> --}}
                                         </div>
                                     </div>
 
@@ -310,8 +331,9 @@
                         <div class="confirm-note faq-confirm-note">
                             <p class="confirm-note-title">確認事項</p>
                             <ul class="form-guide-list">
-                                <li>更新後の内容はFAQ一覧画面から確認できます</li>
-                                <li>履歴を残す場合、変更前の内容が履歴として保存されます</li>
+                                <li>更新後の表示内容はFAQ一覧画面で確認してください</li>
+                                {{-- <li>PDFを差し替えた場合は、この確認画面表示時点で一時保存されています</li> --}}
+                                <li>履歴を残す場合は、変更前情報が faq_history に保存されます</li>
                             </ul>
                         </div>
 
@@ -324,6 +346,9 @@
                                 <input type="hidden" name="answer" value="{{ $requestData['answer'] }}">
                                 <input type="hidden" name="note" value="{{ $requestData['note'] ?? '' }}">
                                 <input type="hidden" name="url" value="{{ $requestData['url'] ?? '' }}">
+                                {{-- <input type="hidden" name="pdf_temp_path" value="{{ $requestData['pdf_temp_path'] ?? '' }}">
+                                <input type="hidden" name="pdf_original_name" value="{{ $requestData['pdf_original_name'] ?? '' }}">
+                                <input type="hidden" name="pdf_path" value="{{ $requestData['pdf'] ?? '' }}"> --}}
                                 <input type="hidden" name="is_visible" value="{{ !empty($requestData['is_visible']) ? 1 : 0 }}">
                                 <input type="hidden" name="faq_history" value="{{ !empty($requestData['faq_history']) ? 1 : 0 }}">
                                 <input type="hidden" name="change_summary"  value="{{ !empty($requestData['faq_history']) ? $requestData['change_summary'] : '' }}">
@@ -345,6 +370,9 @@
                                 <input type="hidden" name="answer" value="{{ $requestData['answer'] }}">
                                 <input type="hidden" name="note" value="{{ $requestData['note'] ?? '' }}">
                                 <input type="hidden" name="url" value="{{ $requestData['url'] ?? '' }}">
+                                {{-- <input type="hidden" name="pdf_temp_path" value="{{ $requestData['pdf_temp_path'] ?? '' }}">
+                                <input type="hidden" name="pdf_original_name" value="{{ $requestData['pdf_original_name'] ?? '' }}">
+                                <input type="hidden" name="pdf_path" value="{{ $requestData['pdf'] ?? '' }}"> --}}
                                 <input type="hidden" name="is_visible" value="{{ !empty($requestData['is_visible']) ? 1 : 0 }}">
                                 <input type="hidden" name="faq_history" value="{{ !empty($requestData['faq_history']) ? 1 : 0 }}">
                                 <input type="hidden" name="change_summary"  value="{{ !empty($requestData['faq_history']) ? $requestData['change_summary'] : '' }}">
@@ -353,7 +381,7 @@
                                     type="submit"
                                     class="header-main-button form-submit-button"
                                 >
-                                    更新する
+                                    登録する
                                 </button>
                             </form>
                         </div>

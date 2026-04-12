@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>アカウント編集</title>
+    <title>アカウント新規登録</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
@@ -14,9 +14,9 @@
         <section class="content">
             <div class="search-panel">
                 <div class="search-copy">
-                    <h1 class="search-heading">アカウントを編集</h1>
+                    <h1 class="search-heading">アカウントを登録</h1>
                     <p class="search-sub">
-                        既存のアカウント情報を見直し、必要に応じて更新します。
+                        システムを利用するアカウントを登録します。
                     </p>
                 </div>
             </div>
@@ -31,15 +31,16 @@
                     </ul>
                 </div>
             @endif
+
             <section class="faq-card form-card account-form-card">
                 <div class="form-card-header">
                     <div>
-                        <h2 class="form-card-title">編集フォーム</h2>
-                        <p class="form-card-sub">変更内容を入力し、確認画面へ進んでください。</p>
+                        <h2 class="form-card-title">登録フォーム</h2>
+                        <p class="form-card-sub">必要事項を入力し、確認画面へ進んでください。</p>
                     </div>
                 </div>
 
-                <form action="{{ route('users.confirmEdit', $user->id) }}" method="post" class="form-body">
+                <form action="{{ route('users.confirm') }}" method="post" class="form-body">
                     @csrf
 
                     <div class="account-form-stack">
@@ -51,9 +52,9 @@
                                 id="name"
                                 type="text"
                                 name="name"
-                                value="{{ old('name', $user->name) }}"
-                                class="text-input"
+                                value="{{ old('name') }}"
                                 placeholder="例：山田 花子"
+                                class="text-input"
                                 required
                             >
                         </div>
@@ -66,30 +67,30 @@
                                 id="email"
                                 type="email"
                                 name="email"
-                                value="{{ old('email', $user->email) }}"
+                                value="{{ old('email') }}"
+                                placeholder="例：sample@example.com"
                                 class="text-input"
-                                placeholder="例：hanako.yamada@example.com"
                                 required
                             >
                         </div>
 
                         <div class="account-form-field">
                             <label for="password" class="faq-label">
-                                新しいパスワード
+                                パスワード <span class="required-badge">必須</span>
                             </label>
                             <input
                                 id="password"
                                 type="password"
                                 name="password"
                                 class="text-input"
-                                placeholder="変更する場合のみ入力"
+                                placeholder="8文字以上で入力"
+                                required
                             >
-                            <p class="faq-help-text">変更しない場合は空欄のままで問題ありません。</p>
                         </div>
 
                         <div class="account-form-field">
                             <label for="password_confirmation" class="faq-label">
-                                新しいパスワード確認
+                                パスワード確認 <span class="required-badge">必須</span>
                             </label>
                             <input
                                 id="password_confirmation"
@@ -97,6 +98,7 @@
                                 name="password_confirmation"
                                 class="text-input"
                                 placeholder="確認用パスワードを入力"
+                                required
                             >
                         </div>
 
@@ -107,9 +109,9 @@
                                 </label>
                                 <select id="role" name="role" class="text-select" required>
                                     <option value="">選択してください</option>
-                                    <option value="admin" {{ old('role', $user->role) === 'admin' ? 'selected' : '' }}>管理者</option>
-                                    <option value="manager" {{ old('role', $user->role) === 'manager' ? 'selected' : '' }}>店長</option>
-                                    <option value="staff" {{ old('role', $user->role) === 'staff' ? 'selected' : '' }}>スタッフ</option>
+                                    <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>管理者</option>
+                                    <option value="manager" {{ old('role') === 'manager' ? 'selected' : '' }}>店長</option>
+                                    <option value="staff" {{ old('role') === 'staff' ? 'selected' : '' }}>スタッフ</option>
                                 </select>
                             </div>
 
@@ -118,18 +120,21 @@
                                     利用状態 <span class="required-badge">必須</span>
                                 </label>
                                 <select id="is_active" name="is_active" class="text-select" required>
-                                    <option value="1" {{ (string) old('is_active', $user->is_active) === '1' ? 'selected' : '' }}>有効</option>
-                                    <option value="0" {{ (string) old('is_active', $user->is_active) === '0' ? 'selected' : '' }}>停止</option>
+                                    <option value="1" {{ (string) old('is_active','1') === '1' ? 'selected' : '' }}>有効</option>
+                                    <option value="0" {{ (string) old('is_active','1') === '0' ? 'selected' : '' }}>停止</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="confirm-note faq-confirm-note">
-                        <p class="confirm-note-title">編集時のご注意</p>
-                        <p class="block-text">
-                            メールアドレス・権限・利用状態の変更は運用に影響するため、内容を確認してから更新してください。
-                        </p>
+                    <div class="sort-guide form-guide">
+                        <p class="form-guide-title">入力ルール</p>
+                        <ul class="form-guide-list">
+                            <li>アカウントは1件ずつ登録します</li>
+                            <li>メールアドレスは他のアカウントと重複しない値を入力してください</li>
+                            <li>パスワードは8文字以上で設定してください</li>
+                            <li>権限は運用ルールに沿って選択してください</li>
+                        </ul>
                     </div>
 
                     <div class="form-actions">

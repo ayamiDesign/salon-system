@@ -36,7 +36,7 @@
                 <div class="form-card-header">
                     <div>
                         <h2 class="form-card-title">登録フォーム</h2>
-                        <p class="form-card-sub">登録するカテゴリ名を入力してください。</p>
+                        <p class="form-card-sub">必要なカテゴリ名を入力し、確認画面へ進んでください。</p>
                     </div>
 
                     <button
@@ -76,7 +76,7 @@
                                                 type="text"
                                                 name="name[]"
                                                 value="{{ $categoryName}}"
-                                                placeholder="例：受付"
+                                                placeholder="例：予約・受付"
                                                 class="text-input"
                                                 required
                                             >
@@ -103,7 +103,7 @@
                         <p class="form-guide-title">入力ルール</p>
                         <ul class="form-guide-list">
                             <li>カテゴリ名は、内容が分かりやすい名称で入力してください</li>
-                            <li>表示順は登録後に一覧画面から調整できます</li>
+                            <li>表示順は登録後に並び替え画面で変更できます</li>
                             <li>不要な行は「削除」ボタンから外してください</li>
                             <li>複数のカテゴリをまとめて登録できます</li>
                         </ul>
@@ -161,7 +161,7 @@
                     <input
                         type="text"
                         name="name[]"
-                        placeholder="例：会計"
+                        placeholder="例：新しいカテゴリ"
                         class="text-input"
                         required
                     >

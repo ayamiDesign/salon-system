@@ -167,6 +167,7 @@
                                         <h3 class="faq-form-section-title">参考資料</h3>
 
                                         <div class="faq-form-grid">
+                                        {{-- <div class="faq-form-grid faq-form-grid-2"> --}}
                                             <div>
                                                 <label class="faq-label">参考URL</label>
                                                 <input
@@ -177,6 +178,17 @@
                                                     class="text-input"
                                                 >
                                             </div>
+
+                                            {{-- <div>
+                                                <label class="faq-label">PDFファイル</label>
+                                                <input
+                                                    type="file"
+                                                    name="faqs[{{ $index }}][pdf]"
+                                                    accept="application/pdf"
+                                                    class="file-input"
+                                                >
+                                                <p class="faq-help-text">PDFのみアップロードできます。</p>
+                                            </div> --}}
                                         </div>
                                     </div>
 
