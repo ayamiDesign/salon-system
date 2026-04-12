@@ -43,7 +43,7 @@ class CategoryController extends Controller
         // バリデーション
         $requestData = $request->validate(
             [
-                'name' => ['required', 'array', 'min:1'],
+                'name' => ['required', 'array'],
                 'name.*' => [
                     'required',
                     'string',
@@ -53,7 +53,6 @@ class CategoryController extends Controller
                 ],
             ],
             [
-                'name.required' => 'カテゴリを1件以上入力してください',
                 'name.required' => 'カテゴリ名を入力してください',
                 'name.array' => 'カテゴリ名の形式が正しくありません',
 
@@ -79,7 +78,7 @@ class CategoryController extends Controller
         // バリデーション
         $requestData = $request->validate(
             [
-                'name' => ['required', 'array', 'min:1'],
+                'name' => ['required', 'array'],
                 'name.*' => [
                     'required',
                     'string',
@@ -89,7 +88,6 @@ class CategoryController extends Controller
                 ],
             ],
             [
-                'name.required' => 'カテゴリを1件以上入力してください',
                 'name.required' => 'カテゴリ名を入力してください',
                 'name.array' => 'カテゴリ名の形式が正しくありません',
 

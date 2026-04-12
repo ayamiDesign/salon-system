@@ -282,24 +282,9 @@ class FaqController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'category1_id' => [
-                    'required', 
-                    'integer', 
-                    'exists:categories,id'
-                ],
-                'category2_id' => [
-                    'nullable', 
-                    'integer', 
-                    'exists:categories,id', 
-                    'different:category1_id'
-                ],
-                'question' => [
-                    'required',
-                    'string',
-                    Rule::unique('faqs', 'question')
-                        ->ignore($id)
-                        ->whereNull('deleted_at'),
-                ],
+                'category1_id' => ['required', 'integer', 'exists:categories,id'],
+                'category2_id' => ['nullable', 'integer', 'exists:categories,id', 'different:category1_id'],
+                'question' => ['required', 'string','unique:faqs,question,'.$id],
                 'answer' => ['required', 'string'],
                 'note' => ['nullable', 'string'],
                 'url' => ['nullable', 'url'],
@@ -311,13 +296,7 @@ class FaqController extends Controller
                 // 'current_pdf_path' => ['nullable', 'string'],
 
                 'faq_history' => ['nullable', 'boolean'],
-                'change_summary' => [ 
-                    'nullable',
-                    'required_if:faq_history,1',
-                    'prohibited_unless:faq_history,1', 
-                    'string', 
-                    'max:25'
-                ],
+                'change_summary' => [ 'nullable','required_if:faq_history,1','prohibited_unless:faq_history,1', 'string', 'max:25'],
             ],
             [
                 'category1_id.required' => 'カテゴリ（メイン）は必須です',
@@ -404,24 +383,9 @@ class FaqController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'category1_id' => [
-                    'required', 
-                    'integer', 
-                    'exists:categories,id'
-                ],
-                'category2_id' => [
-                    'nullable', 
-                    'integer', 
-                    'exists:categories,id', 
-                    'different:category1_id'
-                ],
-                'question' => [
-                    'required',
-                    'string',
-                    Rule::unique('faqs', 'question')
-                        ->ignore($id)
-                        ->whereNull('deleted_at'),
-                ],
+                'category1_id' => ['required', 'integer', 'exists:categories,id'],
+                'category2_id' => ['nullable', 'integer', 'exists:categories,id', 'different:category1_id'],
+                'question' => ['required', 'string'],
                 'answer' => ['required', 'string'],
                 'note' => ['nullable', 'string'],
                 'url' => ['nullable', 'url'],
@@ -446,7 +410,6 @@ class FaqController extends Controller
                 'category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
 
                 'question.required' => '質問は必須です',
-                'question.unique' => '同じ質問が既に存在します',
                 'answer.required' => '回答は必須です',
                 'url.url' => 'URLの形式が正しくありません',
 
