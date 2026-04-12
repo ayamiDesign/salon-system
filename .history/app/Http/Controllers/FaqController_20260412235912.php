@@ -22,6 +22,7 @@ class FaqController extends Controller
 
         // ユーザーロールを取得
         $user = Auth::user();
+        $role = $user->role;
 
         // カテゴリを取得
         $categoriesList = Category::orderBy('sort_order')->get();
