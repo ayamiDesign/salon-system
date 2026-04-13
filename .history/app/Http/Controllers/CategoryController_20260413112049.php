@@ -58,7 +58,7 @@ class CategoryController extends Controller
             'name.array' => 'カテゴリ名の形式が正しくありません',
             'name.min' => 'カテゴリを1件以上入力してください',
 
-            'name.*.required' => ':attributeは必須です',
+            'name.*.required' => ':attributeを入力してください',
             'name.*.string' => ':attributeを正しく入力してください',
             'name.*.max' => ':attributeは255文字以内で入力してください',
             'name.*.distinct' => ':attributeが重複しています',
@@ -88,39 +88,29 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // バリデーション
-        $rules = [
-            'name' => ['required', 'array', 'min:1'],
-            'name.*' => [
-                'required',
-                'string',
-                'max:255',
-                'distinct',
-                Rule::unique('categories', 'name')->whereNull('deleted_at'),
+        $requestData = $request->validate(
+            [
+                'name' => ['required', 'array', 'min:1'],
+                'name.*' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    'distinct',
+                    Rule::unique('categories', 'name')->whereNull('deleted_at'),
+                ],
             ],
-        ];
+            [
+                'name.required' => 'カテゴリを1件以上入力してください',
+                'name.required' => 'カテゴリ名を入力してください',
+                'name.array' => 'カテゴリ名の形式が正しくありません',
 
-        $messages = [
-            'name.required' => 'カテゴリを1件以上入力してください',
-            'name.array' => 'カテゴリ名の形式が正しくありません',
-            'name.min' => 'カテゴリを1件以上入力してください',
-
-            'name.*.required' => ':attributeは必須です',
-            'name.*.string' => ':attributeを正しく入力してください',
-            'name.*.max' => ':attributeは255文字以内で入力してください',
-            'name.*.distinct' => ':attributeが重複しています',
-            'name.*.unique' => ':attributeはすでに登録されています',
-        ];
-
-        $attributes = [];
-
-        foreach ($request->input('name', []) as $index => $value) {
-            $no = $index + 1;
-            $attributes["name.$index"] = "カテゴリ{$no}";
-        }
-
-        $validator = Validator::make($request->all(), $rules, $messages, $attributes);
-
-        $requestData = $validator->validate();
+                'name.*.required' => 'カテゴリ名を入力してください',
+                'name.*.string' => 'カテゴリ名を正しく入力してください',
+                'name.*.max' => 'カテゴリ名は255文字以内で入力してください',
+                'name.*.distinct' => '同じカテゴリ名が入力されています',
+                'name.*.unique' => 'すでに登録されているカテゴリ名です',
+            ]
+        );
 
         foreach ($requestData['name'] as $name) {
 

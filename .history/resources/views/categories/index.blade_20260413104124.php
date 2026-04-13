@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
     <title>カテゴリ管理</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
@@ -71,11 +70,11 @@
                                             <p class="admin-index-title">{{ $category->name }}</p>
                                         </td>
 
-                                        <td data-label="FAQ件数">
+                                        <td>
                                             <span class="admin-index-muted">{{ $category->count }}件</span>
                                         </td>
 
-                                        <td class="admin-index-action-cell" data-label="操作">
+                                        <td class="admin-index-action-cell">
                                             <div class="faq-head-side">
                                                 <div class="js-normal-actions faq-action-group">
                                                     <a

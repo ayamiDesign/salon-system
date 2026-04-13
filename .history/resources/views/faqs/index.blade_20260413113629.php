@@ -54,11 +54,6 @@
                     </ul>
                 </div>
             @endif
-            @if (session('success'))
-                <div class="form-success">
-                    {{ session('success') }}
-                </div>
-            @endif
             <div class="search-panel">
                 <div class="search-copy">
                     <h1 class="search-heading">知りたいことをすぐ検索</h1>

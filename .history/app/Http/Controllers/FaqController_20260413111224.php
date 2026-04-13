@@ -183,7 +183,7 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         // バリデーション
-        $rules = [
+        $requestData = $request->validate([
             'faqs' => ['required', 'array', 'min:1'],
 
             'faqs.*.category1_id' => [
@@ -205,43 +205,23 @@ class FaqController extends Controller
                 'distinct',
                 Rule::unique('faqs', 'question')->whereNull('deleted_at'),
             ],
-
             'faqs.*.answer' => ['required', 'string'],
             'faqs.*.note' => ['nullable', 'string'],
             'faqs.*.url' => ['nullable', 'url'],
             'faqs.*.is_visible' => ['nullable', 'boolean'],
-        ];
-
-        $messages = [
+        ], [
             'faqs.required' => 'FAQを1件以上入力してください',
-            'faqs.*.category1_id.required' => ':attributeは必須です',
-            'faqs.*.category1_id.exists' => ':attributeの値が不正です',
-            'faqs.*.category2_id.exists' => ':attributeの値が不正です',
-            'faqs.*.category2_id.different' => ':attributeはカテゴリ（メイン）と同じにできません',
-            'faqs.*.question.required' => ':attributeは必須です',
-            'faqs.*.question.distinct' => ':attributeが重複しています',
-            'faqs.*.question.unique' => ':attributeは既に存在します',
-            'faqs.*.answer.required' => ':attributeは必須です',
-            'faqs.*.note.string' => ':attributeは文字列で入力してください',
-            'faqs.*.url.url' => ':attributeの形式が正しくありません',
-        ];
-
-        $attributes = [];
-
-        foreach ($request->input('faqs', []) as $index => $faq) {
-            $no = $index + 1;
-
-            $attributes["faqs.$index.category1_id"] = "FAQ {$no} のカテゴリ（メイン）";
-            $attributes["faqs.$index.category2_id"] = "FAQ {$no} のカテゴリ（サブ）";
-            $attributes["faqs.$index.question"] = "FAQ {$no} の質問";
-            $attributes["faqs.$index.answer"] = "FAQ {$no} の回答";
-            $attributes["faqs.$index.note"] = "FAQ {$no} のあわせて確認";
-            $attributes["faqs.$index.url"] = "FAQ {$no} の参考URL";
-        }
-
-        $validator = Validator::make($request->all(), $rules, $messages, $attributes);
-
-        $requestData = $validator->validate();
+            'faqs.*.category1_id.required' => 'カテゴリ（メイン）は必須です',
+            'faqs.*.category1_id.exists' => 'カテゴリ（メイン）の値が不正です',
+            'faqs.*.category2_id.exists' => 'カテゴリ（サブ）の値が不正です',
+            'faqs.*.category2_id.different' => 'カテゴリ（メイン）とカテゴリ（サブ）に同じものは選べません',
+            'faqs.*.question.required' => '質問は必須です',
+            'faqs.*.question.distinct' => '同じ質問が入力されています',
+            'faqs.*.question.unique' => '同じ質問が既に存在します',
+            'faqs.*.answer.required' => '回答は必須です',
+            'faqs.*.note.string' => 'あわせて確認は文字列で入力してください',
+            'faqs.*.url.url' => 'URLの形式が正しくありません',
+        ]);
 
         foreach ($requestData['faqs'] as $faq) {
 

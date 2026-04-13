@@ -72,7 +72,7 @@ class FaqImportController extends Controller
                     $note = trim($row[3] ?? '');
                     $URL = trim($row[4] ?? '');
 
-                    // 質問または回答が空の場合はエラー
+                    // 質問と回答が空の場合はエラー
                     if ($question === '') {
                         throw ValidationException::withMessages([
                             'csv' => "{$rowNumber}行目：質問は必須です",
