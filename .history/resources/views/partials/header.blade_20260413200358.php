@@ -50,8 +50,8 @@
             </ul>
         </nav>
 
-        <div class="topbar-actions">
-            @if(request()->routeIs('faqs.index')&& auth()->user()->role === 'admin')
+        @if(request()->routeIs('faqs.index')&& auth()->user()->role === 'admin')
+            <div class="topbar-actions">
                 <button
                     type="button"
                     id="cancelSortButton"
@@ -108,59 +108,92 @@
                 >
                     新規登録
                 </a>
-            @elseif(request()->routeIs('categories.index')&& auth()->user()->role === 'admin')
+
+                {{-- スマホ用メニューボタン --}}
                 <button
                     type="button"
-                    id="cancelSortButton"
-                    class="action-button action-button-sub hidden"
+                    class="menu-toggle sp-only"
+                    aria-controls="mobileGlobalMenu"
+                    aria-expanded="false"
+                    aria-label="メニューを開く"
+                    data-menu-toggle
                 >
-                    キャンセル
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
+            </div>
+            <div class="topbar-actions">
+                @elseif(request()->routeIs('categories.index')&& auth()->user()->role === 'admin')
+                    <button
+                        type="button"
+                        id="cancelSortButton"
+                        class="action-button action-button-sub hidden"
+                    >
+                        キャンセル
+                    </button>
 
+                    <button
+                        type="button"
+                        id="saveSortButton"
+                        class="action-button action-button-primary hidden"
+                    >
+                        保存する
+                    </button>
+
+                    <button
+                        type="button"
+                        id="sortModeButton"
+                        class="header-sub-button"
+                    >
+                        並び替え
+                    </button>
+
+                    <a
+                        href="{{ route('categories.create') }}"
+                        class="header-main-button"
+                    >
+                        新規登録
+                    </a>
+                @elseif(request()->routeIs('users.index'))
+
+                {{-- スマホ用メニューボタン --}}
                 <button
                     type="button"
-                    id="saveSortButton"
-                    class="action-button action-button-primary hidden"
+                    class="menu-toggle sp-only"
+                    aria-controls="mobileGlobalMenu"
+                    aria-expanded="false"
+                    aria-label="メニューを開く"
+                    data-menu-toggle
                 >
-                    保存する
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
-
-                <button
-                    type="button"
-                    id="sortModeButton"
-                    class="header-sub-button"
-                >
-                    並び替え
-                </button>
-
-                <a
-                    href="{{ route('categories.create') }}"
-                    class="header-main-button"
-                >
-                    新規登録
-                </a>
-            @elseif(request()->routeIs('users.index'))
+            </div>
+            <div class="topbar-actions">
                 <a
                     href="{{ route('users.create') }}"
                     class="header-main-button"
                 >
                     新規登録
                 </a>
-            @endif
-            {{-- スマホ用メニューボタン --}}
-            <button
-                type="button"
-                class="menu-toggle sp-only"
-                aria-controls="mobileGlobalMenu"
-                aria-expanded="false"
-                aria-label="メニューを開く"
-                data-menu-toggle
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+
+                {{-- スマホ用メニューボタン --}}
+                <button
+                    type="button"
+                    class="menu-toggle sp-only"
+                    aria-controls="mobileGlobalMenu"
+                    aria-expanded="false"
+                    aria-label="メニューを開く"
+                    data-menu-toggle
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        @endif
     </div>
 
     {{-- スマホ用グローバルメニュー --}}

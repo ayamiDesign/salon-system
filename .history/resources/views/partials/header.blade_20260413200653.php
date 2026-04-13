@@ -50,8 +50,8 @@
             </ul>
         </nav>
 
-        <div class="topbar-actions">
-            @if(request()->routeIs('faqs.index')&& auth()->user()->role === 'admin')
+        @if(request()->routeIs('faqs.index')&& auth()->user()->role === 'admin')
+            <div class="topbar-actions">
                 <button
                     type="button"
                     id="cancelSortButton"
@@ -108,7 +108,9 @@
                 >
                     新規登録
                 </a>
-            @elseif(request()->routeIs('categories.index')&& auth()->user()->role === 'admin')
+            </div>
+        @elseif(request()->routeIs('categories.index')&& auth()->user()->role === 'admin')
+         <div class="topbar-actions">
                 <button
                     type="button"
                     id="cancelSortButton"
@@ -139,28 +141,30 @@
                 >
                     新規登録
                 </a>
-            @elseif(request()->routeIs('users.index'))
+            </div>
+        @elseif(request()->routeIs('users.index'))
+         <div class="topbar-actions">
                 <a
                     href="{{ route('users.create') }}"
                     class="header-main-button"
                 >
                     新規登録
                 </a>
-            @endif
-            {{-- スマホ用メニューボタン --}}
-            <button
-                type="button"
-                class="menu-toggle sp-only"
-                aria-controls="mobileGlobalMenu"
-                aria-expanded="false"
-                aria-label="メニューを開く"
-                data-menu-toggle
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+            </div>
+        @endif
+        {{-- スマホ用メニューボタン --}}
+        <button
+            type="button"
+            class="menu-toggle sp-only"
+            aria-controls="mobileGlobalMenu"
+            aria-expanded="false"
+            aria-label="メニューを開く"
+            data-menu-toggle
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
 
     {{-- スマホ用グローバルメニュー --}}
