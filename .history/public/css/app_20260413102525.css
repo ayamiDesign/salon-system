@@ -971,7 +971,7 @@ button.header-sub-button:hover,
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 /* FAQ詳細あり */
@@ -1287,17 +1287,6 @@ mark {
     padding-left: 18px;
     font-size: 13px;
     line-height: 1.7;
-}
-
-.form-success {
-    margin-bottom: 14px;
-    padding: 14px 16px;
-    border: 1px solid #bbf7d0;
-    border-radius: 16px;
-    background: #f0fdf4;
-    color: #15803d;
-    font-size: 14px;
-    font-weight: 700;
 }
 
 .form-card {
@@ -3001,7 +2990,7 @@ mark {
 /* ========================================
    29. スマホ表示
 ======================================== */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .pc-only {
         display: none !important;
     }
@@ -3359,90 +3348,4 @@ mark {
         border-radius: 18px;
         border: 1px solid #e5e7eb;
     }
-
-  @media (max-width: 640px) {
-
-    /* カテゴリ一覧 */
-    .category-layout-single .admin-index-table-wrap {
-        overflow: visible;
-        border: 0;
-        background: transparent;
-    }
-
-    .category-layout-single .admin-index-table-scroll {
-        overflow: visible;
-    }
-
-    .category-layout-single .admin-index-table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        table-layout: auto;
-        background: transparent;
-    }
-
-    .category-layout-single .admin-index-table thead {
-        display: none;
-    }
-
-    .category-layout-single .admin-index-table tbody,
-    .category-layout-single .admin-index-table tr,
-    .category-layout-single .admin-index-table td {
-        display: block;
-        width: 100%;
-    }
-
-    .category-layout-single .admin-index-table tbody tr {
-        margin-bottom: 12px;
-        border: 1px solid #e5e7eb;
-        border-radius: 18px;
-        background: #fff;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
-    }
-
-    .category-layout-single .admin-index-table tbody td {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 12px 14px;
-        border-bottom: 1px solid #f3f4f6;
-    }
-
-    .category-layout-single .admin-index-table tbody td:last-child {
-        border-bottom: 0;
-    }
-
-    /* ラベル表示 */
-    .category-layout-single .admin-index-table tbody td::before {
-        content: attr(data-label);
-        flex: 0 0 80px;
-        color: #9ca3af;
-        font-size: 11px;
-        font-weight: 700;
-        line-height: 1.4;
-    }
-
-    /* 操作は一番下で横並び */
-    .category-layout-single .admin-index-action-cell {
-        width: 100%;
-    }
-
-    .category-layout-single .admin-index-action-cell .faq-head-side {
-        width: 100%;
-        justify-content: flex-start;
-    }
-
-    .category-layout-single .admin-index-action-cell .faq-action-group {
-        display: flex;
-        width: 100%;
-        gap: 8px;
-        flex-wrap: nowrap;
-    }
-
-    .category-layout-single .admin-index-action-cell .row-action-button {
-        flex: 1 1 0;
-        min-width: 0;
-    }
-  }
 }

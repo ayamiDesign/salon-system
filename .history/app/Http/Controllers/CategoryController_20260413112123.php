@@ -58,7 +58,7 @@ class CategoryController extends Controller
             'name.array' => 'カテゴリ名の形式が正しくありません',
             'name.min' => 'カテゴリを1件以上入力してください',
 
-            'name.*.required' => ':attributeは必須です',
+            'name.*.required' => ':attributeを入力してください',
             'name.*.string' => ':attributeを正しく入力してください',
             'name.*.max' => ':attributeは255文字以内で入力してください',
             'name.*.distinct' => ':attributeが重複しています',
@@ -104,7 +104,7 @@ class CategoryController extends Controller
             'name.array' => 'カテゴリ名の形式が正しくありません',
             'name.min' => 'カテゴリを1件以上入力してください',
 
-            'name.*.required' => ':attributeは必須です',
+            'name.*.required' => ':attributeを入力してください',
             'name.*.string' => ':attributeを正しく入力してください',
             'name.*.max' => ':attributeは255文字以内で入力してください',
             'name.*.distinct' => ':attributeが重複しています',

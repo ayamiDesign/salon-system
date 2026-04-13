@@ -539,6 +539,17 @@ button.header-sub-button:hover,
     border: 1px solid #fecaca;
 }
 
+.form-success {
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    border: 1px solid #bbf7d0;
+    border-radius: 16px;
+    background: #f0fdf4;
+    color: #15803d;
+    font-size: 14px;
+    font-weight: 700;
+}
+
 /* ========================================
    07. ログイン専用
 ======================================== */
@@ -1287,17 +1298,6 @@ mark {
     padding-left: 18px;
     font-size: 13px;
     line-height: 1.7;
-}
-
-.form-success {
-    margin-bottom: 14px;
-    padding: 14px 16px;
-    border: 1px solid #bbf7d0;
-    border-radius: 16px;
-    background: #f0fdf4;
-    color: #15803d;
-    font-size: 14px;
-    font-weight: 700;
 }
 
 .form-card {

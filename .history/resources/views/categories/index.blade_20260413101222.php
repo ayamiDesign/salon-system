@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
     <title>カテゴリ管理</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
@@ -27,13 +26,11 @@
                 </div>
             </div>
 
-            <div id="sortGuide" class="sort-guide hidden">
-                <p  class="pc-only">
-                    ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
-                </p>
-                <p  class="sp-only">
-                    ※並び替えはPCからご利用ください
-                </p>
+            <div id="sortGuide" class="sort-guide pc-only hidden">
+                ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
+            </div>
+            <div id="sortGuide" class="sort-guide sp-only hidden">
+                ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
             </div>
 
             @if ($categories->isEmpty())
@@ -47,9 +44,9 @@
                             <thead>
                                 <tr>
                                     <th style="width: 14%;">表示順</th>
-                                    <th style="width: 40%;">カテゴリ名</th>
+                                    <th style="width: 46%;">カテゴリ名</th>
                                     <th style="width: 18%;">FAQ件数</th>
-                                    <th style="width: 28%;">操作</th>
+                                    <th style="width: 22%;">操作</th>
                                 </tr>
                             </thead>
                             <tbody id="pc-sortable-body">
@@ -59,7 +56,7 @@
                                         data-id="{{ $category->id }}"
                                         data-order="{{ $category->sort_order }}"
                                     >
-                                        <td class="admin-index-sort-cell" data-label="表示順">
+                                        <td class="admin-index-sort-cell">
                                             <div class="admin-index-sort-wrap">
                                                 <span class="admin-index-sort-order js-sort-order-label">
                                                     {{ $category->sort_order }}
@@ -67,15 +64,15 @@
                                             </div>
                                         </td>
 
-                                        <td data-label="カテゴリ名">
+                                        <td>
                                             <p class="admin-index-title">{{ $category->name }}</p>
                                         </td>
 
-                                        <td data-label="FAQ件数">
-                                            <span class="admin-index-muted">{{ $category->count }}件</span>
+                                        <td>
+                                            <span class="admin-index-muted">FAQ {{ $category->count }}件</span>
                                         </td>
 
-                                        <td class="admin-index-action-cell" data-label="操作">
+                                        <td class="admin-index-action-cell">
                                             <div class="faq-head-side">
                                                 <div class="js-normal-actions faq-action-group">
                                                     <a

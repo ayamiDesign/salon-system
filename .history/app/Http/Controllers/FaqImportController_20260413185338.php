@@ -72,17 +72,9 @@ class FaqImportController extends Controller
                     $note = trim($row[3] ?? '');
                     $URL = trim($row[4] ?? '');
 
-                    // 質問または回答が空の場合はエラー
-                    if ($question === '') {
-                        throw ValidationException::withMessages([
-                            'csv' => "{$rowNumber}行目：質問は必須です",
-                        ]);
-                    }
-
-                    if ($answer === '') {
-                        throw ValidationException::withMessages([
-                            'csv' => "{$rowNumber}行目：回答は必須です",
-                        ]);
+                    // 質問と回答が空の場合はエラー
+                    if ($question === '' || $answer === '') {
+                        throw new \RuntimeException('{$rowNumber}行目：質問または回答が空の行があります');
                     }
 
                     // カテゴリーの処理

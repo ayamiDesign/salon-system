@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
     <title>FAQ一覧</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -52,11 +51,6 @@
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
-                </div>
-            @endif
-            @if (session('success'))
-                <div class="form-success">
-                    {{ session('success') }}
                 </div>
             @endif
             <div class="search-panel">
@@ -127,7 +121,7 @@
 
                 <div id="sortGuide" class="sort-guide hidden">
                     <p  class="pc-only">
-                        ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
+                    ドラッグして表示順を変更できます。並び替え後に「保存する」を押してください。
                     </p>
                     <p  class="sp-only">
                         ※並び替えはPCからご利用ください
